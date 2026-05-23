@@ -31,6 +31,11 @@
             --gray-dim:  rgba(255,255,255,0.10);
             --condensed: 'Barlow Condensed', sans-serif;
             --body:      'Barlow', sans-serif;
+
+            /* ─── Motion: Custom easing curves ─── */
+            --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
         }
 
         html, body {
@@ -65,11 +70,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity .7s ease, visibility .7s ease;
+            transition: opacity .55s var(--ease-out), visibility .55s var(--ease-out);
         }
         .loader.loaded { opacity: 0; visibility: hidden; }
         .loader__logo {
-            animation: loaderIn 1s ease forwards;
+            animation: loaderIn .8s var(--ease-out) forwards;
             text-align: center;
             width: 350px;
             height: 134px;
@@ -83,8 +88,9 @@
             top: -197px;
         }
         @keyframes loaderIn {
-            0%   { opacity: 0; transform: scale(.85) translateY(10px); }
-            60%  { opacity: 1; transform: scale(1.02) translateY(0); }
+            /* Start from scale(0.92) — nothing appears from nothing */
+            0%   { opacity: 0; transform: scale(.92) translateY(8px); }
+            60%  { opacity: 1; transform: scale(1.01) translateY(0); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
@@ -95,7 +101,7 @@
             z-index: 400; /* always above nav overlay */
             padding: 20px 48px 20px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
-            transition: background .3s ease;
+            transition: background .25s var(--ease-out);
         }
         #header.nav-is-open {
             background: var(--black);
@@ -135,10 +141,14 @@
             cursor: pointer;
             background: none;
             border: none;
-            padding: 0;
-            transition: opacity .2s;
+            padding: 8px 4px; /* larger hit area */
+            transition: opacity .15s var(--ease-out);
         }
-        .menu-trigger:hover { opacity: .7; }
+        @media (hover: hover) and (pointer: fine) {
+            .menu-trigger:hover { opacity: .7; }
+        }
+        /* Active feedback: button press scales slightly */
+        .menu-trigger:active { transform: scale(0.97); transition: transform 100ms var(--ease-out), opacity .15s var(--ease-out); }
         .menu-trigger__label {
             font-family: var(--condensed);
             font-size: .78rem;
@@ -162,11 +172,11 @@
             background: var(--white);
             left: 0;
             transform-origin: center;
-            transition: transform .5s cubic-bezier(.23,1,.32,1),
-                        opacity .35s ease,
-                        width .35s ease,
-                        top .45s cubic-bezier(.23,1,.32,1),
-                        bottom .45s cubic-bezier(.23,1,.32,1);
+            transition: transform .45s var(--ease-out),
+                        opacity .25s var(--ease-out),
+                        width .3s var(--ease-out),
+                        top .4s var(--ease-out),
+                        bottom .4s var(--ease-out);
         }
         .burger__line--1 { top: 0;    width: 100%; }
         .burger__line--2 { top: 50%;  transform: translateY(-50%); width: 72%; }
@@ -201,7 +211,7 @@
             padding: 100px 64px 56px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity .5s ease, visibility .5s ease;
+            transition: opacity .4s var(--ease-out), visibility .4s var(--ease-out);
             overflow: hidden;
         }
         #nav.nav-open {
@@ -236,7 +246,7 @@
             padding: 12px 0;
             gap: 20px;
             transform: translateX(-110%);
-            transition: transform .7s cubic-bezier(.16,1,.3,1), padding .3s ease;
+            transition: transform .6s var(--ease-drawer), padding .25s var(--ease-out);
         }
         .menu__item:nth-child(even) .menu__link {
             transform: translateX(110%);
@@ -268,7 +278,7 @@
             text-transform: uppercase;
             color: var(--white);
             line-height: 1;
-            transition: color .25s, -webkit-text-stroke .25s, letter-spacing .3s;
+            transition: color .2s var(--ease-out), -webkit-text-stroke .2s var(--ease-out), letter-spacing .25s var(--ease-out);
         }
         .menu__caption.outline {
             -webkit-text-stroke: 1.5px rgba(255,255,255,.3);
@@ -292,11 +302,13 @@
             background-position: center;
             opacity: 0;
             flex-shrink: 0;
-            transition: opacity .35s ease, transform .35s ease;
+            transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
             filter: grayscale(100%);
-            transform: scale(.85);
+            transform: scale(.92);
         }
-        .menu__link:hover .menu__image { opacity: 1; transform: scale(1); }
+        @media (hover: hover) and (pointer: fine) {
+            .menu__link:hover .menu__image { opacity: 1; transform: scale(1); }
+        }
         .menu-image-1 { background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80'); }
         .menu-image-2 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=200&q=80'); }
         .menu-image-3 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=200&q=80'); }
@@ -310,8 +322,8 @@
             border-top: 1px solid rgba(255,255,255,.07);
             flex-shrink: 0;
             opacity: 0;
-            transform: translateY(12px);
-            transition: opacity .5s ease .4s, transform .5s ease .4s;
+            transform: translateY(10px);
+            transition: opacity .4s var(--ease-out) .35s, transform .4s var(--ease-out) .35s;
         }
         #nav.nav-open .nav__footer {
             opacity: 1;
@@ -327,9 +339,11 @@
             letter-spacing: .18em;
             text-transform: uppercase;
             color: rgba(255,255,255,.35);
-            transition: color .25s;
+            transition: color .2s var(--ease-out);
         }
-        .socials-text a:hover { color: var(--white); }
+        @media (hover: hover) and (pointer: fine) {
+            .socials-text a:hover { color: var(--white); }
+        }
         .socials-text li:not(:last-child)::after {
             content: '+';
             margin-left: 20px;
@@ -353,16 +367,23 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity .55s ease, visibility .55s ease;
+            transition: opacity .45s var(--ease-out), visibility .45s var(--ease-out);
         }
         .section.active { opacity: 1; visibility: visible; pointer-events: auto; }
 
-        /* ─── HERO ─── */
-        #home { z-index: 60; }
+        /* ─── HERO entrance animations ─── */
+        /* Ken Burns slow drift on hero background */
+        @keyframes heroBgDrift {
+            0%   { transform: scale(1.08) translate(0, 0); }
+            50%  { transform: scale(1.12) translate(-1%, -.8%); }
+            100% { transform: scale(1.08) translate(0, 0); }
+        }
         .hero-bg {
             position: absolute;
             inset: 0;
             background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80') center/cover no-repeat;
+            animation: heroBgDrift 18s var(--ease-in-out) infinite;
+            will-change: transform;
         }
         .hero-bg::after {
             content: '';
@@ -371,16 +392,120 @@
             background: linear-gradient(160deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 100%);
         }
 
-        .hero-content {
-            position: relative;
+        /* Hero title lines — each span slides up from below + fades in */
+        .headline__title span {
+            display: block;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity .75s var(--ease-out), transform .75s var(--ease-out);
+        }
+        .hero-ready .headline__title span:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: .05s; }
+        .hero-ready .headline__title span:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: .18s; }
+        .hero-ready .headline__title span:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: .31s; }
+
+        /* Hero caption */
+        .headline__caption {
+            display: block;
+            margin-top: 28px;
+            font-family: var(--condensed);
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .6s var(--ease-out) .48s, transform .6s var(--ease-out) .48s;
+        }
+        .hero-ready .headline__caption { opacity: 1; transform: translateY(0); }
+        .headline__caption em { color: rgba(255,255,255,.8); font-style: normal; }
+
+        /* Hero footer bar — slides up */
+        .intro__footer {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 0 48px 26px;
             z-index: 2;
-            height: 100vh;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s var(--ease-out) .65s, transform .6s var(--ease-out) .65s;
+        }
+        .hero-ready .intro__footer { opacity: 1; transform: translateY(0); }
+
+        /* ─── Ambient floating orb on hero ─── */
+        .hero-orb {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-orb::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
+            top: 10%; left: 55%;
+            animation: orbDrift 12s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        .hero-orb::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.03) 0%, transparent 70%);
+            bottom: 15%; left: 20%;
+            animation: orbDrift2 16s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        @keyframes orbDrift  { from { transform: translate(0, 0) scale(1); }  to { transform: translate(-60px, 40px) scale(1.15); } }
+        @keyframes orbDrift2 { from { transform: translate(0, 0) scale(1); }  to { transform: translate(50px, -30px) scale(1.1); } }
+
+        /* ─── Scroll-reveal for section content ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: .08s; }
+        .reveal-delay-2 { transition-delay: .18s; }
+        .reveal-delay-3 { transition-delay: .28s; }
+
+        /* ─── Event card clip-path reveal ─── */
+        .event-card {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+        }
+        .event-card.in-view { opacity: 1; transform: translateY(0); }
+        .event-card:nth-child(1) { transition-delay: .00s; }
+        .event-card:nth-child(2) { transition-delay: .08s; }
+        .event-card:nth-child(3) { transition-delay: .16s; }
+        .event-card:nth-child(4) { transition-delay: .24s; }
+        .event-card:nth-child(5) { transition-delay: .32s; }
+        .event-card:nth-child(6) { transition-delay: .40s; }
+
+        /* ─── Team cards stagger ─── */
+        .team-card {
+            background: #0d0d0d;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 240px 48px 200px;
+            transition: background .25s var(--ease-out);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: background .25s var(--ease-out), opacity .6s var(--ease-out), transform .6s var(--ease-out);
         }
+        .team-card.in-view { opacity: 1; transform: translateY(0); }
+        .team-card:nth-child(1) { transition-delay: .0s; }
+        .team-card:nth-child(2) { transition-delay: .1s; }
+        .team-card:nth-child(3) { transition-delay: .2s; }
+        .team-card:nth-child(4) { transition-delay: .3s; }
 
+        /* ─── HERO misc ─── */
+        #home { z-index: 60; }
         .headline__title {
             font-family: var(--condensed);
             font-weight: 900;
@@ -403,25 +528,14 @@
             color: var(--white);
             font-style: normal;
         }
-
-        .headline__caption {
-            display: block;
-            margin-top: 28px;
-            font-family: var(--condensed);
-            font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,.45);
-        }
-        .headline__caption em { color: rgba(255,255,255,.8); font-style: normal; }
-
-        /* Hero footer bar */
-        .intro__footer {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 0 48px 26px;
+        .hero-content {
+            position: relative;
             z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 240px 48px 200px;
         }
         .footer__line {
             position: absolute;
@@ -528,9 +642,11 @@
             background-size: cover;
             background-position: center;
             filter: grayscale(100%);
-            transition: filter .5s;
+            transition: filter .4s var(--ease-out);
         }
-        .image-block:hover { filter: grayscale(0%); }
+        @media (hover: hover) and (pointer: fine) {
+            .image-block:hover { filter: grayscale(0%); }
+        }
         .inner-image-1 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'); }
         .inner-image-2 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80'); }
 
@@ -550,57 +666,127 @@
         .works-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            background: rgba(255,255,255,.04);
+            gap: 20px;
+            padding: 40px 48px 80px;
         }
-        @media(max-width:900px) { .works-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width:900px) { .works-grid { grid-template-columns: repeat(2, 1fr); padding: 24px 20px 60px; } }
         @media(max-width:540px) { .works-grid { grid-template-columns: 1fr; } }
 
+        /* ─── Event Card ─── */
         .work-item {
             position: relative;
-            aspect-ratio: 1;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.07);
             overflow: hidden;
             cursor: pointer;
-            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            transition: border-color .3s var(--ease-out), transform .3s var(--ease-out);
         }
-        .work-item img {
+        @media (hover: hover) and (pointer: fine) {
+            .work-item:hover {
+                border-color: rgba(255,255,255,.18);
+                transform: translateY(-4px);
+            }
+            .work-item:hover .work-item__img img {
+                transform: scale(1.06);
+                filter: grayscale(0%);
+            }
+            .work-item:hover .work-item__arrow { opacity: 1; transform: translate(0,0); }
+        }
+
+        .work-item__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .work-item__img img {
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: grayscale(80%);
-            transition: transform .6s ease, filter .4s ease;
+            filter: grayscale(60%);
+            transition: transform .5s var(--ease-out), filter .4s var(--ease-out);
         }
-        .work-item:hover img {
-            transform: scale(1.06);
-            filter: grayscale(0%);
-        }
-        .work-overlay {
+
+        /* Date badge */
+        .work-item__date {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%);
-            opacity: 0;
-            transition: opacity .4s ease;
-            display: flex;
-            align-items: flex-end;
-            padding: 24px;
+            top: 14px; left: 14px;
+            background: rgba(255,255,255,1);
+            color: #000;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 52px;
+            z-index: 2;
         }
-        .work-item:hover .work-overlay { opacity: 1; }
-        .work-title {
+        .work-item__date strong {
+            display: block;
             font-family: var(--condensed);
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: .04em;
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .work-item__date span {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .12em;
             text-transform: uppercase;
-            color: var(--white);
+        }
+
+        /* Card body */
+        .work-item__body {
+            padding: 20px 22px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         .work-cat {
             font-family: var(--condensed);
-            font-size: .65rem;
+            font-size: .72rem;
             letter-spacing: .2em;
             text-transform: uppercase;
-            color: rgba(255,255,255,.45);
-            display: block;
-            margin-top: 4px;
+            color: rgba(255,255,255,.35);
         }
+        .work-title {
+            font-family: var(--condensed);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+        .work-item__arrow {
+            margin-top: auto;
+            padding-top: 14px;
+            font-size: .75rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translate(-8px, 4px);
+            transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
+        }
+
+        /* ─── Fixed background logo watermark ─── */
+        .bg-logo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 55;
+            pointer-events: none;
+            width: min(85vw, 900px);
+            opacity: 0;
+            transition: opacity .6s var(--ease-out);
+            mix-blend-mode: screen;
+        }
+        .bg-logo-watermark svg {
+            width: 100%;
+            height: auto;
+        }
+        body.show-watermark .bg-logo-watermark { opacity: 1; }
 
         /* ─── CONTACT ─── */
         #contact { background: #0a0a0a; }
@@ -643,8 +829,10 @@
             color: rgba(255,255,255,.45);
         }
         .contact__info strong { color: rgba(255,255,255,.75); font-weight: 600; }
-        .contact__info a { color: var(--white); border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 1px; transition: border-color .2s; }
-        .contact__info a:hover { border-color: var(--white); }
+        .contact__info a { color: var(--white); border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 1px; transition: border-color .2s var(--ease-out); }
+        @media (hover: hover) and (pointer: fine) {
+            .contact__info a:hover { border-color: var(--white); }
+        }
 
         /* Footer logo inside contact */
         .contact-footer-logo {
@@ -695,12 +883,15 @@
             letter-spacing: .22em;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background .25s, color .25s;
+            transition: background .2s var(--ease-out), color .2s var(--ease-out), transform 120ms var(--ease-out);
         }
-        .btn-submit:hover {
-            background: transparent;
-            color: var(--white);
+        @media (hover: hover) and (pointer: fine) {
+            .btn-submit:hover {
+                background: transparent;
+                color: var(--white);
+            }
         }
+        .btn-submit:active { transform: scale(0.97); }
 
         /* ─── Marquee Band ─── */
         .marquee-band {
@@ -794,9 +985,11 @@
             background: #0d0d0d;
             display: flex;
             flex-direction: column;
-            transition: background .3s;
+            transition: background .25s var(--ease-out);
         }
-        .team-card:hover { background: #111; }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover { background: #111; }
+        }
 
         .team-card__photo {
             width: 100%;
@@ -804,9 +997,11 @@
             background-size: cover;
             background-position: center top;
             filter: grayscale(100%);
-            transition: filter .5s ease;
+            transition: filter .4s var(--ease-out);
         }
-        .team-card:hover .team-card__photo { filter: grayscale(0%); }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover .team-card__photo { filter: grayscale(0%); }
+        }
 
         .team-card__body {
             padding: 28px 24px 36px;
@@ -888,6 +1083,29 @@
             .menu__caption { font-size: clamp(2.2rem, 13vw, 3.5rem); }
             .contact__title { font-size: clamp(3rem, 14vw, 5rem); }
         }
+
+        /* ─── Reduced motion: remove positional animations, keep opacity/color ─── */
+        @media (prefers-reduced-motion: reduce) {
+            .loader__logo { animation: none; opacity: 1; }
+            .menu__link { transform: none !important; transition: opacity .2s; }
+            .nav__footer { transform: none !important; }
+            .loader { transition: opacity .3s, visibility .3s; }
+            .section { transition: opacity .3s, visibility .3s; }
+            .work-item img { transition: filter .3s; }
+            .team-card__photo { transition: filter .3s; }
+            .image-block { transition: filter .3s; }
+            /* New animation overrides */
+            .hero-bg { animation: none; }
+            .hero-orb::before, .hero-orb::after { animation: none; }
+            .headline__title span, .headline__caption, .intro__footer {
+                opacity: 1; transform: none; transition: none;
+            }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .work-item { clip-path: none; }
+            .team-card { opacity: 1; transform: none; }
+            .event-card { opacity: 1; transform: none; }
+            .burger__line { transition: opacity .2s; }
+        }
     </style>
 </head>
 
@@ -898,6 +1116,22 @@
         <div class="loader__logo">
             <img src="img/logo.png" alt="Fusion4 Events">
         </div>
+    </div>
+
+    <!-- Fixed background logo watermark -->
+    <div class="bg-logo-watermark" id="bgLogoWatermark">
+        <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <text x="50%" y="70%" text-anchor="middle" dominant-baseline="middle"
+                font-family="'Barlow Condensed', sans-serif"
+                font-weight="900"
+                font-size="160"
+                letter-spacing="-4"
+                fill="none"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1.5"
+                text-transform="uppercase"
+            >FUSION4</text>
+        </svg>
     </div>
 
     <!-- Noise -->
@@ -973,6 +1207,7 @@
     <!-- ─── HOME ─── -->
     <section id="home" class="section active">
         <div class="hero-bg"></div>
+        <div class="hero-orb"></div>
         <div class="hero-content">
             <div class="headline-wrap">
                 <h1 class="headline__title">
@@ -1061,12 +1296,12 @@
         <div class="inner__content">
             <!-- Company intro rows -->
             <div class="content-row">
-                <div class="text-content-block">
-                    <span class="block__subtitle">Who We Are</span>
-                    <h2 class="block__title">Crafting <span class="outline-sm">Extraordinary</span> Moments</h2>
-                    <p class="block__text">Fusion4 is a premium events company dedicated to turning visions into reality. From intimate gatherings to large-scale productions, we bring passion, precision, and creativity to every event we touch. Our team of seasoned professionals ensures every detail is flawlessly executed.</p>
+                <div class="text-content-block reveal">
+                    <span class="block__subtitle reveal reveal-delay-1">Who We Are</span>
+                    <h2 class="block__title reveal reveal-delay-2">Crafting <span class="outline-sm">Extraordinary</span> Moments</h2>
+                    <p class="block__text reveal reveal-delay-3">Fusion4 is a premium events company dedicated to turning visions into reality. From intimate gatherings to large-scale productions, we bring passion, precision, and creativity to every event we touch. Our team of seasoned professionals ensures every detail is flawlessly executed.</p>
                 </div>
-                <div class="image-block inner-image-1"></div>
+                <div class="image-block inner-image-1 reveal reveal-delay-2"></div>
             </div>
             <div class="content-row">
                 <div class="image-block inner-image-2"></div>
@@ -1136,52 +1371,76 @@
 
     <!-- ─── EVENTS ─── -->
     <section id="events" class="section">
-        <div class="section-header">
-            <span class="block__subtitle">Our Portfolio</span>
-            <h2 class="block__title">Featured <span class="outline-sm">Events</span></h2>
+        <div class="section-header reveal">
+            <span class="block__subtitle reveal reveal-delay-1">Our Portfolio</span>
+            <h2 class="block__title reveal reveal-delay-2">Featured <span class="outline-sm">Events</span></h2>
         </div>
         <div class="works-grid">
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Gala Night">
-                <div class="work-overlay"><div>
-                    <div class="work-title">Gala Night 2024</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>28</strong><span>May</span></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Gala Night">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Corporate / Awards</span>
-                </div></div>
+                    <div class="work-title">Gala Night 2024</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
-                <div class="work-overlay"><div>
-                    <div class="work-title">Tech Summit</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>14</strong><span>Jun</span></div>
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Conference / Expo</span>
-                </div></div>
+                    <div class="work-title">Tech Summit 2025</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80" alt="Festival">
-                <div class="work-overlay"><div>
-                    <div class="work-title">Summer Fusion Fest</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>02</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80" alt="Festival">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Festival / Music</span>
-                </div></div>
+                    <div class="work-title">Summer Fusion Fest</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" alt="Wedding">
-                <div class="work-overlay"><div>
-                    <div class="work-title">The Grand Wedding</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>19</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" alt="Wedding">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Wedding / Private</span>
-                </div></div>
+                    <div class="work-title">The Grand Wedding</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Brand Launch">
-                <div class="work-overlay"><div>
-                    <div class="work-title">Brand Launch 360°</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>08</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Brand Launch">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Brand / Launch</span>
-                </div></div>
+                    <div class="work-title">Brand Launch 360°</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
-            <div class="work-item">
-                <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Neon Nights">
-                <div class="work-overlay"><div>
-                    <div class="work-title">Neon Nights</div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>23</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Neon Nights">
+                </div>
+                <div class="work-item__body">
                     <span class="work-cat">Nightlife / Entertainment</span>
-                </div></div>
+                    <div class="work-title">Neon Nights</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1191,11 +1450,11 @@
         <div class="contact-wrapper">
             <div class="contact-grid">
                 <div>
-                    <h2 class="contact__title">
+                    <h2 class="contact__title reveal">
                         Let's<br>Create<br>
                         <span class="outline">Together</span>
                     </h2>
-                    <div class="contact__info">
+                    <div class="contact__info reveal reveal-delay-2">
                         <p>
                             Have an event in mind? We'd love to hear from you.<br><br>
                             <strong>Email:</strong> hello@fusion4.events<br>
@@ -1238,7 +1497,13 @@
     <script>
     // ─── Loader ───
     window.addEventListener('load', () => {
-        setTimeout(() => document.getElementById('loader').classList.add('loaded'), 1000);
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('loaded');
+            // Trigger hero entrance after loader fades
+            setTimeout(() => {
+                document.getElementById('home').classList.add('hero-ready');
+            }, 200);
+        }, 1000);
     });
 
     // ─── Noise ───
@@ -1327,6 +1592,44 @@
             homeLink.querySelector('.menu__caption').classList.remove('outline');
         }
     });
+
+    // ─── Scroll-reveal IntersectionObserver ───
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                revealObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .work-item, .team-card, .event-card').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // ─── Re-run observer when switching sections ───
+    document.querySelectorAll('.menu__link').forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal:not(.in-view), .work-item:not(.in-view), .team-card:not(.in-view), .event-card:not(.in-view)').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }, 100);
+        });
+    });
+
+    // ─── Background logo watermark (shows when non-home section is active) ───
+    function updateWatermark() {
+        const activeSection = document.querySelector('.section.active');
+        const isHome = !activeSection || activeSection.id === 'home';
+        document.body.classList.toggle('show-watermark', !isHome);
+    }
+    // Watch section class changes
+    const sectionObserver = new MutationObserver(updateWatermark);
+    document.querySelectorAll('.section').forEach(s => {
+        sectionObserver.observe(s, { attributes: true, attributeFilter: ['class'] });
+    });
+    updateWatermark(); // run once on load
 
     </script>
 </body>
