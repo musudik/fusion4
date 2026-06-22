@@ -113,16 +113,16 @@
         }
         .header__logo {
             position: relative;
-            width: 320px;
-            height: 122px;
+            width: 180px;
+            height: 68px;
             flex-shrink: 0;
         }
         .header__logo img {
             position: absolute;
-            width: 463px;
-            height: 463px;
-            left: -75px;
-            top: -169px;
+            width: 260px;
+            height: 260px;
+            left: -42px;
+            top: -95px;
             display: block;
         }
         .header__underline {
@@ -423,14 +423,14 @@
         /* Hero footer bar — slides up */
         .intro__footer {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
+            bottom: 200px; left: 0; right: 0;
             padding: 0 48px 26px;
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity .6s var(--ease-out) .65s, transform .6s var(--ease-out) .65s;
         }
-        .hero-ready .intro__footer { opacity: 1; transform: translateY(0); }
+        .hero-ready .intro__footer { opacity: 0; transform: translateY(0); display: none; }
 
         /* ─── Ambient floating orb on hero ─── */
         .hero-orb {
@@ -509,7 +509,7 @@
         .headline__title {
             font-family: var(--condensed);
             font-weight: 900;
-            font-size: clamp(5rem, 13vw, 12rem);
+            font-size: clamp(3.5rem, 9vw, 8rem);
             line-height: .88;
             color: var(--white);
             text-transform: uppercase;
@@ -531,11 +531,11 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            height: 100vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 240px 48px 200px;
+            padding: 120px 48px 20px;
         }
         .footer__line {
             position: absolute;
@@ -893,6 +893,234 @@
         }
         .btn-submit:active { transform: scale(0.97); }
 
+        /* ─── Event Showcase (Home) ─── */
+        .event-showcase {
+            position: absolute;
+            top: 100px;
+            bottom: 200px;
+            left: auto;
+            right: 0;
+            width: 42%;
+            z-index: 3;
+            overflow: hidden;
+        }
+        .event-showcase__inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        .showcase-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .showcase-slide.active { opacity: 1; pointer-events: auto; }
+
+        .showcase-slide__image {
+            position: relative;
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .showcase-slide__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transform: scale(1.08);
+            transition: transform 6s var(--ease-out), filter 1.2s var(--ease-out);
+        }
+        .showcase-slide.active .showcase-slide__image img {
+            transform: scale(1);
+            filter: grayscale(0%);
+        }
+
+        /* Diagonal blinds overlay */
+        .showcase-blinds {
+            position: absolute;
+            inset: -20px;
+            z-index: 2;
+            display: flex;
+            overflow: hidden;
+            transform: skewX(-12deg);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        .showcase-blind {
+            flex: 1;
+            background: var(--black);
+            transform: scaleX(1);
+            transform-origin: left;
+            transition: transform 0.7s var(--ease-drawer);
+        }
+        .showcase-slide.active .showcase-blind {
+            transform: scaleX(0);
+        }
+        .showcase-slide.active .showcase-blinds {
+            transition: visibility 0s linear 1s;
+            visibility: hidden;
+        }
+        .showcase-slide.active .showcase-blind:nth-child(1) { transition-delay: 0.0s; }
+        .showcase-slide.active .showcase-blind:nth-child(2) { transition-delay: 0.06s; }
+        .showcase-slide.active .showcase-blind:nth-child(3) { transition-delay: 0.12s; }
+        .showcase-slide.active .showcase-blind:nth-child(4) { transition-delay: 0.18s; }
+        .showcase-slide.active .showcase-blind:nth-child(5) { transition-delay: 0.24s; }
+        .showcase-slide.active .showcase-blind:nth-child(6) { transition-delay: 0.30s; }
+        .showcase-slide.active .showcase-blind:nth-child(7) { transition-delay: 0.36s; }
+        .showcase-slide.active .showcase-blind:nth-child(8) { transition-delay: 0.42s; }
+
+        /* Image gradient fade */
+        .showcase-slide__image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.95) 100%);
+        }
+
+        .showcase-slide__info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            padding: 20px 28px;
+            position: relative;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-top: none;
+        }
+        .showcase-slide__number {
+            font-family: var(--condensed);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.2);
+            margin-bottom: 14px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s var(--ease-out) 0.5s, transform 0.6s var(--ease-out) 0.5s;
+        }
+        .showcase-slide.active .showcase-slide__number { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(1.6rem, 3vw, 2.6rem);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s var(--ease-out) 0.6s, transform 0.6s var(--ease-out) 0.6s;
+        }
+        .showcase-slide.active .showcase-slide__title { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__meta {
+            font-family: var(--condensed);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s var(--ease-out) 0.7s, transform 0.5s var(--ease-out) 0.7s;
+        }
+        .showcase-slide.active .showcase-slide__meta { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__desc {
+            font-family: var(--body);
+            font-size: 0.82rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.4);
+            max-width: 340px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s var(--ease-out) 0.8s, transform 0.5s var(--ease-out) 0.8s;
+        }
+        .showcase-slide.active .showcase-slide__desc { opacity: 1; transform: translateY(0); }
+
+        /* Progress bar */
+        .showcase-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            z-index: 10;
+            display: flex;
+            gap: 4px;
+            padding: 0 16px;
+        }
+        .showcase-progress__bar {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .showcase-progress__fill {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.5);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        .showcase-progress__bar.active .showcase-progress__fill {
+            animation: progressFill 5s linear forwards;
+        }
+        .showcase-progress__bar.done .showcase-progress__fill {
+            transform: scaleX(1);
+        }
+        @keyframes progressFill {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+
+        /* Slide counter */
+        .showcase-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+            font-family: var(--condensed);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.3);
+        }
+        .showcase-counter__current {
+            font-size: 1.4rem;
+            color: var(--white);
+            font-weight: 900;
+        }
+
+        @media(max-width:768px) {
+            .event-showcase { left: auto; right: 0; width: 100%; top: auto; bottom: 200px; height: 280px; }
+            .showcase-slide__desc { display: none; }
+            .showcase-progress { padding: 0 20px; }
+            .showcase-slide__title { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+        }
+        @media(max-width:480px) {
+            .event-showcase { height: 180px; bottom: 195px; }
+            .showcase-slide__image { width: 40%; }
+            .showcase-slide__info { padding: 16px 18px; }
+            .showcase-slide__meta { display: none; }
+        }
+
         /* ─── Marquee Band ─── */
         .marquee-band {
             position: relative;
@@ -1055,16 +1283,16 @@
         /* ─── Mobile ─── */
         @media(max-width:768px) {
             #header { padding: 16px 20px; }
-            .header__logo { width: 200px; height: 76px; }
-            .header__logo img { width: 290px; height: 290px; left: -47px; top: -106px; }
+            .header__logo { width: 140px; height: 54px; }
+            .header__logo img { width: 200px; height: 200px; left: -32px; top: -72px; }
             #nav { padding: 90px 20px 56px; overflow-y: auto; }
             #nav::before { left: 20px; right: 20px; top: 72px; }
             .menu__caption { font-size: clamp(2.4rem, 11vw, 4rem); }
             .menu__image { display: none; }
             .menu__link { padding: 10px 0; }
             .nav__footer { left: 20px; right: 20px; flex-direction: column; gap: 10px; text-align: center; bottom: 28px; }
-            .hero-content { padding: 90px 20px 120px; }
-            .intro__footer { padding: 0 20px 22px; }
+            .hero-content { height: calc(100vh - 185px); padding: 90px 20px 0; }
+            .intro__footer { padding: 0 20px 22px; bottom: 185px; }
             .footer__line { left: 20px; right: 20px; }
             .inner__content { padding: 28px 20px; }
             .text-content-block { padding: 32px 20px; }
@@ -1218,6 +1446,110 @@
                 <span class="headline__caption">Creating <em>unforgettable experiences</em> across the globe</span>
             </div>
         </div>
+        <!-- Event Showcase -->
+        <div class="event-showcase" id="eventShowcase">
+            <div class="event-showcase__inner">
+                <!-- Slide 1 -->
+                <div class="showcase-slide active" data-index="0">
+                    <div class="showcase-slide__image">
+                        <div class="showcase-blinds">
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80" alt="Gala Night">
+                    </div>
+                    <div class="showcase-slide__info">
+                        <span class="showcase-slide__number">01 / 05</span>
+                        <h3 class="showcase-slide__title">Gala Night 2024</h3>
+                        <span class="showcase-slide__meta">Corporate · Awards · Frankfurt</span>
+                        <p class="showcase-slide__desc">An evening of elegance — 800 guests, live orchestra, and immersive light installations across two grand halls.</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="showcase-slide" data-index="1">
+                    <div class="showcase-slide__image">
+                        <div class="showcase-blinds">
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Tech Summit">
+                    </div>
+                    <div class="showcase-slide__info">
+                        <span class="showcase-slide__number">02 / 05</span>
+                        <h3 class="showcase-slide__title">Tech Summit 2025</h3>
+                        <span class="showcase-slide__meta">Conference · Expo · Berlin</span>
+                        <p class="showcase-slide__desc">Three days of innovation — keynotes, interactive demos, and networking for 2,000+ tech leaders.</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="showcase-slide" data-index="2">
+                    <div class="showcase-slide__image">
+                        <div class="showcase-blinds">
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80" alt="Summer Fusion Fest">
+                    </div>
+                    <div class="showcase-slide__info">
+                        <span class="showcase-slide__number">03 / 05</span>
+                        <h3 class="showcase-slide__title">Summer Fusion Fest</h3>
+                        <span class="showcase-slide__meta">Festival · Music · Munich</span>
+                        <p class="showcase-slide__desc">A weekend of rhythm and soul — four stages, 40 artists, and 15,000 festival-goers under the summer sky.</p>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="showcase-slide" data-index="3">
+                    <div class="showcase-slide__image">
+                        <div class="showcase-blinds">
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80" alt="The Grand Wedding">
+                    </div>
+                    <div class="showcase-slide__info">
+                        <span class="showcase-slide__number">04 / 05</span>
+                        <h3 class="showcase-slide__title">The Grand Wedding</h3>
+                        <span class="showcase-slide__meta">Wedding · Private · Lake Como</span>
+                        <p class="showcase-slide__desc">A fairy-tale celebration — lakeside ceremony, 300 guests, bespoke floral design, and fireworks finale.</p>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="showcase-slide" data-index="4">
+                    <div class="showcase-slide__image">
+                        <div class="showcase-blinds">
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80" alt="Neon Nights">
+                    </div>
+                    <div class="showcase-slide__info">
+                        <span class="showcase-slide__number">05 / 05</span>
+                        <h3 class="showcase-slide__title">Neon Nights</h3>
+                        <span class="showcase-slide__meta">Nightlife · Entertainment · Dubai</span>
+                        <p class="showcase-slide__desc">An after-dark spectacle — LED choreography, world-class DJs, and an unforgettable rooftop experience.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Progress bars -->
+            <div class="showcase-progress">
+                <div class="showcase-progress__bar active" data-slide="0"><div class="showcase-progress__fill"></div></div>
+                <div class="showcase-progress__bar" data-slide="1"><div class="showcase-progress__fill"></div></div>
+                <div class="showcase-progress__bar" data-slide="2"><div class="showcase-progress__fill"></div></div>
+                <div class="showcase-progress__bar" data-slide="3"><div class="showcase-progress__fill"></div></div>
+                <div class="showcase-progress__bar" data-slide="4"><div class="showcase-progress__fill"></div></div>
+            </div>
+        </div>
+
         <div class="intro__footer">
             <div class="footer__line"></div>
             <div class="footer__line line-2"></div>
@@ -1630,6 +1962,83 @@
         sectionObserver.observe(s, { attributes: true, attributeFilter: ['class'] });
     });
     updateWatermark(); // run once on load
+
+    // ─── Event Showcase ───
+    (function() {
+        const slides = document.querySelectorAll('.showcase-slide');
+        const bars = document.querySelectorAll('.showcase-progress__bar');
+        const total = slides.length;
+        let current = 0;
+        let timer = null;
+        const INTERVAL = 5000;
+
+        function goTo(index) {
+            // Reset blinds on outgoing slide before hiding
+            slides[current].classList.remove('active');
+            slides[current].querySelectorAll('.showcase-blind').forEach(b => {
+                b.style.transition = 'none';
+                b.style.transform = 'scaleX(1)';
+                b.offsetHeight; // force reflow
+                b.style.transition = '';
+            });
+
+            bars[current].classList.remove('active');
+            bars[current].classList.add('done');
+
+            current = index;
+            // Reset all bars if we looped
+            if (current === 0) {
+                bars.forEach(b => { b.classList.remove('done', 'active'); b.querySelector('.showcase-progress__fill').style.animation = 'none'; });
+            }
+
+            slides[current].classList.add('active');
+            bars[current].classList.add('active');
+            // Restart fill animation
+            const fill = bars[current].querySelector('.showcase-progress__fill');
+            fill.style.animation = 'none';
+            fill.offsetHeight;
+            fill.style.animation = '';
+        }
+
+        function next() {
+            goTo((current + 1) % total);
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(next, INTERVAL);
+        }
+
+        // Click on progress bars
+        bars.forEach(bar => {
+            bar.addEventListener('click', () => {
+                const idx = parseInt(bar.dataset.slide);
+                if (idx === current) return;
+                // Reset all bars up to clicked
+                bars.forEach((b, i) => {
+                    b.classList.remove('active', 'done');
+                    if (i < idx) b.classList.add('done');
+                });
+                slides[current].classList.remove('active');
+                slides[current].querySelectorAll('.showcase-blind').forEach(b => {
+                    b.style.transition = 'none';
+                    b.style.transform = 'scaleX(1)';
+                    b.offsetHeight;
+                    b.style.transition = '';
+                });
+                current = idx;
+                slides[current].classList.add('active');
+                bars[current].classList.add('active');
+                const fill = bars[current].querySelector('.showcase-progress__fill');
+                fill.style.animation = 'none';
+                fill.offsetHeight;
+                fill.style.animation = '';
+                startTimer();
+            });
+        });
+
+        startTimer();
+    })();
 
     </script>
 </body>
