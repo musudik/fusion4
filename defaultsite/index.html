@@ -430,7 +430,7 @@
             transform: translateY(20px);
             transition: opacity .6s var(--ease-out) .65s, transform .6s var(--ease-out) .65s;
         }
-        .hero-ready .intro__footer { opacity: 0; transform: translateY(0); display: none; }
+        .hero-ready .intro__footer { opacity: 1; transform: translateY(0); }
 
         /* ─── Ambient floating orb on hero ─── */
         .hero-orb {
@@ -954,25 +954,13 @@
         .showcase-blind {
             flex: 1;
             background: var(--black);
-            transform: scaleX(1);
-            transform-origin: left;
-            transition: transform 0.7s var(--ease-drawer);
+            transform: scaleY(1);
+            transform-origin: top;
+            transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
-        .showcase-slide.active .showcase-blind {
-            transform: scaleX(0);
+        .showcase-slide.revealing .showcase-blind {
+            transform: scaleY(0);
         }
-        .showcase-slide.active .showcase-blinds {
-            transition: visibility 0s linear 1s;
-            visibility: hidden;
-        }
-        .showcase-slide.active .showcase-blind:nth-child(1) { transition-delay: 0.0s; }
-        .showcase-slide.active .showcase-blind:nth-child(2) { transition-delay: 0.06s; }
-        .showcase-slide.active .showcase-blind:nth-child(3) { transition-delay: 0.12s; }
-        .showcase-slide.active .showcase-blind:nth-child(4) { transition-delay: 0.18s; }
-        .showcase-slide.active .showcase-blind:nth-child(5) { transition-delay: 0.24s; }
-        .showcase-slide.active .showcase-blind:nth-child(6) { transition-delay: 0.30s; }
-        .showcase-slide.active .showcase-blind:nth-child(7) { transition-delay: 0.36s; }
-        .showcase-slide.active .showcase-blind:nth-child(8) { transition-delay: 0.42s; }
 
         /* Image gradient fade */
         .showcase-slide__image::after {
@@ -1109,8 +1097,8 @@
         }
 
         @media(max-width:768px) {
-            .event-showcase { left: auto; right: 0; width: 100%; top: auto; bottom: 200px; height: 280px; }
-            .showcase-slide__desc { display: none; }
+            .event-showcase { display: none; }
+            .hero-content { height: calc(100vh - 185px); padding: 90px 20px 0; }
             .showcase-progress { padding: 0 20px; }
             .showcase-slide__title { font-size: clamp(1.2rem, 4vw, 1.8rem); }
         }
@@ -1446,108 +1434,10 @@
                 <span class="headline__caption">Creating <em>unforgettable experiences</em> across the globe</span>
             </div>
         </div>
-        <!-- Event Showcase -->
+        <!-- Event Showcase (blinds injected by JS) -->
         <div class="event-showcase" id="eventShowcase">
-            <div class="event-showcase__inner">
-                <!-- Slide 1 -->
-                <div class="showcase-slide active" data-index="0">
-                    <div class="showcase-slide__image">
-                        <div class="showcase-blinds">
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80" alt="Gala Night">
-                    </div>
-                    <div class="showcase-slide__info">
-                        <span class="showcase-slide__number">01 / 05</span>
-                        <h3 class="showcase-slide__title">Gala Night 2024</h3>
-                        <span class="showcase-slide__meta">Corporate · Awards · Frankfurt</span>
-                        <p class="showcase-slide__desc">An evening of elegance — 800 guests, live orchestra, and immersive light installations across two grand halls.</p>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="showcase-slide" data-index="1">
-                    <div class="showcase-slide__image">
-                        <div class="showcase-blinds">
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Tech Summit">
-                    </div>
-                    <div class="showcase-slide__info">
-                        <span class="showcase-slide__number">02 / 05</span>
-                        <h3 class="showcase-slide__title">Tech Summit 2025</h3>
-                        <span class="showcase-slide__meta">Conference · Expo · Berlin</span>
-                        <p class="showcase-slide__desc">Three days of innovation — keynotes, interactive demos, and networking for 2,000+ tech leaders.</p>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="showcase-slide" data-index="2">
-                    <div class="showcase-slide__image">
-                        <div class="showcase-blinds">
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80" alt="Summer Fusion Fest">
-                    </div>
-                    <div class="showcase-slide__info">
-                        <span class="showcase-slide__number">03 / 05</span>
-                        <h3 class="showcase-slide__title">Summer Fusion Fest</h3>
-                        <span class="showcase-slide__meta">Festival · Music · Munich</span>
-                        <p class="showcase-slide__desc">A weekend of rhythm and soul — four stages, 40 artists, and 15,000 festival-goers under the summer sky.</p>
-                    </div>
-                </div>
-                <!-- Slide 4 -->
-                <div class="showcase-slide" data-index="3">
-                    <div class="showcase-slide__image">
-                        <div class="showcase-blinds">
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80" alt="The Grand Wedding">
-                    </div>
-                    <div class="showcase-slide__info">
-                        <span class="showcase-slide__number">04 / 05</span>
-                        <h3 class="showcase-slide__title">The Grand Wedding</h3>
-                        <span class="showcase-slide__meta">Wedding · Private · Lake Como</span>
-                        <p class="showcase-slide__desc">A fairy-tale celebration — lakeside ceremony, 300 guests, bespoke floral design, and fireworks finale.</p>
-                    </div>
-                </div>
-                <!-- Slide 5 -->
-                <div class="showcase-slide" data-index="4">
-                    <div class="showcase-slide__image">
-                        <div class="showcase-blinds">
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                            <div class="showcase-blind"></div><div class="showcase-blind"></div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80" alt="Neon Nights">
-                    </div>
-                    <div class="showcase-slide__info">
-                        <span class="showcase-slide__number">05 / 05</span>
-                        <h3 class="showcase-slide__title">Neon Nights</h3>
-                        <span class="showcase-slide__meta">Nightlife · Entertainment · Dubai</span>
-                        <p class="showcase-slide__desc">An after-dark spectacle — LED choreography, world-class DJs, and an unforgettable rooftop experience.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Progress bars -->
-            <div class="showcase-progress">
-                <div class="showcase-progress__bar active" data-slide="0"><div class="showcase-progress__fill"></div></div>
-                <div class="showcase-progress__bar" data-slide="1"><div class="showcase-progress__fill"></div></div>
-                <div class="showcase-progress__bar" data-slide="2"><div class="showcase-progress__fill"></div></div>
-                <div class="showcase-progress__bar" data-slide="3"><div class="showcase-progress__fill"></div></div>
-                <div class="showcase-progress__bar" data-slide="4"><div class="showcase-progress__fill"></div></div>
-            </div>
+            <div class="event-showcase__inner" id="showcaseInner"></div>
+            <div class="showcase-progress" id="showcaseProgress"></div>
         </div>
 
         <div class="intro__footer">
@@ -1965,69 +1855,137 @@
 
     // ─── Event Showcase ───
     (function() {
-        const slides = document.querySelectorAll('.showcase-slide');
-        const bars = document.querySelectorAll('.showcase-progress__bar');
-        const total = slides.length;
+        const BLIND_COUNT = 32;
+        const INTERVAL = 7000;
+        const slideData = [
+            { img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80', alt: 'Gala Night', title: 'Gala Night 2024', meta: 'Corporate · Awards · Frankfurt', desc: 'An evening of elegance — 800 guests, live orchestra, and immersive light installations across two grand halls.' },
+            { img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80', alt: 'Tech Summit', title: 'Tech Summit 2025', meta: 'Conference · Expo · Berlin', desc: 'Three days of innovation — keynotes, interactive demos, and networking for 2,000+ tech leaders.' },
+            { img: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80', alt: 'Summer Fusion Fest', title: 'Summer Fusion Fest', meta: 'Festival · Music · Munich', desc: 'A weekend of rhythm and soul — four stages, 40 artists, and 15,000 festival-goers under the summer sky.' },
+            { img: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80', alt: 'The Grand Wedding', title: 'The Grand Wedding', meta: 'Wedding · Private · Lake Como', desc: 'A fairy-tale celebration — lakeside ceremony, 300 guests, bespoke floral design, and fireworks finale.' },
+            { img: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80', alt: 'Neon Nights', title: 'Neon Nights', meta: 'Nightlife · Entertainment · Dubai', desc: 'An after-dark spectacle — LED choreography, world-class DJs, and an unforgettable rooftop experience.' }
+        ];
+        const total = slideData.length;
+        const inner = document.getElementById('showcaseInner');
+        const progWrap = document.getElementById('showcaseProgress');
+
+        // Build slides
+        slideData.forEach((d, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'showcase-slide' + (i === 0 ? ' active revealing' : '');
+            slide.dataset.index = i;
+
+            let blindsHTML = '';
+            for (let b = 0; b < BLIND_COUNT; b++) blindsHTML += '<div class="showcase-blind"></div>';
+
+            slide.innerHTML =
+                '<div class="showcase-slide__image">' +
+                    '<div class="showcase-blinds">' + blindsHTML + '</div>' +
+                    '<img src="' + d.img + '" alt="' + d.alt + '">' +
+                '</div>' +
+                '<div class="showcase-slide__info">' +
+                    '<span class="showcase-slide__number">0' + (i+1) + ' / 0' + total + '</span>' +
+                    '<h3 class="showcase-slide__title">' + d.title + '</h3>' +
+                    '<span class="showcase-slide__meta">' + d.meta + '</span>' +
+                    '<p class="showcase-slide__desc">' + d.desc + '</p>' +
+                '</div>';
+            inner.appendChild(slide);
+
+            // Progress bar
+            const bar = document.createElement('div');
+            bar.className = 'showcase-progress__bar' + (i === 0 ? ' active' : '');
+            bar.dataset.slide = i;
+            bar.innerHTML = '<div class="showcase-progress__fill"></div>';
+            progWrap.appendChild(bar);
+        });
+
+        // Apply wavy stagger delays via JS (sine wave)
+        inner.querySelectorAll('.showcase-slide').forEach(slide => {
+            slide.querySelectorAll('.showcase-blind').forEach((blind, i) => {
+                const wave = Math.sin((i / BLIND_COUNT) * Math.PI) * 0.4;
+                const base = (i / BLIND_COUNT) * 1.8;
+                blind.style.transitionDelay = (base + wave).toFixed(3) + 's';
+            });
+        });
+
+        const slides = inner.querySelectorAll('.showcase-slide');
+        const bars = progWrap.querySelectorAll('.showcase-progress__bar');
         let current = 0;
         let timer = null;
-        const INTERVAL = 5000;
+
+        function resetBlinds(slide) {
+            slide.classList.remove('revealing');
+            slide.querySelectorAll('.showcase-blind').forEach(b => {
+                b.style.transition = 'none';
+                b.style.transform = 'scaleY(1)';
+            });
+            slide.offsetHeight; // reflow
+            slide.querySelectorAll('.showcase-blind').forEach(b => {
+                b.style.transition = '';
+                b.style.transform = '';
+            });
+        }
 
         function goTo(index) {
-            // Reset blinds on outgoing slide before hiding
-            slides[current].classList.remove('active');
-            slides[current].querySelectorAll('.showcase-blind').forEach(b => {
-                b.style.transition = 'none';
-                b.style.transform = 'scaleX(1)';
-                b.offsetHeight; // force reflow
-                b.style.transition = '';
-            });
+            const prev = slides[current];
+            prev.classList.remove('active', 'revealing');
 
             bars[current].classList.remove('active');
             bars[current].classList.add('done');
 
             current = index;
-            // Reset all bars if we looped
+
             if (current === 0) {
-                bars.forEach(b => { b.classList.remove('done', 'active'); b.querySelector('.showcase-progress__fill').style.animation = 'none'; });
+                bars.forEach(b => {
+                    b.classList.remove('done', 'active');
+                    const fill = b.querySelector('.showcase-progress__fill');
+                    fill.style.animation = 'none';
+                    fill.offsetHeight;
+                    fill.style.animation = '';
+                });
             }
 
+            // Reset blinds on new slide so they cover the image
+            resetBlinds(slides[current]);
+
+            // Activate + reveal
             slides[current].classList.add('active');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slides[current].classList.add('revealing');
+                });
+            });
+
             bars[current].classList.add('active');
-            // Restart fill animation
             const fill = bars[current].querySelector('.showcase-progress__fill');
             fill.style.animation = 'none';
             fill.offsetHeight;
             fill.style.animation = '';
         }
 
-        function next() {
-            goTo((current + 1) % total);
-        }
-
         function startTimer() {
             clearInterval(timer);
-            timer = setInterval(next, INTERVAL);
+            timer = setInterval(() => goTo((current + 1) % total), INTERVAL);
         }
 
-        // Click on progress bars
+        // Click progress bars
         bars.forEach(bar => {
             bar.addEventListener('click', () => {
                 const idx = parseInt(bar.dataset.slide);
                 if (idx === current) return;
-                // Reset all bars up to clicked
                 bars.forEach((b, i) => {
                     b.classList.remove('active', 'done');
                     if (i < idx) b.classList.add('done');
                 });
-                slides[current].classList.remove('active');
-                slides[current].querySelectorAll('.showcase-blind').forEach(b => {
-                    b.style.transition = 'none';
-                    b.style.transform = 'scaleX(1)';
-                    b.offsetHeight;
-                    b.style.transition = '';
-                });
+                const prev = slides[current];
+                prev.classList.remove('active', 'revealing');
                 current = idx;
+                resetBlinds(slides[current]);
                 slides[current].classList.add('active');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        slides[current].classList.add('revealing');
+                    });
+                });
                 bars[current].classList.add('active');
                 const fill = bars[current].querySelector('.showcase-progress__fill');
                 fill.style.animation = 'none';
