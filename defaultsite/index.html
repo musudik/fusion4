@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fusion4 Events</title>
+    <meta name="description" content="Fusion4 Events — extraordinary experiences, flawlessly delivered.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/favicon.png">
+
+    <!-- Google Fonts: Barlow Condensed (matches logo's bold condensed industrial style) + Barlow for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ─── Reset ─── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black:     #000000;
+            --white:     #ffffff;
+            --off-white: #cccccc;
+            --gray:      #888888;
+            --gray-dim:  rgba(255,255,255,0.10);
+            --condensed: 'Barlow Condensed', sans-serif;
+            --body:      'Barlow', sans-serif;
+
+            /* ─── Motion: Custom easing curves ─── */
+            --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        html, body {
+            background: var(--black);
+            color: var(--off-white);
+            font-family: var(--body);
+            font-size: 16px;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        /* ─── Noise ─── */
+        #noise {
+            position: fixed;
+            inset: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .035;
+        }
+
+        /* ─── Loader ─── */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity .55s var(--ease-out), visibility .55s var(--ease-out);
+        }
+        .loader.loaded { opacity: 0; visibility: hidden; }
+        .loader__logo {
+            animation: loaderIn .8s var(--ease-out) forwards;
+            text-align: center;
+            width: 350px;
+            height: 134px;
+            margin: 0 auto;
+        }
+        .loader__logo img {
+            position: relative;
+            width: 537px;
+            height: 537px;
+            left: -91px;
+            top: -197px;
+        }
+        @keyframes loaderIn {
+            /* Start from scale(0.92) — nothing appears from nothing */
+            0%   { opacity: 0; transform: scale(.92) translateY(8px); }
+            60%  { opacity: 1; transform: scale(1.01) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ─── Header ─── */
+        #header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 400; /* always above nav overlay */
+            padding: 20px 48px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+            transition: background .25s var(--ease-out);
+        }
+        #header.nav-is-open {
+            background: var(--black);
+        }
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header__logo {
+            position: relative;
+            width: 320px;
+            height: 122px;
+            flex-shrink: 0;
+        }
+        .header__logo img {
+            position: absolute;
+            width: 463px;
+            height: 463px;
+            left: -75px;
+            top: -169px;
+            display: block;
+        }
+        .header__underline {
+            position: absolute;
+            bottom: 0; left: 48px; right: 48px;
+            height: 1px;
+            background: rgba(255,255,255,.1);
+        }
+        .header__underline.underline-2 { bottom: -1px; background: rgba(255,255,255,.03); }
+
+        /* ─── Menu Trigger ─── */
+        .menu-trigger {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px 4px; /* larger hit area */
+            transition: opacity .15s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .menu-trigger:hover { opacity: .7; }
+        }
+        /* Active feedback: button press scales slightly */
+        .menu-trigger:active { transform: scale(0.97); transition: transform 100ms var(--ease-out), opacity .15s var(--ease-out); }
+        .menu-trigger__label {
+            font-family: var(--condensed);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        /* ─── Burger Icon ─── */
+        .burger {
+            width: 32px;
+            height: 20px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .burger__line {
+            display: block;
+            position: absolute;
+            height: 1.5px;
+            background: var(--white);
+            left: 0;
+            transform-origin: center;
+            transition: transform .45s var(--ease-out),
+                        opacity .25s var(--ease-out),
+                        width .3s var(--ease-out),
+                        top .4s var(--ease-out),
+                        bottom .4s var(--ease-out);
+        }
+        .burger__line--1 { top: 0;    width: 100%; }
+        .burger__line--2 { top: 50%;  transform: translateY(-50%); width: 72%; }
+        .burger__line--3 { bottom: 0; width: 44%; }
+
+        /* open → X */
+        .burger.is-open .burger__line--1 {
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .burger.is-open .burger__line--2 {
+            opacity: 0;
+            transform: translateY(-50%) scaleX(0);
+        }
+        .burger.is-open .burger__line--3 {
+            bottom: auto;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%) rotate(-45deg);
+        }
+
+        /* ─── Navigation Overlay ─── */
+        #nav {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 300; /* above marquee band */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 100px 64px 56px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s var(--ease-out), visibility .4s var(--ease-out);
+            overflow: hidden;
+        }
+        #nav.nav-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Nav border top */
+        #nav::before {
+            content: '';
+            position: absolute;
+            top: 85px; left: 64px; right: 64px;
+            height: 1px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .menu { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .menu__item {
+            position: relative;
+            overflow: hidden;
+        }
+        .menu__divider {
+            display: block;
+            height: 1px;
+            background: rgba(255,255,255,.07);
+        }
+
+        /* Each row slides in from left (odd) or right (even) */
+        .menu__link {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            gap: 20px;
+            transform: translateX(-110%);
+            transition: transform .6s var(--ease-drawer), padding .25s var(--ease-out);
+        }
+        .menu__item:nth-child(even) .menu__link {
+            transform: translateX(110%);
+        }
+
+        /* When nav is open, items slide to position (staggered) */
+        #nav.nav-open .menu__link { transform: translateX(0); }
+        #nav.nav-open .menu__item:nth-child(1) .menu__link { transition-delay: .05s; }
+        #nav.nav-open .menu__item:nth-child(2) .menu__link { transition-delay: .12s; }
+        #nav.nav-open .menu__item:nth-child(3) .menu__link { transition-delay: .19s; }
+        #nav.nav-open .menu__item:nth-child(4) .menu__link { transition-delay: .26s; }
+
+        .menu__link:hover { padding-left: 14px; }
+
+        .menu__number {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .15em;
+            color: rgba(255,255,255,.2);
+            min-width: 34px;
+            flex-shrink: 0;
+        }
+        .menu__caption {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(2.6rem, 6.5vw, 5.8rem);
+            letter-spacing: -.01em;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1;
+            transition: color .2s var(--ease-out), -webkit-text-stroke .2s var(--ease-out), letter-spacing .25s var(--ease-out);
+        }
+        .menu__caption.outline {
+            -webkit-text-stroke: 1.5px rgba(255,255,255,.3);
+            color: transparent;
+        }
+        .menu__link:hover .menu__caption {
+            color: var(--white);
+            -webkit-text-stroke: 0;
+            letter-spacing: .03em;
+        }
+        .menu__link.active-link .menu__caption {
+            color: var(--white);
+            -webkit-text-stroke: 0;
+        }
+
+        /* pill image on hover */
+        .menu__image {
+            width: 110px; height: 64px;
+            border-radius: 100px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            flex-shrink: 0;
+            transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+            filter: grayscale(100%);
+            transform: scale(.92);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .menu__link:hover .menu__image { opacity: 1; transform: scale(1); }
+        }
+        .menu-image-1 { background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80'); }
+        .menu-image-2 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=200&q=80'); }
+        .menu-image-3 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=200&q=80'); }
+        .menu-image-4 { background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80'); }
+
+        .nav__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .4s var(--ease-out) .35s, transform .4s var(--ease-out) .35s;
+        }
+        #nav.nav-open .nav__footer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Socials ─── */
+        .socials-text { display: flex; gap: 20px; }
+        .socials-text a {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            transition: color .2s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .socials-text a:hover { color: var(--white); }
+        }
+        .socials-text li:not(:last-child)::after {
+            content: '+';
+            margin-left: 20px;
+            color: rgba(255,255,255,.12);
+        }
+
+        .copyright {
+            font-family: var(--condensed);
+            font-size: .7rem;
+            letter-spacing: .1em;
+            color: rgba(255,255,255,.2);
+        }
+        .copyright i { color: #cc4444; }
+
+        /* ─── Sections ─── */
+        .section {
+            position: fixed;
+            inset: 0;
+            overflow-y: auto;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .45s var(--ease-out), visibility .45s var(--ease-out);
+        }
+        .section.active { opacity: 1; visibility: visible; pointer-events: auto; }
+
+        /* ─── HERO entrance animations ─── */
+        /* Ken Burns slow drift on hero background */
+        @keyframes heroBgDrift {
+            0%   { transform: scale(1.08) translate(0, 0); }
+            50%  { transform: scale(1.12) translate(-1%, -.8%); }
+            100% { transform: scale(1.08) translate(0, 0); }
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80') center/cover no-repeat;
+            animation: heroBgDrift 18s var(--ease-in-out) infinite;
+            will-change: transform;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 100%);
+        }
+
+        /* Hero title lines — each span slides up from below + fades in */
+        .headline__title span {
+            display: block;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity .75s var(--ease-out), transform .75s var(--ease-out);
+        }
+        .hero-ready .headline__title span:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: .05s; }
+        .hero-ready .headline__title span:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: .18s; }
+        .hero-ready .headline__title span:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: .31s; }
+
+        /* Hero caption */
+        .headline__caption {
+            display: block;
+            margin-top: 28px;
+            font-family: var(--condensed);
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .6s var(--ease-out) .48s, transform .6s var(--ease-out) .48s;
+        }
+        .hero-ready .headline__caption { opacity: 1; transform: translateY(0); }
+        .headline__caption em { color: rgba(255,255,255,.8); font-style: normal; }
+
+        /* Hero footer bar — slides up */
+        .intro__footer {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 0 48px 26px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s var(--ease-out) .65s, transform .6s var(--ease-out) .65s;
+        }
+        .hero-ready .intro__footer { opacity: 1; transform: translateY(0); }
+
+        /* ─── Ambient floating orb on hero ─── */
+        .hero-orb {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-orb::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
+            top: 10%; left: 55%;
+            animation: orbDrift 12s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        .hero-orb::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.03) 0%, transparent 70%);
+            bottom: 15%; left: 20%;
+            animation: orbDrift2 16s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        @keyframes orbDrift  { from { transform: translate(0, 0) scale(1); }  to { transform: translate(-60px, 40px) scale(1.15); } }
+        @keyframes orbDrift2 { from { transform: translate(0, 0) scale(1); }  to { transform: translate(50px, -30px) scale(1.1); } }
+
+        /* ─── Scroll-reveal for section content ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: .08s; }
+        .reveal-delay-2 { transition-delay: .18s; }
+        .reveal-delay-3 { transition-delay: .28s; }
+
+        /* ─── Event card clip-path reveal ─── */
+        .event-card {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+        }
+        .event-card.in-view { opacity: 1; transform: translateY(0); }
+        .event-card:nth-child(1) { transition-delay: .00s; }
+        .event-card:nth-child(2) { transition-delay: .08s; }
+        .event-card:nth-child(3) { transition-delay: .16s; }
+        .event-card:nth-child(4) { transition-delay: .24s; }
+        .event-card:nth-child(5) { transition-delay: .32s; }
+        .event-card:nth-child(6) { transition-delay: .40s; }
+
+        /* ─── Team cards stagger ─── */
+        .team-card {
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            transition: background .25s var(--ease-out);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: background .25s var(--ease-out), opacity .6s var(--ease-out), transform .6s var(--ease-out);
+        }
+        .team-card.in-view { opacity: 1; transform: translateY(0); }
+        .team-card:nth-child(1) { transition-delay: .0s; }
+        .team-card:nth-child(2) { transition-delay: .1s; }
+        .team-card:nth-child(3) { transition-delay: .2s; }
+        .team-card:nth-child(4) { transition-delay: .3s; }
+
+        /* ─── HERO misc ─── */
+        #home { z-index: 60; }
+        .headline__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(5rem, 13vw, 12rem);
+            line-height: .88;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            display: flex;
+            flex-direction: column;
+        }
+        .headline__title .outline {
+            -webkit-text-stroke: 2px var(--white);
+            color: transparent;
+        }
+        .headline__title .star {
+            font-size: .18em;
+            vertical-align: super;
+            -webkit-text-stroke: 0;
+            color: var(--white);
+            font-style: normal;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 240px 48px 200px;
+        }
+        .footer__line {
+            position: absolute;
+            top: 0; left: 48px; right: 48px;
+            height: 1px;
+            background: rgba(255,255,255,.1);
+        }
+        .footer__line.line-2 { top: 1px; background: rgba(255,255,255,.03); }
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer__launching {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+        }
+        .footer__launching strong { color: var(--white); }
+
+        /* ─── ABOUT ─── */
+        #about { background: #0a0a0a; padding-bottom: 185px; }
+
+        .inner__intro {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: var(--black);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .marquee { width: 100%; overflow: hidden; white-space: nowrap; }
+        .marquee__inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        .marquee__inner span {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(5rem, 10vw, 9rem);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            color: rgba(255,255,255,.04);
+            margin-right: 60px;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .inner__content { padding: 60px 48px 80px; }
+        .content-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 2px;
+        }
+        @media(max-width:768px) { .content-row { grid-template-columns: 1fr; } }
+
+        .text-content-block {
+            padding: 64px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #0d0d0d;
+        }
+        .block__subtitle {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 18px;
+        }
+        .block__title {
+            font-family: var(--condensed);
+            font-weight: 800;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            text-transform: uppercase;
+            letter-spacing: .01em;
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+        .block__title .outline-sm {
+            -webkit-text-stroke: 1px rgba(255,255,255,.5);
+            color: transparent;
+        }
+        .block__text {
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: rgba(255,255,255,.45);
+        }
+
+        .image-block {
+            min-height: 420px;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: filter .4s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .image-block:hover { filter: grayscale(0%); }
+        }
+        .inner-image-1 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'); }
+        .inner-image-2 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80'); }
+
+        /* ─── EVENTS ─── */
+        #events { background: var(--black); padding-bottom: 185px; }
+
+        .section-header {
+            padding: 140px 48px 40px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .section-header .block__title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            max-width: 700px;
+            margin-bottom: 0;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 40px 48px 80px;
+        }
+        @media(max-width:900px) { .works-grid { grid-template-columns: repeat(2, 1fr); padding: 24px 20px 60px; } }
+        @media(max-width:540px) { .works-grid { grid-template-columns: 1fr; } }
+
+        /* ─── Event Card ─── */
+        .work-item {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.07);
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: border-color .3s var(--ease-out), transform .3s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .work-item:hover {
+                border-color: rgba(255,255,255,.18);
+                transform: translateY(-4px);
+            }
+            .work-item:hover .work-item__img img {
+                transform: scale(1.06);
+                filter: grayscale(0%);
+            }
+            .work-item:hover .work-item__arrow { opacity: 1; transform: translate(0,0); }
+        }
+
+        .work-item__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .work-item__img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%);
+            transition: transform .5s var(--ease-out), filter .4s var(--ease-out);
+        }
+
+        /* Date badge */
+        .work-item__date {
+            position: absolute;
+            top: 14px; left: 14px;
+            background: rgba(255,255,255,1);
+            color: #000;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 52px;
+            z-index: 2;
+        }
+        .work-item__date strong {
+            display: block;
+            font-family: var(--condensed);
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .work-item__date span {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        /* Card body */
+        .work-item__body {
+            padding: 20px 22px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .work-cat {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+        }
+        .work-title {
+            font-family: var(--condensed);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+        .work-item__arrow {
+            margin-top: auto;
+            padding-top: 14px;
+            font-size: .75rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translate(-8px, 4px);
+            transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
+        }
+
+        /* ─── Fixed background logo watermark ─── */
+        .bg-logo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 55;
+            pointer-events: none;
+            width: min(85vw, 900px);
+            opacity: 0;
+            transition: opacity .6s var(--ease-out);
+            mix-blend-mode: screen;
+        }
+        .bg-logo-watermark svg {
+            width: 100%;
+            height: auto;
+        }
+        body.show-watermark .bg-logo-watermark { opacity: 1; }
+
+        /* ─── CONTACT ─── */
+        #contact { background: #0a0a0a; }
+
+        .contact-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 150px 48px 80px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            max-width: 1100px;
+        }
+        @media(max-width:768px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+        .contact__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            line-height: .88;
+            color: var(--white);
+            margin-bottom: 36px;
+        }
+        .contact__title .outline {
+            -webkit-text-stroke: 2px rgba(255,255,255,.35);
+            color: transparent;
+        }
+
+        .contact__info p {
+            font-family: var(--body);
+            font-size: .88rem;
+            font-weight: 300;
+            line-height: 2;
+            color: rgba(255,255,255,.45);
+        }
+        .contact__info strong { color: rgba(255,255,255,.75); font-weight: 600; }
+        .contact__info a { color: var(--white); border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 1px; transition: border-color .2s var(--ease-out); }
+        @media (hover: hover) and (pointer: fine) {
+            .contact__info a:hover { border-color: var(--white); }
+        }
+
+        /* Footer logo inside contact */
+        .contact-footer-logo {
+            margin-top: 48px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+        .contact-footer-logo img { height: 120px; width: 120px; opacity: .6; }
+
+        .contact-form { display: flex; flex-direction: column; gap: 28px; }
+        .form-field { display: flex; flex-direction: column; gap: 8px; }
+        .form-field label {
+            font-family: var(--condensed);
+            font-size: .65rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+        }
+        .form-field input,
+        .form-field textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            color: var(--white);
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            padding: 10px 0;
+            outline: none;
+            transition: border-color .25s;
+        }
+        .form-field input::placeholder,
+        .form-field textarea::placeholder { color: rgba(255,255,255,.15); }
+        .form-field input:focus,
+        .form-field textarea:focus { border-bottom-color: rgba(255,255,255,.5); }
+        .form-field textarea { resize: none; height: 90px; }
+
+        .btn-submit {
+            align-self: flex-start;
+            margin-top: 4px;
+            padding: 14px 40px;
+            background: var(--white);
+            border: 1px solid var(--white);
+            color: var(--black);
+            font-family: var(--condensed);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s var(--ease-out), color .2s var(--ease-out), transform 120ms var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .btn-submit:hover {
+                background: transparent;
+                color: var(--white);
+            }
+        }
+        .btn-submit:active { transform: scale(0.97); }
+
+        /* ─── Marquee Band ─── */
+        .marquee-band {
+            position: relative;
+            z-index: 55;
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,.08);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .marquee-row {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            height: 90px;
+        }
+        .marquee-row + .marquee-row {
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+        .marquee-track {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            will-change: transform;
+        }
+
+        /* Row 1 scrolls left */
+        .marquee-row--left .marquee-track {
+            animation: mq-left 28s linear infinite;
+        }
+        /* Row 2 scrolls right */
+        .marquee-row--right .marquee-track {
+            animation: mq-right 32s linear infinite;
+        }
+
+        @keyframes mq-left  { from { transform: translateX(0); }   to { transform: translateX(-50%); } }
+        @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+        .marquee-item {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: var(--white);
+            padding: 0 28px;
+            line-height: 1;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .marquee-sep {
+            font-family: var(--condensed);
+            font-weight: 300;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            color: rgba(255,255,255,.18);
+            padding: 0 8px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        /* Outlined alternate items */
+        .marquee-item.outline {
+            -webkit-text-stroke: 1.5px rgba(255,255,255,.4);
+            color: transparent;
+        }
+
+        /* ─── Team Section ─── */
+        .team-section {
+            padding: 80px 0 20px;
+        }
+        .team-header {
+            padding: 0 48px 48px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            margin-bottom: 0;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,.04);
+        }
+        @media(max-width:900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width:540px) { .team-grid { grid-template-columns: 1fr; } }
+
+        .team-card {
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            transition: background .25s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover { background: #111; }
+        }
+
+        .team-card__photo {
+            width: 100%;
+            aspect-ratio: 1;
+            background-size: cover;
+            background-position: center top;
+            filter: grayscale(100%);
+            transition: filter .4s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover .team-card__photo { filter: grayscale(0%); }
+        }
+
+        .team-card__body {
+            padding: 28px 24px 36px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .team-card__index {
+            font-family: var(--condensed);
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            color: rgba(255,255,255,.18);
+            margin-bottom: 10px;
+        }
+        .team-card__name {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: .02em;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .team-card__role {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.3);
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .team-card__bio {
+            font-family: var(--body);
+            font-size: .82rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255,255,255,.4);
+        }
+
+        /* ─── Scrollbar ─── */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); }
+
+        /* ─── Mobile ─── */
+        @media(max-width:768px) {
+            #header { padding: 16px 20px; }
+            .header__logo { width: 200px; height: 76px; }
+            .header__logo img { width: 290px; height: 290px; left: -47px; top: -106px; }
+            #nav { padding: 90px 20px 56px; overflow-y: auto; }
+            #nav::before { left: 20px; right: 20px; top: 72px; }
+            .menu__caption { font-size: clamp(2.4rem, 11vw, 4rem); }
+            .menu__image { display: none; }
+            .menu__link { padding: 10px 0; }
+            .nav__footer { left: 20px; right: 20px; flex-direction: column; gap: 10px; text-align: center; bottom: 28px; }
+            .hero-content { padding: 90px 20px 120px; }
+            .intro__footer { padding: 0 20px 22px; }
+            .footer__line { left: 20px; right: 20px; }
+            .inner__content { padding: 28px 20px; }
+            .text-content-block { padding: 32px 20px; }
+            .section-header { padding: 100px 20px 28px; }
+            .contact-wrapper { padding: 100px 20px 60px; }
+            .header__underline { left: 20px; right: 20px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+            .headline__title { font-size: clamp(3.8rem, 16vw, 6rem); }
+            .works-grid { grid-template-columns: 1fr 1fr; }
+            .marquee-item { font-size: clamp(1.8rem, 6vw, 3rem); }
+        }
+        @media(max-width:480px) {
+            .works-grid { grid-template-columns: 1fr; }
+            .content-row { grid-template-columns: 1fr; }
+            .image-block { min-height: 260px; }
+            .menu__caption { font-size: clamp(2.2rem, 13vw, 3.5rem); }
+            .contact__title { font-size: clamp(3rem, 14vw, 5rem); }
+        }
+
+        /* ─── Reduced motion: remove positional animations, keep opacity/color ─── */
+        @media (prefers-reduced-motion: reduce) {
+            .loader__logo { animation: none; opacity: 1; }
+            .menu__link { transform: none !important; transition: opacity .2s; }
+            .nav__footer { transform: none !important; }
+            .loader { transition: opacity .3s, visibility .3s; }
+            .section { transition: opacity .3s, visibility .3s; }
+            .work-item img { transition: filter .3s; }
+            .team-card__photo { transition: filter .3s; }
+            .image-block { transition: filter .3s; }
+            /* New animation overrides */
+            .hero-bg { animation: none; }
+            .hero-orb::before, .hero-orb::after { animation: none; }
+            .headline__title span, .headline__caption, .intro__footer {
+                opacity: 1; transform: none; transition: none;
+            }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .work-item { clip-path: none; }
+            .team-card { opacity: 1; transform: none; }
+            .event-card { opacity: 1; transform: none; }
+            .burger__line { transition: opacity .2s; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader__logo">
+            <img src="img/logo.png" alt="Fusion4 Events">
+        </div>
+    </div>
+
+    <!-- Fixed background logo watermark -->
+    <div class="bg-logo-watermark" id="bgLogoWatermark">
+        <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <text x="50%" y="70%" text-anchor="middle" dominant-baseline="middle"
+                font-family="'Barlow Condensed', sans-serif"
+                font-weight="900"
+                font-size="160"
+                letter-spacing="-4"
+                fill="none"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1.5"
+                text-transform="uppercase"
+            >FUSION4</text>
+        </svg>
+    </div>
+
+    <!-- Noise -->
+    <canvas id="noise"></canvas>
+
+    <!-- ─── Header ─── -->
+    <header id="header">
+        <div class="header__container">
+            <button class="header__logo" id="logo-home" aria-label="Go to Home" style="background:none;border:none;cursor:pointer;padding:0;">
+                <img src="img/logo.png" alt="Fusion4 Events">
+            </button>
+            <div class="header__controls">
+                <button id="menu-trigger" class="menu-trigger" aria-label="Open menu">
+                    <span class="menu-trigger__label" id="menu-label">Menu</span>
+                    <span class="burger" id="burger">
+                        <span class="burger__line burger__line--1"></span>
+                        <span class="burger__line burger__line--2"></span>
+                        <span class="burger__line burger__line--3"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="header__underline"></div>
+        <div class="header__underline underline-2"></div>
+    </header>
+
+    <!-- ─── Navigation ─── -->
+    <nav id="nav">
+        <ul class="menu">
+            <li class="menu__item">
+                <a href="#" class="menu__link active-link" data-target="home">
+                    <span class="menu__number">01.</span>
+                    <span class="menu__image menu-image-1"></span>
+                    <span class="menu__caption">Home</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="about">
+                    <span class="menu__number">02.</span>
+                    <span class="menu__image menu-image-2"></span>
+                    <span class="menu__caption outline">About Us</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="events">
+                    <span class="menu__number">03.</span>
+                    <span class="menu__image menu-image-3"></span>
+                    <span class="menu__caption outline">Events</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="contact">
+                    <span class="menu__number">04.</span>
+                    <span class="menu__image menu-image-4"></span>
+                    <span class="menu__caption outline">Contact</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+        </ul>
+        <div class="nav__footer">
+            <ul class="socials-text">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">X</a></li>
+            </ul>
+            <p class="copyright">Made with <i class="fa-solid fa-heart"></i> by Fusion4 Events</p>
+        </div>
+    </nav>
+
+    <!-- ─── HOME ─── -->
+    <section id="home" class="section active">
+        <div class="hero-bg"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-content">
+            <div class="headline-wrap">
+                <h1 class="headline__title">
+                    <span>Events</span>
+                    <span>That <span class="star">✦</span> Move</span>
+                    <span class="outline">You</span>
+                </h1>
+                <span class="headline__caption">Creating <em>unforgettable experiences</em> across the globe</span>
+            </div>
+        </div>
+        <div class="intro__footer">
+            <div class="footer__line"></div>
+            <div class="footer__line line-2"></div>
+            <div class="footer__container">
+                <ul class="socials-text">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">X</a></li>
+                </ul>
+                <div class="footer__launching">
+                    Next Event: <strong>Summer Fusion — Aug 2025</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── MARQUEE BAND ─── -->
+    <div class="marquee-band" id="marquee-band" style="position:fixed;bottom:0;left:0;right:0;z-index:200;pointer-events:none;">
+        <!-- Row 1 — scrolls LEFT -->
+        <div class="marquee-row marquee-row--left">
+            <div class="marquee-track">
+                <span class="marquee-item">Live Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Conferences</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Galas &amp; Awards</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Festivals</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Product Launches</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Weddings</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Corporate Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Brand Activations</span><span class="marquee-sep">/</span>
+                <!-- duplicate for seamless loop -->
+                <span class="marquee-item">Live Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Conferences</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Galas &amp; Awards</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Festivals</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Product Launches</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Weddings</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Corporate Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Brand Activations</span><span class="marquee-sep">/</span>
+            </div>
+        </div>
+        <!-- Row 2 — scrolls RIGHT -->
+        <div class="marquee-row marquee-row--right">
+            <div class="marquee-track">
+                <span class="marquee-item outline">Exclusive Venues</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Sound &amp; Lighting</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Stage Production</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">VIP Experiences</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Entertainment</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Crowd Management</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Event Design</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Global Reach ✦</span><span class="marquee-sep">/</span>
+                <!-- duplicate -->
+                <span class="marquee-item outline">Exclusive Venues</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Sound &amp; Lighting</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Stage Production</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">VIP Experiences</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Entertainment</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Crowd Management</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Event Design</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Global Reach ✦</span><span class="marquee-sep">/</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── ABOUT ─── -->
+    <section id="about" class="section">
+        <div class="inner__intro">
+            <div class="marquee">
+                <div class="marquee__inner" aria-hidden="true">
+                    <span>About Us</span><span>About Us</span>
+                    <span>About Us</span><span>About Us</span>
+                    <span>About Us</span><span>About Us</span>
+                </div>
+            </div>
+        </div>
+        <div class="inner__content">
+            <!-- Company intro rows -->
+            <div class="content-row">
+                <div class="text-content-block reveal">
+                    <span class="block__subtitle reveal reveal-delay-1">Who We Are</span>
+                    <h2 class="block__title reveal reveal-delay-2">Crafting <span class="outline-sm">Extraordinary</span> Moments</h2>
+                    <p class="block__text reveal reveal-delay-3">Fusion4 is a premium events company dedicated to turning visions into reality. From intimate gatherings to large-scale productions, we bring passion, precision, and creativity to every event we touch. Our team of seasoned professionals ensures every detail is flawlessly executed.</p>
+                </div>
+                <div class="image-block inner-image-1 reveal reveal-delay-2"></div>
+            </div>
+            <div class="content-row">
+                <div class="image-block inner-image-2"></div>
+                <div class="text-content-block">
+                    <span class="block__subtitle">Our Philosophy</span>
+                    <h2 class="block__title">Every Event Tells a <span class="outline-sm">Story</span></h2>
+                    <p class="block__text">We believe events are more than occasions — they're experiences that linger in memory. Fusion4 blends cutting-edge production with human warmth to deliver events that resonate, inspire, and leave lasting impressions on every single guest.</p>
+                </div>
+            </div>
+
+            <!-- Team section -->
+            <div class="team-section">
+                <div class="team-header">
+                    <span class="block__subtitle">The Founders</span>
+                    <h2 class="block__title">Four <span class="outline-sm">Visionaries</span></h2>
+                </div>
+                <div class="team-grid">
+
+                    <!-- Mr W -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">01</div>
+                            <h3 class="team-card__name">Mr W</h3>
+                            <span class="team-card__role">Creative Director</span>
+                            <p class="team-card__bio">The visionary behind Fusion4's signature aesthetic. Mr W brings two decades of immersive event design experience — transforming raw venues into extraordinary sensory worlds. Every detail, every texture, every light cue bears his obsessive creative stamp.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr X -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">02</div>
+                            <h3 class="team-card__name">Mr X</h3>
+                            <span class="team-card__role">Operations Director</span>
+                            <p class="team-card__bio">The engine that keeps Fusion4 running like clockwork. Mr X oversees logistics, vendor networks, and production timelines with military precision. His talent for crisis management and meticulous planning ensures no event ever misses a beat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr Y -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">03</div>
+                            <h3 class="team-card__name">Mr Y</h3>
+                            <span class="team-card__role">Client & Brand Strategy</span>
+                            <p class="team-card__bio">The relationship architect of Fusion4. Mr Y forges deep partnerships with clients, sponsors, and cultural institutions worldwide. His background in brand storytelling ensures every event amplifies the client's identity and leaves audiences genuinely moved.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr Z -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">04</div>
+                            <h3 class="team-card__name">Mr Z</h3>
+                            <span class="team-card__role">Technology & Production</span>
+                            <p class="team-card__bio">The tech architect powering Fusion4's productions. Mr Z leads audio-visual innovation, live streaming, and interactive installations. From immersive AR experiences to flawless sound design, he keeps Fusion4 at the cutting edge of event technology.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── EVENTS ─── -->
+    <section id="events" class="section">
+        <div class="section-header reveal">
+            <span class="block__subtitle reveal reveal-delay-1">Our Portfolio</span>
+            <h2 class="block__title reveal reveal-delay-2">Featured <span class="outline-sm">Events</span></h2>
+        </div>
+        <div class="works-grid">
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>28</strong><span>May</span></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Gala Night">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Corporate / Awards</span>
+                    <div class="work-title">Gala Night 2024</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>14</strong><span>Jun</span></div>
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Conference / Expo</span>
+                    <div class="work-title">Tech Summit 2025</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>02</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80" alt="Festival">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Festival / Music</span>
+                    <div class="work-title">Summer Fusion Fest</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>19</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" alt="Wedding">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Wedding / Private</span>
+                    <div class="work-title">The Grand Wedding</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>08</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Brand Launch">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Brand / Launch</span>
+                    <div class="work-title">Brand Launch 360°</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>23</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Neon Nights">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Nightlife / Entertainment</span>
+                    <div class="work-title">Neon Nights</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section id="contact" class="section">
+        <div class="contact-wrapper">
+            <div class="contact-grid">
+                <div>
+                    <h2 class="contact__title reveal">
+                        Let's<br>Create<br>
+                        <span class="outline">Together</span>
+                    </h2>
+                    <div class="contact__info reveal reveal-delay-2">
+                        <p>
+                            Have an event in mind? We'd love to hear from you.<br><br>
+                            <strong>Email:</strong> hello@fusion4.events<br>
+                            <strong>Phone:</strong> +49 123 456 7890<br>
+                            <strong>Location:</strong> Frankfurt, Germany<br><br>
+                            <a href="#">Instagram</a>&nbsp; · &nbsp;
+                            <a href="#">Facebook</a>&nbsp; · &nbsp;
+                            <a href="#">LinkedIn</a>
+                        </p>
+                    </div>
+                    <div class="contact-footer-logo">
+                        <img src="img/logo.png" alt="Fusion4 Events">
+                    </div>
+                </div>
+                <div>
+                    <form class="contact-form" onsubmit="return false;">
+                        <div class="form-field">
+                            <label>Your Name</label>
+                            <input type="text" placeholder="John Doe">
+                        </div>
+                        <div class="form-field">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-field">
+                            <label>Event Type</label>
+                            <input type="text" placeholder="Wedding, Corporate, Festival…">
+                        </div>
+                        <div class="form-field">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your event…"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // ─── Loader ───
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('loaded');
+            // Trigger hero entrance after loader fades
+            setTimeout(() => {
+                document.getElementById('home').classList.add('hero-ready');
+            }, 200);
+        }, 1000);
+    });
+
+    // ─── Noise ───
+    (function() {
+        const canvas = document.getElementById('noise');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+        function draw() {
+            const w = canvas.width, h = canvas.height;
+            const img = ctx.createImageData(w, h);
+            const d = img.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 255 | 0;
+                d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+            }
+            ctx.putImageData(img, 0, 0);
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // ─── Menu ───
+    const menuTrigger = document.getElementById('menu-trigger');
+    const burger      = document.getElementById('burger');
+    const menuLabel   = document.getElementById('menu-label');
+    const nav         = document.getElementById('nav');
+    const header      = document.getElementById('header');
+
+    function openMenu() {
+        nav.classList.add('nav-open');
+        burger.classList.add('is-open');
+        menuLabel.textContent = 'Close';
+        menuTrigger.setAttribute('aria-label', 'Close menu');
+        header.classList.add('nav-is-open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        nav.classList.remove('nav-open');
+        burger.classList.remove('is-open');
+        menuLabel.textContent = 'Menu';
+        menuTrigger.setAttribute('aria-label', 'Open menu');
+        header.classList.remove('nav-is-open');
+        document.body.style.overflow = '';
+    }
+
+    menuTrigger.addEventListener('click', () => {
+        nav.classList.contains('nav-open') ? closeMenu() : openMenu();
+    });
+
+    // ─── Section switching ───
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.menu__link[data-target]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const target = link.dataset.target;
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(target).classList.add('active');
+
+            navLinks.forEach(l => {
+                l.classList.remove('active-link');
+                const cap = l.querySelector('.menu__caption');
+                cap.classList.add('outline');
+            });
+            link.classList.add('active-link');
+            link.querySelector('.menu__caption').classList.remove('outline');
+
+            closeMenu();
+        });
+    });
+    // ─── Logo → Home ───
+    document.getElementById('logo-home').addEventListener('click', () => {
+        closeMenu();
+        sections.forEach(s => s.classList.remove('active'));
+        document.getElementById('home').classList.add('active');
+        navLinks.forEach(l => {
+            l.classList.remove('active-link');
+            l.querySelector('.menu__caption').classList.add('outline');
+        });
+        const homeLink = document.querySelector('.menu__link[data-target="home"]');
+        if (homeLink) {
+            homeLink.classList.add('active-link');
+            homeLink.querySelector('.menu__caption').classList.remove('outline');
+        }
+    });
+
+    // ─── Scroll-reveal IntersectionObserver ───
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                revealObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .work-item, .team-card, .event-card').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // ─── Re-run observer when switching sections ───
+    document.querySelectorAll('.menu__link').forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal:not(.in-view), .work-item:not(.in-view), .team-card:not(.in-view), .event-card:not(.in-view)').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }, 100);
+        });
+    });
+
+    // ─── Background logo watermark (shows when non-home section is active) ───
+    function updateWatermark() {
+        const activeSection = document.querySelector('.section.active');
+        const isHome = !activeSection || activeSection.id === 'home';
+        document.body.classList.toggle('show-watermark', !isHome);
+    }
+    // Watch section class changes
+    const sectionObserver = new MutationObserver(updateWatermark);
+    document.querySelectorAll('.section').forEach(s => {
+        sectionObserver.observe(s, { attributes: true, attributeFilter: ['class'] });
+    });
+    updateWatermark(); // run once on load
+
+    </script>
+</body>
+</html>
