@@ -381,15 +381,171 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80') center/cover no-repeat;
-            animation: heroBgDrift 18s var(--ease-in-out) infinite;
-            will-change: transform;
+            bottom: 185px;
+            top: 88px;
+            overflow: hidden;
+        }
+        .hero-bg__sharp {
+            position: absolute;
+            right: 48px;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                                linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            animation: heroFloat 6s var(--ease-in-out) infinite;
+        }
+        @keyframes heroFloat {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
         }
         .hero-bg::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(160deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 100%);
+            z-index: 2;
+            background: none;
+        }
+
+        /* Animated aurora glow on sides */
+        .hero-aurora {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-aurora__beam {
+            position: absolute;
+            width: 300px;
+            height: 160%;
+            top: -30%;
+            opacity: 0;
+            filter: blur(60px);
+            will-change: transform, opacity;
+        }
+        .hero-aurora__beam--1 {
+            left: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,153,51,.15) 30%, rgba(204,68,0,.1) 60%, transparent 100%);
+            animation: auroraBeam1 8s var(--ease-in-out) infinite;
+        }
+        .hero-aurora__beam--2 {
+            right: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,120,30,.12) 35%, rgba(255,60,0,.08) 65%, transparent 100%);
+            animation: auroraBeam2 9s var(--ease-in-out) 2.5s infinite;
+        }
+        .hero-aurora__beam--3 {
+            left: 8%;
+            width: 200px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,200,80,.08) 40%, rgba(255,100,0,.05) 70%, transparent 100%);
+            animation: auroraBeam1 10s var(--ease-in-out) 5s infinite;
+        }
+        .hero-aurora__beam--4 {
+            right: 8%;
+            width: 250px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,80,0,.1) 30%, rgba(200,50,0,.06) 65%, transparent 100%);
+            animation: auroraBeam2 7s var(--ease-in-out) 3.5s infinite;
+        }
+        @keyframes auroraBeam1 {
+            0%   { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(-15deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+        }
+        @keyframes auroraBeam2 {
+            0%   { opacity: 0; transform: rotate(12deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(12deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(12deg) translateY(10%); }
+        }
+
+        /* Floating sparkle particles */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 3;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,180,80,.6);
+            box-shadow: 0 0 6px rgba(255,153,51,.4);
+            animation: particleFloat linear infinite;
+            will-change: transform;
+        }
+        @keyframes particleFloat {
+            0%   { transform: translateY(0) scale(0); opacity: 0; }
+            10%  { opacity: 1; transform: translateY(-10vh) scale(1); }
+            50%  { opacity: .6; transform: translateY(-40vh) scale(.8); }
+            90%  { opacity: .2; transform: translateY(-75vh) scale(.3); }
+            100% { opacity: 0; transform: translateY(-85vh) scale(0); }
+        }
+
+        /* Corner frame accents */
+        .hero-frame {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .hero-frame__corner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+        }
+        .hero-frame__corner--tl { top: 14px; left: 14px; border-top: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) .8s forwards; }
+        .hero-frame__corner--tr { top: 14px; right: 14px; border-top: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1s forwards; }
+        .hero-frame__corner--bl { bottom: 14px; left: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.2s forwards; }
+        .hero-frame__corner--br { bottom: 14px; right: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.4s forwards; }
+        @keyframes frameIn {
+            from { opacity: 0; transform: scale(.5); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scanning light line */
+        .hero-scanline {
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0; right: 0;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-scanline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,153,51,.4) 50%, transparent 100%);
+            animation: scanH 6s linear infinite;
+        }
+        @keyframes scanH {
+            0%   { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* Hero title lines — each span slides up from below + fades in */
@@ -423,8 +579,8 @@
         /* Hero footer bar — slides up */
         .intro__footer {
             position: absolute;
-            bottom: 200px; left: 0; right: 0;
-            padding: 0 48px 26px;
+            bottom: 195px; left: 0; right: 0;
+            padding: 0 48px 12px;
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
@@ -436,6 +592,8 @@
         .hero-orb {
             position: absolute;
             inset: 0;
+            top: 88px;
+            bottom: 185px;
             z-index: 1;
             pointer-events: none;
             overflow: hidden;
@@ -509,7 +667,7 @@
         .headline__title {
             font-family: var(--condensed);
             font-weight: 900;
-            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-size: clamp(2.4rem, 5vw, 4.5rem);
             line-height: .88;
             color: var(--white);
             text-transform: uppercase;
@@ -529,13 +687,19 @@
             font-style: normal;
         }
         .hero-content {
-            position: relative;
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0;
+            right: 0;
             z-index: 2;
-            height: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 120px 48px 20px;
+            justify-content: flex-start;
+            padding: 20px 48px 40px;
+        }
+        .hero-content .headline-wrap {
+            max-width: 650px;
         }
         .footer__line {
             position: absolute;
@@ -1279,8 +1443,13 @@
             .menu__image { display: none; }
             .menu__link { padding: 10px 0; }
             .nav__footer { left: 20px; right: 20px; flex-direction: column; gap: 10px; text-align: center; bottom: 28px; }
-            .hero-content { height: calc(100vh - 185px); padding: 90px 20px 0; }
-            .intro__footer { padding: 0 20px 22px; bottom: 185px; }
+            .hero-content { top: 70px; bottom: 185px; padding: 12px 20px 60px; }
+            .hero-content .headline-wrap { max-width: 100%; }
+            .hero-bg { top: 70px; }
+            .hero-bg__sharp { right: 10px; }
+            .intro__footer { padding: 0 20px 10px; bottom: 185px; }
+            .footer__container { flex-direction: column-reverse; gap: 8px; align-items: flex-start; }
+            .footer__launching { font-size: .6rem; letter-spacing: .12em; white-space: normal; word-break: break-word; }
             .footer__line { left: 20px; right: 20px; }
             .inner__content { padding: 28px 20px; }
             .text-content-block { padding: 32px 20px; }
@@ -1288,9 +1457,10 @@
             .contact-wrapper { padding: 100px 20px 60px; }
             .header__underline { left: 20px; right: 20px; }
             .contact-grid { grid-template-columns: 1fr; gap: 36px; }
-            .headline__title { font-size: clamp(3.8rem, 16vw, 6rem); }
+            .headline__title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
             .works-grid { grid-template-columns: 1fr 1fr; }
             .marquee-item { font-size: clamp(1.8rem, 6vw, 3rem); }
+            .hero-aurora, .hero-particles, .hero-frame, .hero-scanline { top: 70px; }
         }
         @media(max-width:480px) {
             .works-grid { grid-template-columns: 1fr; }
@@ -1413,8 +1583,8 @@
         <div class="nav__footer">
             <ul class="socials-text">
                 <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">X</a></li>
+                <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                <li><a href="#">tiktok</a></li>
             </ul>
             <p class="copyright">Made with <i class="fa-solid fa-heart"></i> by Fusion4 Events</p>
         </div>
@@ -1422,35 +1592,48 @@
 
     <!-- ─── HOME ─── -->
     <section id="home" class="section active">
-        <div class="hero-bg"></div>
+        <div class="hero-bg">
+            <div class="hero-bg__blur"></div>
+            <img class="hero-bg__sharp" src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Sharad Purnima Raas Garba 2026">
+        </div>
+        <div class="hero-aurora">
+            <div class="hero-aurora__beam hero-aurora__beam--1"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--2"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--3"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--4"></div>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-frame">
+            <div class="hero-frame__corner hero-frame__corner--tl"></div>
+            <div class="hero-frame__corner hero-frame__corner--tr"></div>
+            <div class="hero-frame__corner hero-frame__corner--bl"></div>
+            <div class="hero-frame__corner hero-frame__corner--br"></div>
+        </div>
+        <div class="hero-scanline"></div>
         <div class="hero-orb"></div>
         <div class="hero-content">
             <div class="headline-wrap">
+                <p style="font-family:var(--condensed);font-size:.99rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:16px;">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</p>
                 <h1 class="headline__title">
-                    <span>Events</span>
-                    <span>That <span class="star">✦</span> Move</span>
-                    <span class="outline">You</span>
+                    <span>Europe's Biggest</span>
+                    <span class="outline">Sharad Purnima Raas</span>
+                    <span>Garba 2026</span>
                 </h1>
-                <span class="headline__caption">Creating <em>unforgettable experiences</em> across the globe</span>
+                <span class="headline__caption">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · <em>🎤 Apexa Pandya Live in Concert</em></span>
+                <p style="font-family:var(--condensed);font-size:1.1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,153,51,.8);margin-top:20px;">One Night | One Celebration | Million Memories</p>
             </div>
         </div>
-        <!-- Event Showcase (blinds injected by JS) -->
-        <div class="event-showcase" id="eventShowcase">
-            <div class="event-showcase__inner" id="showcaseInner"></div>
-            <div class="showcase-progress" id="showcaseProgress"></div>
-        </div>
-
         <div class="intro__footer">
             <div class="footer__line"></div>
             <div class="footer__line line-2"></div>
             <div class="footer__container">
                 <ul class="socials-text">
                     <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">X</a></li>
+                    <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                    <li><a href="#">tiktok</a></li>
                 </ul>
                 <div class="footer__launching">
-                    Next Event: <strong>Summer Fusion — Aug 2025</strong>
+                    Next Event: <strong>Sharad Purnima Raas Garba — 25 Oct 2026</strong>
                 </div>
             </div>
         </div>
@@ -1598,6 +1781,46 @@
             <h2 class="block__title reveal reveal-delay-2">Featured <span class="outline-sm">Events</span></h2>
         </div>
         <div class="works-grid">
+            <div class="work-item event-card" style="border-color:rgba(255,180,50,.25);grid-column:1/-1;">
+                <div style="position:relative;aspect-ratio:21/9;overflow:hidden;">
+                    <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;z-index:5;"><strong>25</strong><span>Oct</span></div>
+                    <!-- Garba Gallery Slideshow -->
+                    <div id="garbaGallery" style="position:absolute;inset:0;">
+                        <img src="img/galary/garba2026/AP-POST.png" alt="Sharad Purnima Raas Garba 2026" class="garba-slide garba-slide-active" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1.2s ease;">
+                        <img src="img/galary/garba2026/Apexa Pandya.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
+                        <img src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
+                        <img src="img/galary/garba2026/Apexa Pandya-3.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
+                        <img src="img/galary/garba2026/Apexa Pandya-4.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
+                    </div>
+                    <!-- Gallery dots -->
+                    <div id="garbaDots" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;"></div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:24px 28px;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%);">
+                        <span style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;margin-bottom:10px;">🎫 Tickets from July 04</span>
+                        <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">2000+ Attendees</span>
+                        <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">Sponsor: Squarea</span>
+                    </div>
+                </div>
+                <div class="work-item__body" style="padding:24px 28px 28px;">
+                    <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events &times; Indian Nomads in Ingolstadt e.V.</span>
+                    <div class="work-title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:4px;">🎭 Europe's Biggest Sharad Purnima Raas Garba 2026</div>
+                    <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Sunday, 25 October 2026 &bull; Non-Stop Raas Garba All Night &bull; 🎤 Apexa Pandya Live in Concert</p>
+                    <p style="font-family:var(--condensed);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:12px;">One Night | One Celebration | Million Memories</p>
+                    <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);max-width:700px;">The Biggest Stage &amp; The Biggest Night — non-stop Raas Garba all night with live music, dance &amp; dhol, food stalls &amp; amazing vibes. 2000+ attendees expected. More surprises to be unveiled!</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
+                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">✨ Biggest Stage</span>
+                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🎤 Live Music</span>
+                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">💃 Dance &amp; Dhol</span>
+                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🍽️ Food Stalls</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                        <span style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,153,51,.5);"><i class="fa-solid fa-location-dot"></i>&ensp;Top 'Secret' Location — To Be Unveiled</span>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:10px;">
+                        <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                        <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                    </div>
+                </div>
+            </div>
             <div class="work-item event-card">
                 <div class="work-item__img">
                     <div class="work-item__date"><strong>28</strong><span>May</span></div>
@@ -1682,9 +1905,9 @@
                             <strong>Email:</strong> hello@fusion4.events<br>
                             <strong>Phone:</strong> +49 123 456 7890<br>
                             <strong>Location:</strong> Frankfurt, Germany<br><br>
-                            <a href="#">Instagram</a>&nbsp; · &nbsp;
+                            <a href="https://www.instagram.com/fusion4events/">Instagram</a>&nbsp; · &nbsp;
                             <a href="#">Facebook</a>&nbsp; · &nbsp;
-                            <a href="#">LinkedIn</a>
+                            <a href="#">tiktok</a>
                         </p>
                     </div>
                     <div class="contact-footer-logo">
@@ -1996,6 +2219,48 @@
         });
 
         startTimer();
+    })();
+
+    // ─── Garba Gallery Slideshow ───
+    (function() {
+        const slides = document.querySelectorAll('#garbaGallery .garba-slide');
+        const dotsWrap = document.getElementById('garbaDots');
+        if (!slides.length) return;
+        let current = 0;
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:' + (i === 0 ? 'rgba(255,153,51,.9)' : 'rgba(255,255,255,.3)') + ';cursor:pointer;transition:background .3s;';
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+        });
+        const dots = dotsWrap.querySelectorAll('span');
+        function goTo(idx) {
+            slides[current].style.opacity = '0';
+            dots[current].style.background = 'rgba(255,255,255,.3)';
+            current = idx;
+            slides[current].style.opacity = '1';
+            dots[current].style.background = 'rgba(255,153,51,.9)';
+        }
+        setInterval(() => goTo((current + 1) % slides.length), 4000);
+    })();
+
+    // ─── Hero Floating Particles ───
+    (function() {
+        const container = document.getElementById('heroParticles');
+        if (!container) return;
+        const COUNT = 25;
+        for (let i = 0; i < COUNT; i++) {
+            const p = document.createElement('div');
+            p.className = 'hero-particle';
+            const size = 2 + Math.random() * 3;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.bottom = '-10px';
+            p.style.animationDuration = (6 + Math.random() * 8) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(p);
+        }
     })();
 
     </script>
