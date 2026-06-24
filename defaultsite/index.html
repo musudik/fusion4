@@ -1427,6 +1427,74 @@
             color: rgba(255,255,255,.4);
         }
 
+        /* ─── Event Detail Modal ─── */
+        .event-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity .3s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open {
+            display: flex;
+            opacity: 1;
+        }
+        .event-modal {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform .35s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open .event-modal {
+            transform: translateY(0);
+        }
+        .event-modal__close {
+            position: sticky;
+            top: 0;
+            float: right;
+            z-index: 10;
+            margin: 14px 14px 0 0;
+            background: rgba(0,0,0,.7);
+            border: 1px solid rgba(255,255,255,.2);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+        .event-modal__close:hover { background: rgba(255,255,255,.15); }
+        .event-modal__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #000;
+        }
+        .event-modal__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @media(max-width:768px) {
+            .event-modal-overlay { padding: 0; }
+            .event-modal { max-height: 100vh; max-width: 100%; border: none; }
+        }
+
         /* ─── Scrollbar ─── */
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: var(--black); }
@@ -1619,7 +1687,7 @@
                     <span class="outline">Sharad Purnima Raas</span>
                     <span>Garba 2026</span>
                 </h1>
-                <span class="headline__caption">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · <em>🎤 Apexa Pandya Live in Concert</em></span>
+                <span class="headline__caption">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · <em>🎤Apexa Pandya Live in Concert</em></span>
                 <p style="font-family:var(--condensed);font-size:1.1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,153,51,.8);margin-top:20px;">One Night | One Celebration | Million Memories</p>
             </div>
         </div>
@@ -1730,9 +1798,9 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">01</div>
-                            <h3 class="team-card__name">Mr W</h3>
+                            <h3 class="team-card__name">Mr Aditya Tomar</h3>
                             <span class="team-card__role">Creative Director</span>
-                            <p class="team-card__bio">The visionary behind Fusion4's signature aesthetic. Mr W brings two decades of immersive event design experience — transforming raw venues into extraordinary sensory worlds. Every detail, every texture, every light cue bears his obsessive creative stamp.</p>
+                            <p class="team-card__bio">The visionary behind Fusion4's signature aesthetic. Mr Aditya Tomar brings two decades of immersive event design experience — transforming raw venues into extraordinary sensory worlds. Every detail, every texture, every light cue bears his obsessive creative stamp.</p>
                         </div>
                     </div>
 
@@ -1741,9 +1809,9 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">02</div>
-                            <h3 class="team-card__name">Mr X</h3>
-                            <span class="team-card__role">Operations Director</span>
-                            <p class="team-card__bio">The engine that keeps Fusion4 running like clockwork. Mr X oversees logistics, vendor networks, and production timelines with military precision. His talent for crisis management and meticulous planning ensures no event ever misses a beat.</p>
+                            <h3 class="team-card__name">Mr Gaurav Kwatra</h3>
+                            <span class="team-card__role">Technology & Operations Director</span>
+                            <p class="team-card__bio">The engine that keeps Fusion4 running like clockwork. Mr Gaurav Kwatra oversees logistics, vendor networks, and production timelines with military precision. His talent for crisis management and meticulous planning ensures no event ever misses a beat.</p>
                         </div>
                     </div>
 
@@ -1752,20 +1820,20 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">03</div>
-                            <h3 class="team-card__name">Mr Y</h3>
-                            <span class="team-card__role">Client & Brand Strategy</span>
-                            <p class="team-card__bio">The relationship architect of Fusion4. Mr Y forges deep partnerships with clients, sponsors, and cultural institutions worldwide. His background in brand storytelling ensures every event amplifies the client's identity and leaves audiences genuinely moved.</p>
+                            <h3 class="team-card__name">Mr Himanshu Mahajan</h3>
+                            <span class="team-card__role">Client & Brand Strategy Director</span>
+                            <p class="team-card__bio">The relationship architect of Fusion4. Mr Himanshu Mahajan forges deep partnerships with clients, sponsors, and cultural institutions worldwide. His background in brand storytelling ensures every event amplifies the client's identity and leaves audiences genuinely moved.</p>
                         </div>
                     </div>
 
                     <!-- Mr Z -->
                     <div class="team-card">
-                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80')"></div>
+                        <div class="team-card__photo" style="background-image:url('img/galary/team/km.jpg')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">04</div>
-                            <h3 class="team-card__name">Mr Z</h3>
-                            <span class="team-card__role">Technology & Production</span>
-                            <p class="team-card__bio">The tech architect powering Fusion4's productions. Mr Z leads audio-visual innovation, live streaming, and interactive installations. From immersive AR experiences to flawless sound design, he keeps Fusion4 at the cutting edge of event technology.</p>
+                            <h3 class="team-card__name">Mr Kiran Musudi</h3>
+                            <span class="team-card__role">Marketing & Media Director</span>
+                            <p class="team-card__bio">The tech architect powering Fusion4's productions. Mr Kiran Musudi leads audio-visual innovation, live streaming, and interactive installations. From immersive AR experiences to flawless sound design, he keeps Fusion4 at the cutting edge of event technology.</p>
                         </div>
                     </div>
 
@@ -1781,58 +1849,29 @@
             <h2 class="block__title reveal reveal-delay-2">Featured <span class="outline-sm">Events</span></h2>
         </div>
         <div class="works-grid">
-            <div class="work-item event-card" style="border-color:rgba(255,180,50,.25);grid-column:1/-1;">
-                <div style="position:relative;aspect-ratio:21/9;overflow:hidden;">
-                    <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;z-index:5;"><strong>25</strong><span>Oct</span></div>
-                    <!-- Garba Gallery Slideshow -->
-                    <div id="garbaGallery" style="position:absolute;inset:0;">
-                        <img src="img/galary/garba2026/AP-POST.png" alt="Sharad Purnima Raas Garba 2026" class="garba-slide garba-slide-active" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1.2s ease;">
-                        <img src="img/galary/garba2026/Apexa Pandya.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
-                        <img src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
-                        <img src="img/galary/garba2026/Apexa Pandya-3.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
-                        <img src="img/galary/garba2026/Apexa Pandya-4.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
-                    </div>
-                    <!-- Gallery dots -->
-                    <div id="garbaDots" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;"></div>
-                    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:24px 28px;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%);">
-                        <span style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;margin-bottom:10px;">🎫 Tickets from July 04</span>
-                        <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">2000+ Attendees</span>
-                        <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">Sponsor: Squarea</span>
-                    </div>
-                </div>
-                <div class="work-item__body" style="padding:24px 28px 28px;">
-                    <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events &times; Indian Nomads in Ingolstadt e.V.</span>
-                    <div class="work-title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:4px;">🎭 Europe's Biggest Sharad Purnima Raas Garba 2026</div>
-                    <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Sunday, 25 October 2026 &bull; Non-Stop Raas Garba All Night &bull; 🎤 Apexa Pandya Live in Concert</p>
-                    <p style="font-family:var(--condensed);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:12px;">One Night | One Celebration | Million Memories</p>
-                    <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);max-width:700px;">The Biggest Stage &amp; The Biggest Night — non-stop Raas Garba all night with live music, dance &amp; dhol, food stalls &amp; amazing vibes. 2000+ attendees expected. More surprises to be unveiled!</p>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
-                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">✨ Biggest Stage</span>
-                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🎤 Live Music</span>
-                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">💃 Dance &amp; Dhol</span>
-                        <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🍽️ Food Stalls</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
-                        <span style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,153,51,.5);"><i class="fa-solid fa-location-dot"></i>&ensp;Top 'Secret' Location — To Be Unveiled</span>
-                    </div>
-                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:10px;">
-                        <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
-                        <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="work-item event-card">
+            <div class="work-item event-card" data-detail="event-detail-retro">
                 <div class="work-item__img">
-                    <div class="work-item__date"><strong>28</strong><span>May</span></div>
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Gala Night">
+                    <div class="work-item__date">06<strong></strong><span>June 2026</span></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="RETRO BOLLYWOOD NIGHT">
                 </div>
                 <div class="work-item__body">
-                    <span class="work-cat">Corporate / Awards</span>
-                    <div class="work-title">Gala Night 2024</div>
+                    <span class="work-cat">Vibe & Entertainment</span>
+                    <div class="work-title">RETRO BOLLYWOOD NIGHT 2026</div>
                     <span class="work-item__arrow">View Event →</span>
                 </div>
             </div>
-            <div class="work-item event-card">
+            <div class="work-item event-card" data-detail="event-detail-garba">
+                <div class="work-item__img">
+                    <div class="work-item__date">25<strong></strong><span>October 2026</span></div>
+                    <img src="img/galary/garba2026/AP-POST.png?w=800&q=80" alt="Garba 2026">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Dance & Music</span>
+                    <div class="work-title">Garba 2026</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <!-- <div class="work-item event-card">
                 <div class="work-item__img">
                     <div class="work-item__date"><strong>14</strong><span>Jun</span></div>
                     <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
@@ -1886,7 +1925,7 @@
                     <div class="work-title">Neon Nights</div>
                     <span class="work-item__arrow">View Event →</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -1902,9 +1941,9 @@
                     <div class="contact__info reveal reveal-delay-2">
                         <p>
                             Have an event in mind? We'd love to hear from you.<br><br>
-                            <strong>Email:</strong> hello@fusion4.events<br>
-                            <strong>Phone:</strong> +49 123 456 7890<br>
-                            <strong>Location:</strong> Frankfurt, Germany<br><br>
+                            <strong>Email:</strong> info@fusion4events.com<br>
+                            <strong>Phone:</strong> +49 155 6020035<br>
+                            <strong>Location:</strong> Munich, Germany<br><br>
                             <a href="https://www.instagram.com/fusion4events/">Instagram</a>&nbsp; · &nbsp;
                             <a href="#">Facebook</a>&nbsp; · &nbsp;
                             <a href="#">tiktok</a>
@@ -2090,6 +2129,7 @@
         const total = slideData.length;
         const inner = document.getElementById('showcaseInner');
         const progWrap = document.getElementById('showcaseProgress');
+        if (!inner || !progWrap) return;
 
         // Build slides
         slideData.forEach((d, i) => {
@@ -2263,6 +2303,93 @@
         }
     })();
 
+    // ─── Event Detail Modal (deferred until DOM ready) ───
+    window.addEventListener('load', function() {
+        var overlay = document.getElementById('eventModalOverlay');
+        if (!overlay) return;
+        var modals = overlay.querySelectorAll('.event-modal');
+
+        document.querySelector('.works-grid').addEventListener('click', function(e) {
+            var card = e.target.closest('.work-item[data-detail]');
+            if (!card) return;
+            var detailId = card.dataset.detail;
+            modals.forEach(function(m) { m.style.display = 'none'; });
+            var target = document.getElementById(detailId);
+            if (!target) return;
+            target.style.display = '';
+            overlay.classList.add('modal-open');
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay || e.target.closest('.event-modal__close')) {
+                overlay.classList.remove('modal-open');
+            }
+        });
+    });
+
     </script>
+
+    <!-- ─── Event Detail Modals ─── -->
+    <div class="event-modal-overlay" id="eventModalOverlay">
+
+        <div class="event-modal" id="event-detail-garba">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;z-index:5;"><strong>25</strong><span>Oct</span></div>
+                <div id="garbaGallery" style="position:absolute;inset:0;background:#000;">
+                    <img src="img/galary/garba2026/AP-POST.png" alt="Sharad Purnima Raas Garba 2026" class="garba-slide garba-slide-active" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-3.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-4.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                </div>
+                <div id="garbaDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;"></div>
+                <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:16px 24px;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%);">
+                    <!-- <span style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;">🎫 Tickets from July 04</span> 
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">2000+ Attendees</span>
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">Sponsor: Squarea</span>-->
+                </div>
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">🎭 Europe's Biggest Sharad Purnima Raas Garba 2026</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · 🎤 Apexa Pandya Live in Concert</p>
+                <p style="font-family:var(--condensed);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:12px;">One Night | One Celebration | Million Memories</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">The Biggest Stage &amp; The Biggest Night — non-stop Raas Garba all night with live music, dance &amp; dhol, food stalls &amp; amazing vibes. 2000+ attendees expected. More surprises to be unveiled!</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">✨ Biggest Stage</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🎤 Live Music</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">💃 Dance &amp; Dhol</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🍽️ Food Stalls</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <span style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,153,51,.5);"><i class="fa-solid fa-location-dot"></i>&ensp;Top 'Secret' Location — To Be Unveiled</span>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:10px;">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-modal" id="event-detail-retro" style="display:none;">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;"><strong>06</strong><span>Jun</span></div>
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80" alt="Retro Bollywood Night 2026">
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">Retro Bollywood Night 2026</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Saturday, 06 June 2026 · Vibe &amp; Entertainment</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">Step back in time with the biggest Retro Bollywood party in Europe. Classic hits, dazzling outfits, and a night of pure nostalgia. More details coming soon!</p>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
