@@ -1560,6 +1560,247 @@
             .event-card { opacity: 1; transform: none; }
             .burger__line { transition: opacity .2s; }
         }
+
+        /* ─────────────────────────────────────────────
+           COOKIE CONSENT / PRIVACY / GDPR
+           ───────────────────────────────────────────── */
+
+        /* ─── Cookie Banner ─── */
+        .cookie-banner {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 140%);
+            width: min(680px, calc(100vw - 32px));
+            background: #0a0a0a;
+            border: 1px solid var(--gray-dim);
+            box-shadow: 0 20px 60px rgba(0,0,0,.6);
+            z-index: 8000;
+            padding: 26px 28px 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform .6s var(--ease-drawer), opacity .5s var(--ease-out), visibility .5s;
+        }
+        .cookie-banner.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .cookie-banner__label {
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .cookie-banner__label i { font-size: .85rem; }
+        .cookie-banner__text {
+            font-family: var(--body);
+            font-size: .82rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--off-white);
+            margin-bottom: 20px;
+        }
+        .cookie-banner__text a {
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+        .cookie-banner__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .cookie-btn {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 12px 26px;
+            cursor: pointer;
+            border: 1px solid var(--white);
+            background: transparent;
+            color: var(--white);
+            transition: background .2s var(--ease-out), color .2s var(--ease-out), transform 120ms var(--ease-out);
+        }
+        .cookie-btn--solid { background: var(--white); color: var(--black); }
+        .cookie-btn--ghost { border-color: var(--gray-dim); color: var(--gray); }
+        @media (hover: hover) and (pointer: fine) {
+            .cookie-btn--solid:hover { background: transparent; color: var(--white); }
+            .cookie-btn--outline:hover { background: var(--white); color: var(--black); }
+            .cookie-btn--ghost:hover { color: var(--white); border-color: var(--white); }
+        }
+        .cookie-btn:active { transform: scale(.97); }
+        .cookie-btn--ghost { margin-left: auto; }
+
+        @media (max-width: 560px) {
+            .cookie-banner { padding: 22px 20px 20px; bottom: 12px; }
+            .cookie-banner__actions { flex-direction: column; align-items: stretch; }
+            .cookie-btn { width: 100%; text-align: center; }
+            .cookie-btn--ghost { margin-left: 0; }
+        }
+
+        /* ─── Legal Overlay (Privacy / Cookies / Imprint) ─── */
+        .legal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0,0,0,.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s var(--ease-out), visibility .4s;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .legal-overlay.show { opacity: 1; visibility: visible; }
+        .legal-panel {
+            position: relative;
+            width: min(760px, 100%);
+            background: #0a0a0a;
+            border: 1px solid var(--gray-dim);
+            padding: 56px clamp(24px, 5vw, 60px) 60px;
+            transform: translateY(24px);
+            transition: transform .5s var(--ease-drawer);
+        }
+        .legal-overlay.show .legal-panel { transform: translateY(0); }
+        .legal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gray-dim);
+            background: transparent;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-close:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+        }
+        .legal-eyebrow {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        .legal-panel h2 {
+            font-family: var(--condensed);
+            font-weight: 800;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            line-height: 1.05;
+            letter-spacing: .01em;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .legal-updated {
+            font-family: var(--body);
+            font-size: .75rem;
+            font-weight: 300;
+            color: var(--gray);
+            margin-bottom: 34px;
+        }
+        .legal-body h3 {
+            font-family: var(--condensed);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin: 30px 0 12px;
+        }
+        .legal-body h3:first-child { margin-top: 0; }
+        .legal-body p,
+        .legal-body li {
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--off-white);
+        }
+        .legal-body p { margin-bottom: 14px; }
+        .legal-body ul { list-style: none; margin: 0 0 16px; padding: 0; }
+        .legal-body li { position: relative; padding-left: 20px; margin-bottom: 8px; }
+        .legal-body li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gray);
+            font-size: .7rem;
+            top: .35em;
+        }
+        .legal-body a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+        .legal-body strong { color: var(--white); font-weight: 600; }
+        .legal-note {
+            border: 1px solid var(--gray-dim);
+            padding: 14px 18px;
+            margin: 8px 0 18px;
+            font-size: .82rem !important;
+            color: var(--gray) !important;
+            line-height: 1.6;
+        }
+        .legal-manage {
+            margin-top: 8px;
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 12px 26px;
+            cursor: pointer;
+            border: 1px solid var(--white);
+            background: var(--white);
+            color: var(--black);
+            transition: background .2s, color .2s, transform 120ms;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-manage:hover { background: transparent; color: var(--white); }
+        }
+        .legal-manage:active { transform: scale(.97); }
+
+        /* ─── Legal footer links (reused in nav footer + contact) ─── */
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            align-items: center;
+        }
+        .legal-links a {
+            font-family: var(--condensed);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color .2s;
+        }
+        .legal-links span { color: var(--gray-dim); font-size: .6rem; }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-links a:hover { color: var(--white); }
+        }
     </style>
 </head>
 
@@ -1650,10 +1891,15 @@
         </ul>
         <div class="nav__footer">
             <ul class="socials-text">
-                <li><a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a></li>
+                <li><a href="#">Facebook</a></li>
                 <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
-                <li><a href="https://www.tiktok.com/@fusion4events">TikTok</a></li>
+                <li><a href="#">tiktok</a></li>
             </ul>
+            <div class="legal-links">
+                <a data-legal="privacy">Privacy Policy</a><span>·</span>
+                <a data-legal="cookies">Cookie Policy</a><span>·</span>
+                <a data-legal="imprint">Legal Notice</a>
+            </div>
             <p class="copyright">Made with <i class="fa-solid fa-heart"></i> by Fusion4 Events</p>
         </div>
     </nav>
@@ -1696,9 +1942,9 @@
             <div class="footer__line line-2"></div>
             <div class="footer__container">
                 <ul class="socials-text">
-                    <li><a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a></li>
+                    <li><a href="#">Facebook</a></li>
                     <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
-                    <li><a href="https://www.tiktok.com/@fusion4events">TikTok</a></li>
+                    <li><a href="#">tiktok</a></li>
                 </ul>
                 <div class="footer__launching">
                     Next Event: <strong>Sharad Purnima Raas Garba — 25 Oct 2026</strong>
@@ -1795,7 +2041,7 @@
 
                     <!-- Mr W -->
                     <div class="team-card">
-                        <!-- <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80')"></div> -->
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">01</div>
                             <h3 class="team-card__name">Mr Aditya Tomar</h3>
@@ -1806,7 +2052,7 @@
 
                     <!-- Mr X -->
                     <div class="team-card">
-                        <!-- <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80')"></div> -->
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">02</div>
                             <h3 class="team-card__name">Mr Gaurav Kwatra</h3>
@@ -1817,7 +2063,7 @@
 
                     <!-- Mr Y -->
                     <div class="team-card">
-                        <!-- <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')"></div> -->
+                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">03</div>
                             <h3 class="team-card__name">Mr Himanshu Mahajan</h3>
@@ -1828,7 +2074,7 @@
 
                     <!-- Mr Z -->
                     <div class="team-card">
-                        <!-- <div class="team-card__photo" style="background-image:url('img/galary/team/km.jpg')"></div> -->
+                        <div class="team-card__photo" style="background-image:url('img/galary/team/km.jpg')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">04</div>
                             <h3 class="team-card__name">Mr Kiran Musudi</h3>
@@ -1945,12 +2191,17 @@
                             <strong>Phone:</strong> +49 155 6020035<br>
                             <strong>Location:</strong> Munich, Germany<br><br>
                             <a href="https://www.instagram.com/fusion4events/">Instagram</a>&nbsp; · &nbsp;
-                            <a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a>&nbsp; · &nbsp;
-                            <a href="https://www.tiktok.com/@fusion4events">TikTok</a>
+                            <a href="#">Facebook</a>&nbsp; · &nbsp;
+                            <a href="#">tiktok</a>
                         </p>
                     </div>
                     <div class="contact-footer-logo">
                         <img src="img/logo.png" alt="Fusion4 Events">
+                    </div>
+                    <div class="legal-links reveal reveal-delay-3" style="margin-top:22px;">
+                        <a data-legal="privacy">Privacy Policy</a><span>·</span>
+                        <a data-legal="cookies">Cookie Policy</a><span>·</span>
+                        <a data-legal="imprint">Legal Notice</a>
                     </div>
                 </div>
                 <div>
@@ -2391,5 +2642,193 @@
         </div>
 
     </div>
+
+    <!-- ─── Cookie Consent Banner ─── -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <div class="cookie-banner__label"><i class="fa-solid fa-cookie-bite"></i> We value your privacy</div>
+        <p class="cookie-banner__text">
+            We use only essential cookies and local storage needed to run this site and remember your preferences.
+            With your consent, we may also load fonts and imagery from third-party providers.
+            Read our <a data-legal="cookies">Cookie Policy</a> and <a data-legal="privacy">Privacy Policy</a> for details.
+        </p>
+        <div class="cookie-banner__actions">
+            <button class="cookie-btn cookie-btn--solid" id="cookieAccept">Accept all</button>
+            <button class="cookie-btn cookie-btn--outline" id="cookieReject">Reject non-essential</button>
+            <button class="cookie-btn cookie-btn--ghost" data-legal="cookies">Cookie settings</button>
+        </div>
+    </div>
+
+    <!-- ─── Legal Overlay (Privacy / Cookies / Imprint) ─── -->
+    <div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+        <div class="legal-panel">
+            <button class="legal-close" id="legalClose" aria-label="Close">✕</button>
+
+            <!-- PRIVACY POLICY -->
+            <div class="legal-doc" data-doc="privacy" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2 id="legalTitle">Privacy Policy</h2>
+                <p class="legal-updated">Last updated: 1 July 2026</p>
+                <div class="legal-body">
+                    <p>Fusion4 Events ("we", "us", "our") is committed to protecting your personal data. This Privacy Policy explains what we collect, why, and the rights you have under the EU General Data Protection Regulation (GDPR) and the German Federal Data Protection Act (BDSG).</p>
+
+                    <h3>1. Data Controller</h3>
+                    <p>The controller responsible for your personal data is:</p>
+                    <p class="legal-note">Fusion4 Events<br>[Street address], Munich, Germany<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 15560 200235<br><em>Please replace the bracketed details with your registered company information.</em></p>
+
+                    <h3>2. What We Collect</h3>
+                    <ul>
+                        <li><strong>Contact form data</strong> — the name, email address, event type and message you voluntarily submit.</li>
+                        <li><strong>Technical data</strong> — IP address, browser type and access times, processed by our hosting provider in server logs.</li>
+                        <li><strong>Consent preferences</strong> — your cookie choice, stored locally in your browser.</li>
+                    </ul>
+
+                    <h3>3. Why We Process It (Legal Basis)</h3>
+                    <ul>
+                        <li>To respond to your enquiries — <strong>Art. 6(1)(b) GDPR</strong> (steps prior to a contract) or <strong>Art. 6(1)(f)</strong> (legitimate interest in answering you).</li>
+                        <li>To operate and secure the website — <strong>Art. 6(1)(f) GDPR</strong> (legitimate interest).</li>
+                        <li>To load optional third-party content — <strong>Art. 6(1)(a) GDPR</strong> (your consent).</li>
+                    </ul>
+
+                    <h3>4. Third-Party Services</h3>
+                    <p>When enabled, this site loads resources from external providers that may receive your IP address:</p>
+                    <ul>
+                        <li><strong>Google Fonts</strong> (Google Ireland Ltd.) — typography.</li>
+                        <li><strong>Font Awesome / Cloudflare CDN</strong> — icons.</li>
+                        <li><strong>Unsplash</strong> — showcase imagery.</li>
+                    </ul>
+                    <p>Some enquiries may reach us via <strong>WhatsApp</strong> (Meta Platforms Ireland Ltd.) or <strong>Instagram</strong>, whose own privacy terms then apply. We do not use advertising or analytics trackers, and we do not sell your data.</p>
+
+                    <h3>5. Data Retention</h3>
+                    <p>Enquiry data is kept only as long as needed to handle your request and to meet legal retention obligations, then deleted. Server logs are retained for a short period for security purposes.</p>
+
+                    <h3>6. Your Rights</h3>
+                    <p>Under the GDPR you have the right to:</p>
+                    <ul>
+                        <li>Access the personal data we hold about you (Art. 15).</li>
+                        <li>Request correction of inaccurate data (Art. 16).</li>
+                        <li>Request erasure — the "right to be forgotten" (Art. 17).</li>
+                        <li>Restrict or object to processing (Art. 18 & 21).</li>
+                        <li>Receive your data in a portable format (Art. 20).</li>
+                        <li>Withdraw consent at any time, without affecting prior processing (Art. 7(3)).</li>
+                        <li>Lodge a complaint with a supervisory authority (Art. 77).</li>
+                    </ul>
+                    <p>To exercise any right, email <a href="mailto:info@fusion4events.com">info@fusion4events.com</a>.</p>
+
+                    <h3>7. Managing Cookies</h3>
+                    <p>You can review or change your cookie choice at any time.</p>
+                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
+                </div>
+            </div>
+
+            <!-- COOKIE POLICY -->
+            <div class="legal-doc" data-doc="cookies" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2>Cookie Policy</h2>
+                <p class="legal-updated">Last updated: 1 July 2026</p>
+                <div class="legal-body">
+                    <p>This policy explains how Fusion4 Events uses cookies and similar local-storage technologies, and how you can control them.</p>
+
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies and local storage are small pieces of data saved in your browser. They let a website remember your actions and preferences over time.</p>
+
+                    <h3>Categories We Use</h3>
+                    <ul>
+                        <li><strong>Strictly necessary</strong> — a single local-storage entry that records your cookie choice so we don't ask again. Always active; cannot be disabled.</li>
+                        <li><strong>Preference / third-party content</strong> — loaded only after you click "Accept all". These enable web fonts and imagery served by Google, Cloudflare and Unsplash, which may set their own cookies or log your IP.</li>
+                    </ul>
+                    <p>We do <strong>not</strong> use analytics, advertising, or cross-site tracking cookies.</p>
+
+                    <h3>Your Choice</h3>
+                    <p>"Accept all" enables third-party content. "Reject non-essential" keeps only the strictly necessary entry. You can change your decision at any time below.</p>
+                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
+
+                    <h3>Browser Controls</h3>
+                    <p>You can also block or delete cookies through your browser settings. Doing so may affect how some parts of the site display.</p>
+                </div>
+            </div>
+
+            <!-- LEGAL NOTICE / IMPRINT -->
+            <div class="legal-doc" data-doc="imprint" hidden>
+                <div class="legal-eyebrow">§ 5 DDG · § 18 MStV</div>
+                <h2>Legal Notice</h2>
+                <p class="legal-updated">Imprint / Impressum</p>
+                <div class="legal-body">
+                    <p class="legal-note">Fusion4 Events<br>[Street address]<br>[Postal code] Munich, Germany<br><br>Represented by: [Managing Director]<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 15560 200235<br><br>Register court / no.: [if applicable]<br>VAT ID (§ 27a UStG): [if applicable]<br><em>Please replace the bracketed details with your registered company information.</em></p>
+
+                    <h3>Responsible for Content</h3>
+                    <p>[Name of responsible person], at the address above (per § 18(2) MStV).</p>
+
+                    <h3>Dispute Resolution</h3>
+                    <p>The EU Commission provides a platform for online dispute resolution at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+
+                    <h3>Liability &amp; Copyright</h3>
+                    <p>Despite careful review we accept no liability for the content of external links, for which the respective operators are responsible. All content and works on this site are protected by copyright; any use beyond that permitted by law requires our prior written consent.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ─── Cookie Consent + Legal Overlay ───
+    (function() {
+        const STORAGE_KEY = 'f4-cookie-consent';   // 'accepted' | 'rejected'
+        const banner   = document.getElementById('cookieBanner');
+        const overlay  = document.getElementById('legalOverlay');
+        const docs     = overlay.querySelectorAll('.legal-doc');
+        let lastFocus  = null;
+
+        function getConsent() {
+            try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+        }
+        function setConsent(value) {
+            try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
+            hideBanner();
+        }
+        function showBanner() { banner.classList.add('show'); }
+        function hideBanner() { banner.classList.remove('show'); }
+
+        document.getElementById('cookieAccept').addEventListener('click', () => setConsent('accepted'));
+        document.getElementById('cookieReject').addEventListener('click', () => setConsent('rejected'));
+
+        if (!getConsent()) {
+            setTimeout(showBanner, 1600);
+        }
+
+        function openLegal(doc) {
+            docs.forEach(d => { d.hidden = (d.dataset.doc !== doc); });
+            lastFocus = document.activeElement;
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            overlay.scrollTop = 0;
+            document.getElementById('legalClose').focus({ preventScroll: true });
+        }
+        function closeLegal() {
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+            if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-legal]');
+            if (trigger) {
+                e.preventDefault();
+                openLegal(trigger.dataset.legal);
+                return;
+            }
+            const manage = e.target.closest('[data-manage="cookies"]');
+            if (manage) {
+                e.preventDefault();
+                closeLegal();
+                showBanner();
+            }
+        });
+
+        document.getElementById('legalClose').addEventListener('click', closeLegal);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLegal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) closeLegal();
+        });
+    })();
+    </script>
 </body>
 </html>
