@@ -381,15 +381,171 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80') center/cover no-repeat;
-            animation: heroBgDrift 18s var(--ease-in-out) infinite;
-            will-change: transform;
+            bottom: 185px;
+            top: 88px;
+            overflow: hidden;
+        }
+        .hero-bg__sharp {
+            position: absolute;
+            right: 48px;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                                linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            animation: heroFloat 6s var(--ease-in-out) infinite;
+        }
+        @keyframes heroFloat {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
         }
         .hero-bg::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(160deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 100%);
+            z-index: 2;
+            background: none;
+        }
+
+        /* Animated aurora glow on sides */
+        .hero-aurora {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-aurora__beam {
+            position: absolute;
+            width: 300px;
+            height: 160%;
+            top: -30%;
+            opacity: 0;
+            filter: blur(60px);
+            will-change: transform, opacity;
+        }
+        .hero-aurora__beam--1 {
+            left: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,153,51,.15) 30%, rgba(204,68,0,.1) 60%, transparent 100%);
+            animation: auroraBeam1 8s var(--ease-in-out) infinite;
+        }
+        .hero-aurora__beam--2 {
+            right: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,120,30,.12) 35%, rgba(255,60,0,.08) 65%, transparent 100%);
+            animation: auroraBeam2 9s var(--ease-in-out) 2.5s infinite;
+        }
+        .hero-aurora__beam--3 {
+            left: 8%;
+            width: 200px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,200,80,.08) 40%, rgba(255,100,0,.05) 70%, transparent 100%);
+            animation: auroraBeam1 10s var(--ease-in-out) 5s infinite;
+        }
+        .hero-aurora__beam--4 {
+            right: 8%;
+            width: 250px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,80,0,.1) 30%, rgba(200,50,0,.06) 65%, transparent 100%);
+            animation: auroraBeam2 7s var(--ease-in-out) 3.5s infinite;
+        }
+        @keyframes auroraBeam1 {
+            0%   { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(-15deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+        }
+        @keyframes auroraBeam2 {
+            0%   { opacity: 0; transform: rotate(12deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(12deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(12deg) translateY(10%); }
+        }
+
+        /* Floating sparkle particles */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 3;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,180,80,.6);
+            box-shadow: 0 0 6px rgba(255,153,51,.4);
+            animation: particleFloat linear infinite;
+            will-change: transform;
+        }
+        @keyframes particleFloat {
+            0%   { transform: translateY(0) scale(0); opacity: 0; }
+            10%  { opacity: 1; transform: translateY(-10vh) scale(1); }
+            50%  { opacity: .6; transform: translateY(-40vh) scale(.8); }
+            90%  { opacity: .2; transform: translateY(-75vh) scale(.3); }
+            100% { opacity: 0; transform: translateY(-85vh) scale(0); }
+        }
+
+        /* Corner frame accents */
+        .hero-frame {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .hero-frame__corner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+        }
+        .hero-frame__corner--tl { top: 14px; left: 14px; border-top: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) .8s forwards; }
+        .hero-frame__corner--tr { top: 14px; right: 14px; border-top: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1s forwards; }
+        .hero-frame__corner--bl { bottom: 14px; left: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.2s forwards; }
+        .hero-frame__corner--br { bottom: 14px; right: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.4s forwards; }
+        @keyframes frameIn {
+            from { opacity: 0; transform: scale(.5); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scanning light line */
+        .hero-scanline {
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0; right: 0;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-scanline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,153,51,.4) 50%, transparent 100%);
+            animation: scanH 6s linear infinite;
+        }
+        @keyframes scanH {
+            0%   { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* Hero title lines — each span slides up from below + fades in */
@@ -423,8 +579,8 @@
         /* Hero footer bar — slides up */
         .intro__footer {
             position: absolute;
-            bottom: 200px; left: 0; right: 0;
-            padding: 0 48px 26px;
+            bottom: 195px; left: 0; right: 0;
+            padding: 0 48px 12px;
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
@@ -436,6 +592,8 @@
         .hero-orb {
             position: absolute;
             inset: 0;
+            top: 88px;
+            bottom: 185px;
             z-index: 1;
             pointer-events: none;
             overflow: hidden;
@@ -509,7 +667,7 @@
         .headline__title {
             font-family: var(--condensed);
             font-weight: 900;
-            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-size: clamp(2.4rem, 5vw, 4.5rem);
             line-height: .88;
             color: var(--white);
             text-transform: uppercase;
@@ -529,13 +687,19 @@
             font-style: normal;
         }
         .hero-content {
-            position: relative;
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0;
+            right: 0;
             z-index: 2;
-            height: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 120px 48px 20px;
+            justify-content: flex-start;
+            padding: 20px 48px 40px;
+        }
+        .hero-content .headline-wrap {
+            max-width: 650px;
         }
         .footer__line {
             position: absolute;
@@ -1263,6 +1427,74 @@
             color: rgba(255,255,255,.4);
         }
 
+        /* ─── Event Detail Modal ─── */
+        .event-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity .3s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open {
+            display: flex;
+            opacity: 1;
+        }
+        .event-modal {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform .35s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open .event-modal {
+            transform: translateY(0);
+        }
+        .event-modal__close {
+            position: sticky;
+            top: 0;
+            float: right;
+            z-index: 10;
+            margin: 14px 14px 0 0;
+            background: rgba(0,0,0,.7);
+            border: 1px solid rgba(255,255,255,.2);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+        .event-modal__close:hover { background: rgba(255,255,255,.15); }
+        .event-modal__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #000;
+        }
+        .event-modal__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @media(max-width:768px) {
+            .event-modal-overlay { padding: 0; }
+            .event-modal { max-height: 100vh; max-width: 100%; border: none; }
+        }
+
         /* ─── Scrollbar ─── */
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: var(--black); }
@@ -1279,8 +1511,13 @@
             .menu__image { display: none; }
             .menu__link { padding: 10px 0; }
             .nav__footer { left: 20px; right: 20px; flex-direction: column; gap: 10px; text-align: center; bottom: 28px; }
-            .hero-content { height: calc(100vh - 185px); padding: 90px 20px 0; }
-            .intro__footer { padding: 0 20px 22px; bottom: 185px; }
+            .hero-content { top: 70px; bottom: 185px; padding: 12px 20px 60px; }
+            .hero-content .headline-wrap { max-width: 100%; }
+            .hero-bg { top: 70px; }
+            .hero-bg__sharp { right: 10px; }
+            .intro__footer { padding: 0 20px 10px; bottom: 185px; }
+            .footer__container { flex-direction: column-reverse; gap: 8px; align-items: flex-start; }
+            .footer__launching { font-size: .6rem; letter-spacing: .12em; white-space: normal; word-break: break-word; }
             .footer__line { left: 20px; right: 20px; }
             .inner__content { padding: 28px 20px; }
             .text-content-block { padding: 32px 20px; }
@@ -1288,9 +1525,10 @@
             .contact-wrapper { padding: 100px 20px 60px; }
             .header__underline { left: 20px; right: 20px; }
             .contact-grid { grid-template-columns: 1fr; gap: 36px; }
-            .headline__title { font-size: clamp(3.8rem, 16vw, 6rem); }
+            .headline__title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
             .works-grid { grid-template-columns: 1fr 1fr; }
             .marquee-item { font-size: clamp(1.8rem, 6vw, 3rem); }
+            .hero-aurora, .hero-particles, .hero-frame, .hero-scanline { top: 70px; }
         }
         @media(max-width:480px) {
             .works-grid { grid-template-columns: 1fr; }
@@ -1654,8 +1892,8 @@
         <div class="nav__footer">
             <ul class="socials-text">
                 <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">X</a></li>
+                <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                <li><a href="#">tiktok</a></li>
             </ul>
             <div class="legal-links">
                 <a data-legal="privacy">Privacy Policy</a><span>·</span>
@@ -1668,35 +1906,48 @@
 
     <!-- ─── HOME ─── -->
     <section id="home" class="section active">
-        <div class="hero-bg"></div>
+        <div class="hero-bg">
+            <div class="hero-bg__blur"></div>
+            <img class="hero-bg__sharp" src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Sharad Purnima Raas Garba 2026">
+        </div>
+        <div class="hero-aurora">
+            <div class="hero-aurora__beam hero-aurora__beam--1"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--2"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--3"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--4"></div>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-frame">
+            <div class="hero-frame__corner hero-frame__corner--tl"></div>
+            <div class="hero-frame__corner hero-frame__corner--tr"></div>
+            <div class="hero-frame__corner hero-frame__corner--bl"></div>
+            <div class="hero-frame__corner hero-frame__corner--br"></div>
+        </div>
+        <div class="hero-scanline"></div>
         <div class="hero-orb"></div>
         <div class="hero-content">
             <div class="headline-wrap">
+                <p style="font-family:var(--condensed);font-size:.99rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:16px;">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</p>
                 <h1 class="headline__title">
-                    <span>Events</span>
-                    <span>That <span class="star">✦</span> Move</span>
-                    <span class="outline">You</span>
+                    <span>Europe's Biggest</span>
+                    <span class="outline">Sharad Purnima Raas</span>
+                    <span>Garba 2026</span>
                 </h1>
-                <span class="headline__caption">Creating <em>unforgettable experiences</em> across the globe</span>
+                <span class="headline__caption">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · <em>🎤Apexa Pandya Live in Concert</em></span>
+                <p style="font-family:var(--condensed);font-size:1.1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,153,51,.8);margin-top:20px;">One Night | One Celebration | Million Memories</p>
             </div>
         </div>
-        <!-- Event Showcase (blinds injected by JS) -->
-        <div class="event-showcase" id="eventShowcase">
-            <div class="event-showcase__inner" id="showcaseInner"></div>
-            <div class="showcase-progress" id="showcaseProgress"></div>
-        </div>
-
         <div class="intro__footer">
             <div class="footer__line"></div>
             <div class="footer__line line-2"></div>
             <div class="footer__container">
                 <ul class="socials-text">
                     <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">X</a></li>
+                    <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                    <li><a href="#">tiktok</a></li>
                 </ul>
                 <div class="footer__launching">
-                    Next Event: <strong>Summer Fusion — Aug 2025</strong>
+                    Next Event: <strong>Sharad Purnima Raas Garba — 25 Oct 2026</strong>
                 </div>
             </div>
         </div>
@@ -1793,9 +2044,9 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">01</div>
-                            <h3 class="team-card__name">Mr W</h3>
+                            <h3 class="team-card__name">Mr Aditya Tomar</h3>
                             <span class="team-card__role">Creative Director</span>
-                            <p class="team-card__bio">The visionary behind Fusion4's signature aesthetic. Mr W brings two decades of immersive event design experience — transforming raw venues into extraordinary sensory worlds. Every detail, every texture, every light cue bears his obsessive creative stamp.</p>
+                            <p class="team-card__bio">The visionary behind Fusion4's signature aesthetic. Mr Aditya Tomar brings two decades of immersive event design experience — transforming raw venues into extraordinary sensory worlds. Every detail, every texture, every light cue bears his obsessive creative stamp.</p>
                         </div>
                     </div>
 
@@ -1804,9 +2055,9 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">02</div>
-                            <h3 class="team-card__name">Mr X</h3>
-                            <span class="team-card__role">Operations Director</span>
-                            <p class="team-card__bio">The engine that keeps Fusion4 running like clockwork. Mr X oversees logistics, vendor networks, and production timelines with military precision. His talent for crisis management and meticulous planning ensures no event ever misses a beat.</p>
+                            <h3 class="team-card__name">Mr Gaurav Kwatra</h3>
+                            <span class="team-card__role">Technology & Operations Director</span>
+                            <p class="team-card__bio">The engine that keeps Fusion4 running like clockwork. Mr Gaurav Kwatra oversees logistics, vendor networks, and production timelines with military precision. His talent for crisis management and meticulous planning ensures no event ever misses a beat.</p>
                         </div>
                     </div>
 
@@ -1815,20 +2066,20 @@
                         <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">03</div>
-                            <h3 class="team-card__name">Mr Y</h3>
-                            <span class="team-card__role">Client & Brand Strategy</span>
-                            <p class="team-card__bio">The relationship architect of Fusion4. Mr Y forges deep partnerships with clients, sponsors, and cultural institutions worldwide. His background in brand storytelling ensures every event amplifies the client's identity and leaves audiences genuinely moved.</p>
+                            <h3 class="team-card__name">Mr Himanshu Mahajan</h3>
+                            <span class="team-card__role">Client & Brand Strategy Director</span>
+                            <p class="team-card__bio">The relationship architect of Fusion4. Mr Himanshu Mahajan forges deep partnerships with clients, sponsors, and cultural institutions worldwide. His background in brand storytelling ensures every event amplifies the client's identity and leaves audiences genuinely moved.</p>
                         </div>
                     </div>
 
                     <!-- Mr Z -->
                     <div class="team-card">
-                        <div class="team-card__photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80')"></div>
+                        <div class="team-card__photo" style="background-image:url('img/galary/team/km.jpg')"></div>
                         <div class="team-card__body">
                             <div class="team-card__index">04</div>
-                            <h3 class="team-card__name">Mr Z</h3>
-                            <span class="team-card__role">Technology & Production</span>
-                            <p class="team-card__bio">The tech architect powering Fusion4's productions. Mr Z leads audio-visual innovation, live streaming, and interactive installations. From immersive AR experiences to flawless sound design, he keeps Fusion4 at the cutting edge of event technology.</p>
+                            <h3 class="team-card__name">Mr Kiran Musudi</h3>
+                            <span class="team-card__role">Marketing & Media Director</span>
+                            <p class="team-card__bio">The tech architect powering Fusion4's productions. Mr Kiran Musudi leads audio-visual innovation, live streaming, and interactive installations. From immersive AR experiences to flawless sound design, he keeps Fusion4 at the cutting edge of event technology.</p>
                         </div>
                     </div>
 
@@ -1844,18 +2095,29 @@
             <h2 class="block__title reveal reveal-delay-2">Featured <span class="outline-sm">Events</span></h2>
         </div>
         <div class="works-grid">
-            <div class="work-item event-card">
+            <div class="work-item event-card" data-detail="event-detail-retro">
                 <div class="work-item__img">
-                    <div class="work-item__date"><strong>28</strong><span>May</span></div>
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Gala Night">
+                    <div class="work-item__date">06<strong></strong><span>June 2026</span></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="RETRO BOLLYWOOD NIGHT">
                 </div>
                 <div class="work-item__body">
-                    <span class="work-cat">Corporate / Awards</span>
-                    <div class="work-title">Gala Night 2024</div>
+                    <span class="work-cat">Vibe & Entertainment</span>
+                    <div class="work-title">RETRO BOLLYWOOD NIGHT 2026</div>
                     <span class="work-item__arrow">View Event →</span>
                 </div>
             </div>
-            <div class="work-item event-card">
+            <div class="work-item event-card" data-detail="event-detail-garba">
+                <div class="work-item__img">
+                    <div class="work-item__date">25<strong></strong><span>October 2026</span></div>
+                    <img src="img/galary/garba2026/AP-POST.png?w=800&q=80" alt="Garba 2026">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Dance & Music</span>
+                    <div class="work-title">Garba 2026</div>
+                    <span class="work-item__arrow">View Event →</span>
+                </div>
+            </div>
+            <!-- <div class="work-item event-card">
                 <div class="work-item__img">
                     <div class="work-item__date"><strong>14</strong><span>Jun</span></div>
                     <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
@@ -1909,7 +2171,7 @@
                     <div class="work-title">Neon Nights</div>
                     <span class="work-item__arrow">View Event →</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -1925,12 +2187,12 @@
                     <div class="contact__info reveal reveal-delay-2">
                         <p>
                             Have an event in mind? We'd love to hear from you.<br><br>
-                            <strong>Email:</strong> hello@fusion4.events<br>
-                            <strong>Phone:</strong> +49 123 456 7890<br>
-                            <strong>Location:</strong> Frankfurt, Germany<br><br>
-                            <a href="#">Instagram</a>&nbsp; · &nbsp;
+                            <strong>Email:</strong> info@fusion4events.com<br>
+                            <strong>Phone:</strong> +49 155 6020035<br>
+                            <strong>Location:</strong> Munich, Germany<br><br>
+                            <a href="https://www.instagram.com/fusion4events/">Instagram</a>&nbsp; · &nbsp;
                             <a href="#">Facebook</a>&nbsp; · &nbsp;
-                            <a href="#">LinkedIn</a>
+                            <a href="#">tiktok</a>
                         </p>
                     </div>
                     <div class="contact-footer-logo">
@@ -1966,131 +2228,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ─── Cookie Consent Banner ─── -->
-    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
-        <div class="cookie-banner__label"><i class="fa-solid fa-cookie-bite"></i> We value your privacy</div>
-        <p class="cookie-banner__text">
-            We use only essential cookies and local storage needed to run this site and remember your preferences.
-            With your consent, we may also load fonts and imagery from third-party providers.
-            Read our <a data-legal="cookies">Cookie Policy</a> and <a data-legal="privacy">Privacy Policy</a> for details.
-        </p>
-        <div class="cookie-banner__actions">
-            <button class="cookie-btn cookie-btn--solid" id="cookieAccept">Accept all</button>
-            <button class="cookie-btn cookie-btn--outline" id="cookieReject">Reject non-essential</button>
-            <button class="cookie-btn cookie-btn--ghost" data-legal="cookies">Cookie settings</button>
-        </div>
-    </div>
-
-    <!-- ─── Legal Overlay (Privacy / Cookies / Imprint) ─── -->
-    <div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
-        <div class="legal-panel">
-            <button class="legal-close" id="legalClose" aria-label="Close">✕</button>
-
-            <!-- PRIVACY POLICY -->
-            <div class="legal-doc" data-doc="privacy" hidden>
-                <div class="legal-eyebrow">Fusion4 Events</div>
-                <h2 id="legalTitle">Privacy Policy</h2>
-                <p class="legal-updated">Last updated: 1 July 2026</p>
-                <div class="legal-body">
-                    <p>Fusion4 Events ("we", "us", "our") is committed to protecting your personal data. This Privacy Policy explains what we collect, why, and the rights you have under the EU General Data Protection Regulation (GDPR) and the German Federal Data Protection Act (BDSG).</p>
-
-                    <h3>1. Data Controller</h3>
-                    <p>The controller responsible for your personal data is:</p>
-                    <p class="legal-note">Fusion4 Events<br>[Street address], Frankfurt, Germany<br>Email: <a href="mailto:hello@fusion4.events">hello@fusion4.events</a><br>Phone: +49 123 456 7890<br><em>Please replace the bracketed details with your registered company information.</em></p>
-
-                    <h3>2. What We Collect</h3>
-                    <ul>
-                        <li><strong>Contact form data</strong> — the name, email address, event type and message you voluntarily submit.</li>
-                        <li><strong>Technical data</strong> — IP address, browser type and access times, processed by our hosting provider in server logs.</li>
-                        <li><strong>Consent preferences</strong> — your cookie choice, stored locally in your browser.</li>
-                    </ul>
-
-                    <h3>3. Why We Process It (Legal Basis)</h3>
-                    <ul>
-                        <li>To respond to your enquiries — <strong>Art. 6(1)(b) GDPR</strong> (steps prior to a contract) or <strong>Art. 6(1)(f)</strong> (legitimate interest in answering you).</li>
-                        <li>To operate and secure the website — <strong>Art. 6(1)(f) GDPR</strong> (legitimate interest).</li>
-                        <li>To load optional third-party content — <strong>Art. 6(1)(a) GDPR</strong> (your consent).</li>
-                    </ul>
-
-                    <h3>4. Third-Party Services</h3>
-                    <p>When enabled, this site loads resources from external providers that may receive your IP address:</p>
-                    <ul>
-                        <li><strong>Google Fonts</strong> (Google Ireland Ltd.) — typography.</li>
-                        <li><strong>Font Awesome / Cloudflare CDN</strong> — icons.</li>
-                        <li><strong>Unsplash</strong> — showcase imagery.</li>
-                    </ul>
-                    <p>We do not use advertising or analytics trackers, and we do not sell your data.</p>
-
-                    <h3>5. Data Retention</h3>
-                    <p>Enquiry data is kept only as long as needed to handle your request and to meet legal retention obligations, then deleted. Server logs are retained for a short period for security purposes.</p>
-
-                    <h3>6. Your Rights</h3>
-                    <p>Under the GDPR you have the right to:</p>
-                    <ul>
-                        <li>Access the personal data we hold about you (Art. 15).</li>
-                        <li>Request correction of inaccurate data (Art. 16).</li>
-                        <li>Request erasure — the "right to be forgotten" (Art. 17).</li>
-                        <li>Restrict or object to processing (Art. 18 & 21).</li>
-                        <li>Receive your data in a portable format (Art. 20).</li>
-                        <li>Withdraw consent at any time, without affecting prior processing (Art. 7(3)).</li>
-                        <li>Lodge a complaint with a supervisory authority (Art. 77).</li>
-                    </ul>
-                    <p>To exercise any right, email <a href="mailto:hello@fusion4.events">hello@fusion4.events</a>.</p>
-
-                    <h3>7. Managing Cookies</h3>
-                    <p>You can review or change your cookie choice at any time.</p>
-                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
-                </div>
-            </div>
-
-            <!-- COOKIE POLICY -->
-            <div class="legal-doc" data-doc="cookies" hidden>
-                <div class="legal-eyebrow">Fusion4 Events</div>
-                <h2>Cookie Policy</h2>
-                <p class="legal-updated">Last updated: 1 July 2026</p>
-                <div class="legal-body">
-                    <p>This policy explains how Fusion4 Events uses cookies and similar local-storage technologies, and how you can control them.</p>
-
-                    <h3>What Are Cookies?</h3>
-                    <p>Cookies and local storage are small pieces of data saved in your browser. They let a website remember your actions and preferences over time.</p>
-
-                    <h3>Categories We Use</h3>
-                    <ul>
-                        <li><strong>Strictly necessary</strong> — a single local-storage entry that records your cookie choice so we don't ask again. Always active; cannot be disabled.</li>
-                        <li><strong>Preference / third-party content</strong> — loaded only after you click "Accept all". These enable web fonts and imagery served by Google, Cloudflare and Unsplash, which may set their own cookies or log your IP.</li>
-                    </ul>
-                    <p>We do <strong>not</strong> use analytics, advertising, or cross-site tracking cookies.</p>
-
-                    <h3>Your Choice</h3>
-                    <p>"Accept all" enables third-party content. "Reject non-essential" keeps only the strictly necessary entry. You can change your decision at any time below.</p>
-                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
-
-                    <h3>Browser Controls</h3>
-                    <p>You can also block or delete cookies through your browser settings. Doing so may affect how some parts of the site display.</p>
-                </div>
-            </div>
-
-            <!-- LEGAL NOTICE / IMPRINT -->
-            <div class="legal-doc" data-doc="imprint" hidden>
-                <div class="legal-eyebrow">§ 5 DDG · § 18 MStV</div>
-                <h2>Legal Notice</h2>
-                <p class="legal-updated">Imprint / Impressum</p>
-                <div class="legal-body">
-                    <p class="legal-note">Fusion4 Events<br>[Street address]<br>[Postal code] Frankfurt am Main, Germany<br><br>Represented by: [Managing Director]<br>Email: <a href="mailto:hello@fusion4.events">hello@fusion4.events</a><br>Phone: +49 123 456 7890<br><br>Register court / no.: [if applicable]<br>VAT ID (§ 27a UStG): [if applicable]<br><em>Please replace the bracketed details with your registered company information.</em></p>
-
-                    <h3>Responsible for Content</h3>
-                    <p>[Name of responsible person], at the address above (per § 18(2) MStV).</p>
-
-                    <h3>Dispute Resolution</h3>
-                    <p>The EU Commission provides a platform for online dispute resolution at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
-
-                    <h3>Liability &amp; Copyright</h3>
-                    <p>Despite careful review we accept no liability for the content of external links, for which the respective operators are responsible. All content and works on this site are protected by copyright; any use beyond that permitted by law requires our prior written consent.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
     // ─── Loader ───
@@ -2243,6 +2380,7 @@
         const total = slideData.length;
         const inner = document.getElementById('showcaseInner');
         const progWrap = document.getElementById('showcaseProgress');
+        if (!inner || !progWrap) return;
 
         // Build slides
         slideData.forEach((d, i) => {
@@ -2374,6 +2512,263 @@
         startTimer();
     })();
 
+    // ─── Garba Gallery Slideshow ───
+    (function() {
+        const slides = document.querySelectorAll('#garbaGallery .garba-slide');
+        const dotsWrap = document.getElementById('garbaDots');
+        if (!slides.length) return;
+        let current = 0;
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:' + (i === 0 ? 'rgba(255,153,51,.9)' : 'rgba(255,255,255,.3)') + ';cursor:pointer;transition:background .3s;';
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+        });
+        const dots = dotsWrap.querySelectorAll('span');
+        function goTo(idx) {
+            slides[current].style.opacity = '0';
+            dots[current].style.background = 'rgba(255,255,255,.3)';
+            current = idx;
+            slides[current].style.opacity = '1';
+            dots[current].style.background = 'rgba(255,153,51,.9)';
+        }
+        setInterval(() => goTo((current + 1) % slides.length), 4000);
+    })();
+
+    // ─── Hero Floating Particles ───
+    (function() {
+        const container = document.getElementById('heroParticles');
+        if (!container) return;
+        const COUNT = 25;
+        for (let i = 0; i < COUNT; i++) {
+            const p = document.createElement('div');
+            p.className = 'hero-particle';
+            const size = 2 + Math.random() * 3;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.bottom = '-10px';
+            p.style.animationDuration = (6 + Math.random() * 8) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(p);
+        }
+    })();
+
+    // ─── Event Detail Modal (deferred until DOM ready) ───
+    window.addEventListener('load', function() {
+        var overlay = document.getElementById('eventModalOverlay');
+        if (!overlay) return;
+        var modals = overlay.querySelectorAll('.event-modal');
+
+        document.querySelector('.works-grid').addEventListener('click', function(e) {
+            var card = e.target.closest('.work-item[data-detail]');
+            if (!card) return;
+            var detailId = card.dataset.detail;
+            modals.forEach(function(m) { m.style.display = 'none'; });
+            var target = document.getElementById(detailId);
+            if (!target) return;
+            target.style.display = '';
+            overlay.classList.add('modal-open');
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay || e.target.closest('.event-modal__close')) {
+                overlay.classList.remove('modal-open');
+            }
+        });
+    });
+
+    </script>
+
+    <!-- ─── Event Detail Modals ─── -->
+    <div class="event-modal-overlay" id="eventModalOverlay">
+
+        <div class="event-modal" id="event-detail-garba">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;z-index:5;"><strong>25</strong><span>Oct</span></div>
+                <div id="garbaGallery" style="position:absolute;inset:0;background:#000;">
+                    <img src="img/galary/garba2026/AP-POST.png" alt="Sharad Purnima Raas Garba 2026" class="garba-slide garba-slide-active" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-2.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-3.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                    <img src="img/galary/garba2026/Apexa Pandya-4.jpg" alt="Apexa Pandya Live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;">
+                </div>
+                <div id="garbaDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;"></div>
+                <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:16px 24px;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%);">
+                    <!-- <span style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;">🎫 Tickets from July 04</span> 
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">2000+ Attendees</span>
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">Sponsor: Squarea</span>-->
+                </div>
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">🎭 Europe's Biggest Sharad Purnima Raas Garba 2026</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Sunday, 25 October 2026 · Non-Stop Raas Garba All Night · 🎤 Apexa Pandya Live in Concert</p>
+                <p style="font-family:var(--condensed);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:12px;">One Night | One Celebration | Million Memories</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">The Biggest Stage &amp; The Biggest Night — non-stop Raas Garba all night with live music, dance &amp; dhol, food stalls &amp; amazing vibes. 2000+ attendees expected. More surprises to be unveiled!</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">✨ Biggest Stage</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🎤 Live Music</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">💃 Dance &amp; Dhol</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🍽️ Food Stalls</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <span style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,153,51,.5);"><i class="fa-solid fa-location-dot"></i>&ensp;Top 'Secret' Location — To Be Unveiled</span>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:10px;">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-modal" id="event-detail-retro" style="display:none;">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;"><strong>06</strong><span>Jun</span></div>
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80" alt="Retro Bollywood Night 2026">
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">Retro Bollywood Night 2026</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Saturday, 06 June 2026 · Vibe &amp; Entertainment</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">Step back in time with the biggest Retro Bollywood party in Europe. Classic hits, dazzling outfits, and a night of pure nostalgia. More details coming soon!</p>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ─── Cookie Consent Banner ─── -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <div class="cookie-banner__label"><i class="fa-solid fa-cookie-bite"></i> We value your privacy</div>
+        <p class="cookie-banner__text">
+            We use only essential cookies and local storage needed to run this site and remember your preferences.
+            With your consent, we may also load fonts and imagery from third-party providers.
+            Read our <a data-legal="cookies">Cookie Policy</a> and <a data-legal="privacy">Privacy Policy</a> for details.
+        </p>
+        <div class="cookie-banner__actions">
+            <button class="cookie-btn cookie-btn--solid" id="cookieAccept">Accept all</button>
+            <button class="cookie-btn cookie-btn--outline" id="cookieReject">Reject non-essential</button>
+            <button class="cookie-btn cookie-btn--ghost" data-legal="cookies">Cookie settings</button>
+        </div>
+    </div>
+
+    <!-- ─── Legal Overlay (Privacy / Cookies / Imprint) ─── -->
+    <div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+        <div class="legal-panel">
+            <button class="legal-close" id="legalClose" aria-label="Close">✕</button>
+
+            <!-- PRIVACY POLICY -->
+            <div class="legal-doc" data-doc="privacy" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2 id="legalTitle">Privacy Policy</h2>
+                <p class="legal-updated">Last updated: 1 July 2026</p>
+                <div class="legal-body">
+                    <p>Fusion4 Events ("we", "us", "our") is committed to protecting your personal data. This Privacy Policy explains what we collect, why, and the rights you have under the EU General Data Protection Regulation (GDPR) and the German Federal Data Protection Act (BDSG).</p>
+
+                    <h3>1. Data Controller</h3>
+                    <p>The controller responsible for your personal data is:</p>
+                    <p class="legal-note">Fusion4 Events<br>[Street address], Munich, Germany<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 15560 200235<br><em>Please replace the bracketed details with your registered company information.</em></p>
+
+                    <h3>2. What We Collect</h3>
+                    <ul>
+                        <li><strong>Contact form data</strong> — the name, email address, event type and message you voluntarily submit.</li>
+                        <li><strong>Technical data</strong> — IP address, browser type and access times, processed by our hosting provider in server logs.</li>
+                        <li><strong>Consent preferences</strong> — your cookie choice, stored locally in your browser.</li>
+                    </ul>
+
+                    <h3>3. Why We Process It (Legal Basis)</h3>
+                    <ul>
+                        <li>To respond to your enquiries — <strong>Art. 6(1)(b) GDPR</strong> (steps prior to a contract) or <strong>Art. 6(1)(f)</strong> (legitimate interest in answering you).</li>
+                        <li>To operate and secure the website — <strong>Art. 6(1)(f) GDPR</strong> (legitimate interest).</li>
+                        <li>To load optional third-party content — <strong>Art. 6(1)(a) GDPR</strong> (your consent).</li>
+                    </ul>
+
+                    <h3>4. Third-Party Services</h3>
+                    <p>When enabled, this site loads resources from external providers that may receive your IP address:</p>
+                    <ul>
+                        <li><strong>Google Fonts</strong> (Google Ireland Ltd.) — typography.</li>
+                        <li><strong>Font Awesome / Cloudflare CDN</strong> — icons.</li>
+                        <li><strong>Unsplash</strong> — showcase imagery.</li>
+                    </ul>
+                    <p>Some enquiries may reach us via <strong>WhatsApp</strong> (Meta Platforms Ireland Ltd.) or <strong>Instagram</strong>, whose own privacy terms then apply. We do not use advertising or analytics trackers, and we do not sell your data.</p>
+
+                    <h3>5. Data Retention</h3>
+                    <p>Enquiry data is kept only as long as needed to handle your request and to meet legal retention obligations, then deleted. Server logs are retained for a short period for security purposes.</p>
+
+                    <h3>6. Your Rights</h3>
+                    <p>Under the GDPR you have the right to:</p>
+                    <ul>
+                        <li>Access the personal data we hold about you (Art. 15).</li>
+                        <li>Request correction of inaccurate data (Art. 16).</li>
+                        <li>Request erasure — the "right to be forgotten" (Art. 17).</li>
+                        <li>Restrict or object to processing (Art. 18 & 21).</li>
+                        <li>Receive your data in a portable format (Art. 20).</li>
+                        <li>Withdraw consent at any time, without affecting prior processing (Art. 7(3)).</li>
+                        <li>Lodge a complaint with a supervisory authority (Art. 77).</li>
+                    </ul>
+                    <p>To exercise any right, email <a href="mailto:info@fusion4events.com">info@fusion4events.com</a>.</p>
+
+                    <h3>7. Managing Cookies</h3>
+                    <p>You can review or change your cookie choice at any time.</p>
+                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
+                </div>
+            </div>
+
+            <!-- COOKIE POLICY -->
+            <div class="legal-doc" data-doc="cookies" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2>Cookie Policy</h2>
+                <p class="legal-updated">Last updated: 1 July 2026</p>
+                <div class="legal-body">
+                    <p>This policy explains how Fusion4 Events uses cookies and similar local-storage technologies, and how you can control them.</p>
+
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies and local storage are small pieces of data saved in your browser. They let a website remember your actions and preferences over time.</p>
+
+                    <h3>Categories We Use</h3>
+                    <ul>
+                        <li><strong>Strictly necessary</strong> — a single local-storage entry that records your cookie choice so we don't ask again. Always active; cannot be disabled.</li>
+                        <li><strong>Preference / third-party content</strong> — loaded only after you click "Accept all". These enable web fonts and imagery served by Google, Cloudflare and Unsplash, which may set their own cookies or log your IP.</li>
+                    </ul>
+                    <p>We do <strong>not</strong> use analytics, advertising, or cross-site tracking cookies.</p>
+
+                    <h3>Your Choice</h3>
+                    <p>"Accept all" enables third-party content. "Reject non-essential" keeps only the strictly necessary entry. You can change your decision at any time below.</p>
+                    <button class="legal-manage" data-manage="cookies">Change cookie preferences</button>
+
+                    <h3>Browser Controls</h3>
+                    <p>You can also block or delete cookies through your browser settings. Doing so may affect how some parts of the site display.</p>
+                </div>
+            </div>
+
+            <!-- LEGAL NOTICE / IMPRINT -->
+            <div class="legal-doc" data-doc="imprint" hidden>
+                <div class="legal-eyebrow">§ 5 DDG · § 18 MStV</div>
+                <h2>Legal Notice</h2>
+                <p class="legal-updated">Imprint / Impressum</p>
+                <div class="legal-body">
+                    <p class="legal-note">Fusion4 Events<br>[Street address]<br>[Postal code] Munich, Germany<br><br>Represented by: [Managing Director]<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 15560 200235<br><br>Register court / no.: [if applicable]<br>VAT ID (§ 27a UStG): [if applicable]<br><em>Please replace the bracketed details with your registered company information.</em></p>
+
+                    <h3>Responsible for Content</h3>
+                    <p>[Name of responsible person], at the address above (per § 18(2) MStV).</p>
+
+                    <h3>Dispute Resolution</h3>
+                    <p>The EU Commission provides a platform for online dispute resolution at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+
+                    <h3>Liability &amp; Copyright</h3>
+                    <p>Despite careful review we accept no liability for the content of external links, for which the respective operators are responsible. All content and works on this site are protected by copyright; any use beyond that permitted by law requires our prior written consent.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
     // ─── Cookie Consent + Legal Overlay ───
     (function() {
         const STORAGE_KEY = 'f4-cookie-consent';   // 'accepted' | 'rejected'
@@ -2382,15 +2777,12 @@
         const docs     = overlay.querySelectorAll('.legal-doc');
         let lastFocus  = null;
 
-        // — Consent —
         function getConsent() {
             try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
         }
         function setConsent(value) {
             try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
             hideBanner();
-            // Third-party content (fonts/icons/images) is already referenced in the
-            // markup; a real gated loader would be wired here on "accepted".
         }
         function showBanner() { banner.classList.add('show'); }
         function hideBanner() { banner.classList.remove('show'); }
@@ -2398,12 +2790,10 @@
         document.getElementById('cookieAccept').addEventListener('click', () => setConsent('accepted'));
         document.getElementById('cookieReject').addEventListener('click', () => setConsent('rejected'));
 
-        // Show banner on first visit only
         if (!getConsent()) {
             setTimeout(showBanner, 1600);
         }
 
-        // — Legal overlay —
         function openLegal(doc) {
             docs.forEach(d => { d.hidden = (d.dataset.doc !== doc); });
             lastFocus = document.activeElement;
@@ -2418,7 +2808,6 @@
             if (lastFocus && lastFocus.focus) lastFocus.focus();
         }
 
-        // Any element with data-legal opens the matching doc
         document.addEventListener('click', (e) => {
             const trigger = e.target.closest('[data-legal]');
             if (trigger) {
@@ -2426,7 +2815,6 @@
                 openLegal(trigger.dataset.legal);
                 return;
             }
-            // "Change cookie preferences" buttons inside the overlay
             const manage = e.target.closest('[data-manage="cookies"]');
             if (manage) {
                 e.preventDefault();
@@ -2441,7 +2829,6 @@
             if (e.key === 'Escape' && overlay.classList.contains('show')) closeLegal();
         });
     })();
-
     </script>
 </body>
 </html>
