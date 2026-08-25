@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Check-in Scanner (internal) | Fusion4 Events</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="config.js"></script>
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0a0a0a;color:#ccc;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.5;padding:16px;max-width:560px;margin:0 auto}
+    h1{color:#fff;font-size:1.25rem;margin-bottom:2px}
+    .hint{color:#777;font-size:.8rem}
+    input,button{width:100%;border-radius:6px;font-size:1rem}
+    input{background:#0f0f0f;border:1px solid #333;color:#eee;padding:11px 12px;margin-top:10px}
+    button{background:linear-gradient(135deg,#ff9933,#e65c00);border:0;color:#fff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:13px;margin-top:10px;cursor:pointer}
+    button.ghost{background:none;border:1px solid #ff993399;color:#ff9933}
+    button.small{width:auto;padding:8px 14px;font-size:.75rem;margin-right:8px}
+    #videoWrap{position:relative;margin-top:14px;border-radius:10px;overflow:hidden;background:#000;display:none}
+    video{width:100%;display:block}
+    #reticle{position:absolute;inset:12%;border:2px solid rgba(255,153,51,.8);border-radius:12px;pointer-events:none}
+    #banner{margin-top:14px;padding:18px;border-radius:10px;text-align:center;font-weight:800;font-size:1.15rem;display:none}
+    #banner.ok{display:block;background:#0f3d16;color:#7CFC8E;border:1px solid #1f7a2e}
+    #banner.dup{display:block;background:#4a3a08;color:#ffd76b;border:1px solid #8a6d10}
+    #banner.bad{display:block;background:#45100f;color:#ff8f8a;border:1px solid #8a201d}
+    #banner small{display:block;font-weight:400;font-size:.82rem;margin-top:6px;opacity:.85}
+    .stats{display:flex;gap:10px;margin-top:14px}
+    .stat{flex:1;background:#141414;border:1px solid #2a2a2a;border-radius:8px;text-align:center;padding:10px}
+    .stat b{display:block;color:#ff9933;font-size:1.4rem}
+    .stat span{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#888}
+    #log{margin-top:14px;font-size:.8rem;color:#999;max-height:200px;overflow:auto;border-top:1px solid #222;padding-top:8px}
+    #log div{padding:3px 0;border-bottom:1px dashed #1e1e1e}
+    .rowbtns{margin-top:12px}
+</style>
+</head>
+<body>
+
+<h1>✅ Garba Mahotsav — Check-in Scanner</h1>
+<p class="hint">Internal tool. Enter the same secret key used to generate the tickets, then start the camera. Check-ins are stored on this device (works offline once loaded) — export the CSV after the event.</p>
+
+<input id="secret" type="password" placeholder="Secret key">
+<button id="btnStart">📷 Start Scanning</button>
+
+<div id="videoWrap"><video id="video" playsinline muted></video><div id="reticle"></div></div>
+
+<div id="banner"></div>
+
+<input id="manual" placeholder="Camera trouble? Paste/type QR text here and press Enter" style="display:none">
+
+<div class="stats">
+    <div class="stat"><b id="stTotal">0</b><span>Checked in</span></div>
+    <div class="stat"><b id="stDup">0</b><span>Duplicates</span></div>
+    <div class="stat"><b id="stBad">0</b><span>Rejected</span></div>
+</div>
+
+<div class="rowbtns">
+    <button class="ghost small" id="btnExport">⬇️ Export CSV</button>
+    <button class="ghost small" id="btnReset">🗑️ Reset device data</button>
+</div>
+
+<div id="log"></div>
+
+<script>
+(function(){
+"use strict";
+var cfg = window.F4_TICKETS || {event:{id:"EVENT"}};
+var EVENT_ID = (cfg.event && cfg.event.id) || "EVENT";
+var LS_KEY = "f4-checkins-" + EVENT_ID;
+var stats = {dup:0, bad:0};
+var lastPayload = "", lastTime = 0;
+
+function load(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||"{}"); }catch(e){ return {}; } }
+function save(db){ try{ localStorage.setItem(LS_KEY, JSON.stringify(db)); }catch(e){} }
+function count(){ return Object.keys(load()).length; }
+function updStats(){
+    document.getElementById("stTotal").textContent = count();
+    document.getElementById("stDup").textContent = stats.dup;
+    document.getElementById("stBad").textContent = stats.bad;
+}
+updStats();
+
+async function hmac(secret,msg){
+    var enc=new TextEncoder();
+    var key=await crypto.subtle.importKey("raw",enc.encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
+    var sig=await crypto.subtle.sign("HMAC",key,enc.encode(msg));
+    return Array.from(new Uint8Array(sig)).map(function(b){return b.toString(16).padStart(2,"0");}).join("").slice(0,16);
+}
+function banner(cls,msg,sub){
+    var b=document.getElementById("banner");
+    b.className=cls; b.innerHTML=msg+(sub?"<small>"+sub+"</small>":"");
+    if(navigator.vibrate) navigator.vibrate(cls==="ok"?80:[80,60,80]);
+}
+function logLine(txt){
+    var l=document.getElementById("log");
+    var d=document.createElement("div");
+    d.textContent=new Date().toLocaleTimeString()+" — "+txt;
+    l.prepend(d);
+}
+
+async function handle(payload){
+    var now=Date.now();
+    if(payload===lastPayload && now-lastTime<3000) return;  // debounce same code
+    lastPayload=payload; lastTime=now;
+
+    var secret=document.getElementById("secret").value.trim();
+    var p=payload.trim().split("|");
+    if(p.length!==6 || p[0]!=="F4T1"){ stats.bad++; updStats(); banner("bad","❌ Not a valid ticket QR"); logLine("REJECT (format)"); return; }
+    var eventId=p[1], cat=p[2], id=p[3], name=p[4], sig=p[5];
+    if(eventId!==EVENT_ID){ stats.bad++; updStats(); banner("bad","❌ Wrong event","Ticket is for: "+eventId); logLine("REJECT (event "+eventId+") #"+id); return; }
+    var expect=await hmac(secret,"F4T1|"+eventId+"|"+cat+"|"+id+"|"+name);
+    if(expect!==sig){ stats.bad++; updStats(); banner("bad","❌ Invalid signature","Wrong secret key or forged ticket"); logLine("REJECT (signature) #"+id); return; }
+
+    var db=load();
+    if(db[id]){
+        stats.dup++; updStats();
+        banner("dup","⚠️ Already checked in","#"+id+" · "+db[id].name+" · "+new Date(db[id].t).toLocaleTimeString());
+        logLine("DUPLICATE #"+id+" ("+name+")");
+        return;
+    }
+    db[id]={name:name,cat:cat,t:now}; save(db); updStats();
+    banner("ok","✅ Welcome, "+name+"!","#"+id+" · "+cat);
+    logLine("OK #"+id+" ("+name+", "+cat+")");
+}
+
+/* camera loop */
+var video=document.getElementById("video"), stream=null, canvas=document.createElement("canvas"), ctx=canvas.getContext("2d",{willReadFrequently:true});
+function tick(){
+    if(!stream) return;
+    if(video.readyState===video.HAVE_ENOUGH_DATA){
+        canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+        ctx.drawImage(video,0,0,canvas.width,canvas.height);
+        var img=ctx.getImageData(0,0,canvas.width,canvas.height);
+        var code=jsQR(img.data,img.width,img.height,{inversionAttempts:"dontInvert"});
+        if(code && code.data) handle(code.data);
+    }
+    requestAnimationFrame(tick);
+}
+document.getElementById("btnStart").addEventListener("click",function(){
+    if(!document.getElementById("secret").value.trim()){ alert("Enter the secret key first."); return; }
+    navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}}).then(function(s){
+        stream=s; video.srcObject=s; video.setAttribute("playsinline",true); video.play();
+        document.getElementById("videoWrap").style.display="block";
+        document.getElementById("manual").style.display="block";
+        requestAnimationFrame(tick);
+    }).catch(function(e){
+        alert("Camera not available ("+e.name+"). Use the manual field below.");
+        document.getElementById("manual").style.display="block";
+    });
+});
+document.getElementById("manual").addEventListener("keydown",function(e){
+    if(e.key==="Enter" && this.value.trim()){ handle(this.value.trim()); this.value=""; }
+});
+document.getElementById("btnExport").addEventListener("click",function(){
+    var db=load();
+    var csv="ticket_id,name,category,checked_in_at\n"+Object.keys(db).map(function(id){
+        var r=db[id];
+        return id+',"'+String(r.name).replace(/"/g,'""')+'",'+r.cat+","+new Date(r.t).toISOString();
+    }).join("\n");
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    a.download="checkins-"+EVENT_ID+"-"+new Date().toISOString().slice(0,10)+".csv";
+    a.click();
+});
+document.getElementById("btnReset").addEventListener("click",function(){
+    if(confirm("Delete ALL check-in records stored on this device?")){ localStorage.removeItem(LS_KEY); stats={dup:0,bad:0}; updStats(); document.getElementById("log").innerHTML=""; banner("dup","Device data cleared"); }
+});
+})();
+</script>
+</body>
+</html>

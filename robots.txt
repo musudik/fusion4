@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /_to_delete/
+Disallow: /tickets/generate.html
+Disallow: /tickets/scan.html
+Disallow: /tickets/README.md
 
 Sitemap: https://fusion4events.com/sitemap.xml

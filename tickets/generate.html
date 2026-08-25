@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ticket Generator (internal) | Fusion4 Events</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js"></script>
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0a0a0a;color:#ccc;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;padding:24px}
+    h1{color:#fff;font-size:1.5rem;margin-bottom:4px}
+    h2{color:#ff9933;font-size:1.05rem;margin:22px 0 8px}
+    .hint{color:#777;font-size:.85rem}
+    .panel{background:#141414;border:1px solid #2a2a2a;border-radius:8px;padding:20px;margin-top:16px;max-width:860px}
+    label{display:block;margin:10px 0 4px;color:#aaa;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}
+    input,select,textarea{width:100%;background:#0f0f0f;border:1px solid #333;border-radius:5px;color:#eee;padding:9px 12px;font-size:.95rem}
+    textarea{min-height:110px;font-family:monospace}
+    .row{display:flex;gap:14px;flex-wrap:wrap}
+    .row>div{flex:1;min-width:180px}
+    button{background:linear-gradient(135deg,#ff9933,#e65c00);border:0;border-radius:5px;color:#fff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px 22px;margin:16px 8px 0 0;cursor:pointer;font-size:.85rem}
+    button.ghost{background:none;border:1px solid #ff993399;color:#ff9933}
+    #status{margin-top:12px;font-size:.9rem;color:#8f8}
+    /* printable tickets */
+    #sheet{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+    .tkt{background:#fff;color:#111;border-radius:10px;overflow:hidden;display:flex;border:1px solid #ddd;page-break-inside:avoid}
+    .tkt__side{background:linear-gradient(160deg,#ff9933,#e65c00);color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.62rem;padding:10px 6px;text-align:center}
+    .tkt__body{padding:14px 16px;flex:1}
+    .tkt__event{font-weight:800;text-transform:uppercase;font-size:.9rem;line-height:1.25}
+    .tkt__meta{font-size:.7rem;color:#555;margin-top:4px}
+    .tkt__holder{margin-top:8px;font-size:.85rem}
+    .tkt__holder strong{font-size:.95rem}
+    .tkt__cat{display:inline-block;background:#ff993322;color:#c25400;font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-top:6px}
+    .tkt__id{font-family:monospace;font-size:.66rem;color:#888;margin-top:8px}
+    .tkt__qr{padding:12px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-left:1px dashed #ccc}
+    .tkt__qr img, .tkt__qr canvas{width:110px !important;height:110px !important}
+    @media print{
+        body{background:#fff;padding:0}
+        .panel,h1,h2,.hint,#status,.no-print{display:none !important}
+        #sheet{grid-template-columns:repeat(2,1fr);gap:8mm;margin:0}
+        .tkt{border:1px solid #999}
+    }
+</style>
+</head>
+<body>
+
+<h1>🎟️ Ticket Generator <span class="hint">(internal tool — do not share this URL)</span></h1>
+<p class="hint">Generates offline QR tickets signed with your secret key. Use the same secret in <b>scan.html</b> at the venue. Nothing is uploaded — everything runs in this browser tab.</p>
+
+<div class="panel">
+    <h2>1 · Settings</h2>
+    <div class="row">
+        <div>
+            <label>Secret key (keep private, remember it!)</label>
+            <input id="secret" type="password" placeholder="e.g. garba2026-secret-key">
+        </div>
+        <div>
+            <label>Event ID</label>
+            <input id="eventId" value="">
+        </div>
+    </div>
+
+    <h2>2 · Bulk generate</h2>
+    <div class="row">
+        <div>
+            <label>Category</label>
+            <select id="cat"></select>
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input id="qty" type="number" min="1" max="2000" value="10">
+        </div>
+        <div>
+            <label>Name prefix (optional)</label>
+            <input id="prefix" placeholder="e.g. Guest">
+        </div>
+    </div>
+    <button id="btnBulk">Generate Bulk</button>
+
+    <h2>3 · Or paste a guest list (CSV: name,category)</h2>
+    <textarea id="csv" placeholder="Asha Patel,earlybird&#10;Rahul Shah,family&#10;Meera Joshi,kids"></textarea>
+    <button id="btnCsv">Generate From List</button>
+
+    <div id="status"></div>
+    <button class="ghost no-print" id="btnPrint" style="display:none">🖨️ Print / Save as PDF</button>
+    <button class="ghost no-print" id="btnManifest" style="display:none">⬇️ Download Manifest CSV</button>
+</div>
+
+<div id="sheet"></div>
+
+<script>
+(function(){
+"use strict";
+var cfg = window.F4_TICKETS || {categories:[],event:{}};
+var manifest = [];
+
+document.getElementById("eventId").value = (cfg.event && cfg.event.id) || "EVENT";
+var sel = document.getElementById("cat");
+(cfg.categories||[]).forEach(function(c){
+    var o=document.createElement("option"); o.value=c.id; o.textContent=c.name+(c.price!=null?" — "+(cfg.currencySymbol||"€")+c.price:"");
+    sel.appendChild(o);
+});
+
+function catName(id){
+    var c=(cfg.categories||[]).find(function(x){return x.id===id;});
+    return c?c.name:id;
+}
+function uid(){
+    var s="";var chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var a=new Uint8Array(8); crypto.getRandomValues(a);
+    for(var i=0;i<8;i++) s+=chars[a[i]%chars.length];
+    return s;
+}
+async function hmac(secret,msg){
+    var enc=new TextEncoder();
+    var key=await crypto.subtle.importKey("raw",enc.encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
+    var sig=await crypto.subtle.sign("HMAC",key,enc.encode(msg));
+    return Array.from(new Uint8Array(sig)).map(function(b){return b.toString(16).padStart(2,"0");}).join("").slice(0,16);
+}
+async function makeTicket(eventId,catId,name,secret){
+    var id=uid();
+    var base="F4T1|"+eventId+"|"+catId+"|"+id+"|"+name;
+    var sig=await hmac(secret,base);
+    return {payload:base+"|"+sig, id:id, cat:catId, name:name};
+}
+function renderTicket(t){
+    var d=document.createElement("div"); d.className="tkt";
+    d.innerHTML='<div class="tkt__side">Fusion4 Events</div>'
+        +'<div class="tkt__body">'
+        +'<div class="tkt__event">'+(cfg.event.name||"Event")+'</div>'
+        +'<div class="tkt__meta">'+(cfg.event.date||"")+' · '+(cfg.event.time||"")+'<br>'+(cfg.event.venue||"")+'</div>'
+        +'<div class="tkt__holder">Admit: <strong>'+escapeHtml(t.name||"Guest")+'</strong></div>'
+        +'<span class="tkt__cat">'+escapeHtml(catName(t.cat))+'</span>'
+        +'<div class="tkt__id">#'+t.id+'</div>'
+        +'</div><div class="tkt__qr"><div id="qr-'+t.id+'"></div></div>';
+    document.getElementById("sheet").appendChild(d);
+    new QRCode(document.getElementById("qr-"+t.id),{text:t.payload,width:110,height:110,correctLevel:QRCode.CorrectLevel.M});
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+async function generate(list){
+    var secret=document.getElementById("secret").value.trim();
+    var eventId=document.getElementById("eventId").value.trim();
+    if(!secret){alert("Enter a secret key first — the scanner needs the same key.");return;}
+    if(!eventId){alert("Enter an event ID.");return;}
+    document.getElementById("sheet").innerHTML=""; manifest=[];
+    for(var i=0;i<list.length;i++){
+        var t=await makeTicket(eventId,list[i].cat,list[i].name,secret);
+        manifest.push(t); renderTicket(t);
+    }
+    document.getElementById("status").textContent="✔ "+manifest.length+" ticket(s) generated. Print them or save the manifest.";
+    document.getElementById("btnPrint").style.display="inline-block";
+    document.getElementById("btnManifest").style.display="inline-block";
+}
+
+document.getElementById("btnBulk").addEventListener("click",function(){
+    var qty=Math.max(1,Math.min(2000,parseInt(document.getElementById("qty").value||"1",10)));
+    var cat=sel.value||"standard";
+    var prefix=document.getElementById("prefix").value.trim();
+    var list=[];
+    for(var i=1;i<=qty;i++) list.push({cat:cat,name:prefix?prefix+" "+i:"Guest"});
+    generate(list);
+});
+document.getElementById("btnCsv").addEventListener("click",function(){
+    var rows=document.getElementById("csv").value.split(/\r?\n/).map(function(r){return r.trim();}).filter(Boolean);
+    var list=rows.map(function(r){
+        var p=r.split(",").map(function(x){return x.trim();});
+        return {name:p[0]||"Guest",cat:p[1]||sel.value||"standard"};
+    });
+    if(!list.length){alert("Paste at least one line: name,category");return;}
+    generate(list);
+});
+document.getElementById("btnPrint").addEventListener("click",function(){window.print();});
+document.getElementById("btnManifest").addEventListener("click",function(){
+    var csv="ticket_id,name,category,payload\n"+manifest.map(function(t){
+        return t.id+',"'+t.name.replace(/"/g,'""')+'",'+t.cat+',"'+t.payload+'"';
+    }).join("\n");
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    a.download="tickets-manifest-"+(document.getElementById("eventId").value||"event")+".csv";
+    a.click();
+});
+})();
+</script>
+</body>
+</html>

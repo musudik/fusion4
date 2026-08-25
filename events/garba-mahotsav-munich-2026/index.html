@@ -349,8 +349,15 @@
 
     <section id="tickets">
         <h2>Tickets</h2>
-        <p>🔥 <strong style="color:#fff;">Limited early bird tickets from €15.99!</strong> One ticket covers all three experiences — Live Garba Raas, Bhajan Sandhya and DJ Dandiya Night. Book online now:</p>
-        <p style="margin-top:14px;"><a class="cta" href="https://brizz.me/booking/31548328-bb1b-4dff-8ca4-2a97c3ae6b72" rel="noopener">Book Tickets Online</a></p>
+        <p>🔥 <strong style="color:#fff;">Limited early bird tickets from €15.99!</strong> One ticket covers all three experiences — Live Garba Raas, Bhajan Sandhya and DJ Dandiya Night.</p>
+
+        <!-- Tickets module (categories render here when enabled in /tickets/config.js) -->
+        <div id="f4-tickets"></div>
+        <!-- Static fallback (shown when the module is switched off) -->
+        <div id="f4-tickets-fallback">
+            <p style="margin-top:14px;"><a class="cta" href="https://brizz.me/booking/31548328-bb1b-4dff-8ca4-2a97c3ae6b72" rel="noopener">Book Tickets Online</a></p>
+        </div>
+
         <p style="margin-top:18px;">Questions about group bookings, stalls or sponsoring? Contact the organizers directly:</p>
         <ul class="list">
             <li>WhatsApp: <a href="https://wa.me/4915560200235">+49 15560 200235</a></li>
@@ -396,6 +403,8 @@
     <p style="margin-top:10px;">© 2026 Fusion4 Events — Garba Mahotsav Munich 2026 · Zenith – Die Kulturhalle, München</p>
 </footer>
 
+<script src="../../tickets/config.js"></script>
+<script src="../../tickets/tickets.js" defer></script>
 <script>
 (function () {
     var marquee = document.querySelector('.logo-marquee');
