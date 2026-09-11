@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://fusion4events.com/">
+    <link rel="alternate" hreflang="en" href="https://fusion4events.com/">
+    <link rel="alternate" hreflang="de" href="https://fusion4events.com/de/">
+    <link rel="alternate" hreflang="x-default" href="https://fusion4events.com/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -48,11 +51,9 @@
     <link rel="apple-touch-icon" href="img/favicon.png">
 
     <!-- Google Fonts: Barlow Condensed (matches logo's bold condensed industrial style) + Barlow for body -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="fonts/fonts.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 
     <style>
         /* ─── Reset ─── */
@@ -1836,7 +1837,14 @@
         @media (hover: hover) and (pointer: fine) {
             .legal-links a:hover { color: var(--white); }
         }
-    </style>
+    
+        /* ─── Associates grid ─── */
+        .associates-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:22px; margin-top:34px; align-items:stretch; }
+        .associate { margin:0; text-align:center; }
+        .associate img { width:100%; max-width:190px; height:150px; object-fit:contain; background:#fff; border-radius:10px; padding:12px; filter:grayscale(1); opacity:.82; transition:filter .4s ease, opacity .4s ease, transform .4s ease; }
+        .associate:hover img { filter:grayscale(0); opacity:1; transform:translateY(-4px); }
+        .associate figcaption { margin-top:10px; font-family:var(--condensed); font-size:.68rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+</style>
 </head>
 
 <body>
@@ -1874,6 +1882,7 @@
                 <img src="img/logo.png" alt="Fusion4 Events">
             </button>
             <div class="header__controls">
+                <a href="de/index.html" style="font-family:var(--condensed);font-size:.75rem;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:5px 12px;margin-right:14px;text-decoration:none;">DE</a>
                 <button id="menu-trigger" class="menu-trigger" aria-label="Open menu">
                     <span class="menu-trigger__label" id="menu-label">Menu</span>
                     <span class="burger" id="burger">
@@ -1931,9 +1940,9 @@
                 <li><a href="https://www.tiktok.com/@fusion4events">TikTok</a></li>
             </ul>
             <div class="legal-links">
-                <a data-legal="privacy">Privacy Policy</a><span>·</span>
-                <a data-legal="cookies">Cookie Policy</a><span>·</span>
-                <a data-legal="imprint">Legal Notice</a>
+                <a data-legal="privacy" href="privacy/index.html">Privacy Policy</a><span>·</span>
+                <a data-legal="cookies" href="privacy/index.html">Cookie Policy</a><span>·</span>
+                <a data-legal="imprint" href="impressum/index.html">Legal Notice</a>
             </div>
             <p class="copyright">Made with <i class="fa-solid fa-heart"></i> by Fusion4 Events</p>
         </div>
@@ -2123,6 +2132,34 @@
                     </div>
 
                 </div>
+                <!-- ─── ASSOCIATES ─── -->
+                <div class="section-header reveal" style="margin-top:70px;">
+                    <span class="block__subtitle reveal reveal-delay-1">In Association With</span>
+                    <h2 class="block__title reveal reveal-delay-2">Our <span class="outline-sm">Associates</span></h2>
+                </div>
+                <div class="associates-grid reveal reveal-delay-2">
+                    <figure class="associate">
+                        <img src="img/assosiates/indian-nomads.webp" alt="Indian Nomads in Ingolstadt e.V." width="440" height="443" loading="lazy">
+                        <figcaption>Indian Nomads in Ingolstadt e.V.</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="img/assosiates/dj-garry-crew.webp" alt="DJ Garry &amp; Crew — Event Production &amp; Technical Services" width="440" height="461" loading="lazy">
+                        <figcaption>DJ Garry &amp; Crew</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="img/assosiates/melodies-n-mixes.webp" alt="Melodies-N-Mixes" width="440" height="504" loading="lazy">
+                        <figcaption>Melodies-N-Mixes</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="img/assosiates/teentech.webp" alt="TeenTech — the next challenge awaits" width="440" height="422" loading="lazy">
+                        <figcaption>TeenTech</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="img/assosiates/fkgpt-dev.webp" alt="FKGPT.dev" width="440" height="367" loading="lazy">
+                        <figcaption>FKGPT.dev</figcaption>
+                    </figure>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2239,9 +2276,9 @@
                         <img src="img/logo.png" alt="Fusion4 Events">
                     </div>
                     <div class="legal-links reveal reveal-delay-3" style="margin-top:22px;">
-                        <a data-legal="privacy">Privacy Policy</a><span>·</span>
-                        <a data-legal="cookies">Cookie Policy</a><span>·</span>
-                        <a data-legal="imprint">Legal Notice</a>
+                        <a data-legal="privacy" href="privacy/index.html">Privacy Policy</a><span>·</span>
+                        <a data-legal="cookies" href="privacy/index.html">Cookie Policy</a><span>·</span>
+                        <a data-legal="imprint" href="impressum/index.html">Legal Notice</a>
                     </div>
                 </div>
                 <div>
@@ -2691,7 +2728,7 @@
         <p class="cookie-banner__text">
             We use only essential cookies and local storage needed to run this site and remember your preferences.
             With your consent, we may also load fonts and imagery from third-party providers.
-            Read our <a data-legal="cookies">Cookie Policy</a> and <a data-legal="privacy">Privacy Policy</a> for details.
+            Read our <a data-legal="cookies" href="privacy/index.html">Cookie Policy</a> and <a data-legal="privacy" href="privacy/index.html">Privacy Policy</a> for details.
         </p>
         <div class="cookie-banner__actions">
             <button class="cookie-btn cookie-btn--solid" id="cookieAccept">Accept all</button>
@@ -2776,7 +2813,7 @@
                     <h3>Categories We Use</h3>
                     <ul>
                         <li><strong>Strictly necessary</strong> — a single local-storage entry that records your cookie choice so we don't ask again. Always active; cannot be disabled.</li>
-                        <li><strong>Preference / third-party content</strong> — loaded only after you click "Accept all". These enable web fonts and imagery served by Google, Cloudflare and Unsplash, which may set their own cookies or log your IP.</li>
+                        <li><strong>Preference / third-party content</strong> — loaded only after you click "Accept all". These enable stock imagery served by Unsplash, which may log your IP. Web fonts and icons are self-hosted on fusion4events.com — no font requests go to Google or Cloudflare.</li>
                     </ul>
                     <p>We do <strong>not</strong> use analytics, advertising, or cross-site tracking cookies.</p>
 
@@ -2796,7 +2833,7 @@
                 <p class="legal-updated">Imprint / Impressum</p>
                 <div class="legal-body">
                     <p class="legal-note">Fusion4 Events<br>By Indian Nomads in Ingolstadt e.V. <br>Unterer Taubentalweg 35, 
-Ingolstadt 85055<br><br>Represented by: Himanshu Mahajan<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 1577 8494287<br><br>Register court / no.: [if applicable]<br>VAT ID (§ 27a UStG): [if applicable]<br><em>Please replace the bracketed details with your registered company information.</em></p>
+Ingolstadt 85055<br><br>Represented by: Himanshu Mahajan<br>Email: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Phone / WhatsApp: +49 1577 8494287</p>
 
                     <h3>Responsible for Content</h3>
                     <p>Himanshu Mahajan, at the address above (per § 18(2) MStV).</p>

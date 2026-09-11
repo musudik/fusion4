@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://fusion4events.com/</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://fusion4events.com/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/"/>
   </url>
-  <url>
-    <loc>https://fusion4events.com/events/</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+  <url><loc>https://fusion4events.com/de/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/"/>
   </url>
-  <url>
-    <loc>https://fusion4events.com/events/garba-mahotsav-munich-2026/</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+  <url><loc>https://fusion4events.com/events/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/events/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/events/"/>
   </url>
+  <url><loc>https://fusion4events.com/de/events/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/events/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/events/"/>
+  </url>
+  <url><loc>https://fusion4events.com/events/garba-mahotsav-munich-2026/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/events/garba-mahotsav-munich-2026/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/events/garba-mahotsav-munich-2026/"/>
+  </url>
+  <url><loc>https://fusion4events.com/de/events/garba-mahotsav-munich-2026/</loc><lastmod>2026-09-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fusion4events.com/events/garba-mahotsav-munich-2026/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://fusion4events.com/de/events/garba-mahotsav-munich-2026/"/>
+  </url>
+  <url><loc>https://fusion4events.com/impressum/</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://fusion4events.com/privacy/</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://fusion4events.com/de/impressum/</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://fusion4events.com/de/privacy/</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

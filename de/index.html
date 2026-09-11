@@ -1,0 +1,2908 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Fusion4 Events – Garba Mahotsav München 2026 &amp; Indische Events in Deutschland</title>
+    <meta name="description" content="Fusion4 Events — indische Events in Deutschland. Als Nächstes: Garba Mahotsav München 2026 mit Apexa Pandya live im Zenith Kulturhalle am 25. Oktober 2026. Tickets & Infos.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://fusion4events.com/de/">
+    <link rel="alternate" hreflang="de" href="https://fusion4events.com/de/">
+    <link rel="alternate" hreflang="en" href="https://fusion4events.com/">
+    <link rel="alternate" hreflang="x-default" href="https://fusion4events.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fusion4 Events">
+    <meta property="og:title" content="Fusion4 Events – Garba Mahotsav München 2026 & Indische Events in Deutschland">
+    <meta property="og:description" content="Als Nächstes: Garba Mahotsav München 2026 mit Apexa Pandya live im Zenith Kulturhalle, 25. Oktober 2026. Europas größtes Sharad-Purnima-Raas-Garba.">
+    <meta property="og:url" content="https://fusion4events.com/de/">
+    <meta property="og:image" content="https://fusion4events.com/img/galary/garba2026/garba-mahotsav-munich-2026-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fusion4 Events – Garba Mahotsav München 2026 & Indische Events in Deutschland">
+    <meta name="twitter:description" content="Garba Mahotsav München 2026 mit Apexa Pandya live im Zenith Kulturhalle, 25. Oktober 2026. Tickets & Infos.">
+    <meta name="twitter:image" content="https://fusion4events.com/img/galary/garba2026/garba-mahotsav-munich-2026-og.jpg">
+
+    <!-- Structured data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Fusion4 Events",
+      "url": "https://fusion4events.com/",
+      "logo": "https://fusion4events.com/img/logo.png",
+      "email": "info@fusion4events.com",
+      "telephone": "+49 15560 200235",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61591721092583",
+        "https://www.instagram.com/fusion4events/",
+        "https://www.tiktok.com/@fusion4events"
+      ]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon.png">
+    <link rel="apple-touch-icon" href="../img/favicon.png">
+
+    <!-- Google Fonts: Barlow Condensed (matches logo's bold condensed industrial style) + Barlow for body -->
+    <link href="../fonts/fonts.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css">
+
+    <style>
+        /* ─── Reset ─── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black:     #000000;
+            --white:     #ffffff;
+            --off-white: #cccccc;
+            --gray:      #888888;
+            --gray-dim:  rgba(255,255,255,0.10);
+            --condensed: 'Barlow Condensed', sans-serif;
+            --body:      'Barlow', sans-serif;
+
+            /* ─── Motion: Custom easing curves ─── */
+            --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        html, body {
+            background: var(--black);
+            color: var(--off-white);
+            font-family: var(--body);
+            font-size: 16px;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        /* ─── Noise ─── */
+        #noise {
+            position: fixed;
+            inset: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .035;
+        }
+
+        /* ─── Loader ─── */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity .55s var(--ease-out), visibility .55s var(--ease-out);
+        }
+        .loader.loaded { opacity: 0; visibility: hidden; }
+        .loader__logo {
+            animation: loaderIn .8s var(--ease-out) forwards;
+            text-align: center;
+            width: 350px;
+            height: 134px;
+            margin: 0 auto;
+        }
+        .loader__logo img {
+            position: relative;
+            width: 537px;
+            height: 537px;
+            left: -91px;
+            top: -197px;
+        }
+        @keyframes loaderIn {
+            /* Start from scale(0.92) — nothing appears from nothing */
+            0%   { opacity: 0; transform: scale(.92) translateY(8px); }
+            60%  { opacity: 1; transform: scale(1.01) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ─── Header ─── */
+        #header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 400; /* always above nav overlay */
+            padding: 20px 48px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+            transition: background .25s var(--ease-out);
+        }
+        #header.nav-is-open {
+            background: var(--black);
+        }
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header__logo {
+            position: relative;
+            width: 180px;
+            height: 68px;
+            flex-shrink: 0;
+        }
+        .header__logo img {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            left: -42px;
+            top: -95px;
+            display: block;
+        }
+        .header__underline {
+            position: absolute;
+            bottom: 0; left: 48px; right: 48px;
+            height: 1px;
+            background: rgba(255,255,255,.1);
+        }
+        .header__underline.underline-2 { bottom: -1px; background: rgba(255,255,255,.03); }
+
+        /* ─── Menu Trigger ─── */
+        .menu-trigger {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px 4px; /* larger hit area */
+            transition: opacity .15s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .menu-trigger:hover { opacity: .7; }
+        }
+        /* Active feedback: button press scales slightly */
+        .menu-trigger:active { transform: scale(0.97); transition: transform 100ms var(--ease-out), opacity .15s var(--ease-out); }
+        .menu-trigger__label {
+            font-family: var(--condensed);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        /* ─── Burger Icon ─── */
+        .burger {
+            width: 32px;
+            height: 20px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .burger__line {
+            display: block;
+            position: absolute;
+            height: 1.5px;
+            background: var(--white);
+            left: 0;
+            transform-origin: center;
+            transition: transform .45s var(--ease-out),
+                        opacity .25s var(--ease-out),
+                        width .3s var(--ease-out),
+                        top .4s var(--ease-out),
+                        bottom .4s var(--ease-out);
+        }
+        .burger__line--1 { top: 0;    width: 100%; }
+        .burger__line--2 { top: 50%;  transform: translateY(-50%); width: 72%; }
+        .burger__line--3 { bottom: 0; width: 44%; }
+
+        /* open → X */
+        .burger.is-open .burger__line--1 {
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .burger.is-open .burger__line--2 {
+            opacity: 0;
+            transform: translateY(-50%) scaleX(0);
+        }
+        .burger.is-open .burger__line--3 {
+            bottom: auto;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%) rotate(-45deg);
+        }
+
+        /* ─── Navigation Overlay ─── */
+        #nav {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 300; /* above marquee band */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 100px 64px 56px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s var(--ease-out), visibility .4s var(--ease-out);
+            overflow: hidden;
+        }
+        #nav.nav-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Nav border top */
+        #nav::before {
+            content: '';
+            position: absolute;
+            top: 85px; left: 64px; right: 64px;
+            height: 1px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .menu { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .menu__item {
+            position: relative;
+            overflow: hidden;
+        }
+        .menu__divider {
+            display: block;
+            height: 1px;
+            background: rgba(255,255,255,.07);
+        }
+
+        /* Each row slides in from left (odd) or right (even) */
+        .menu__link {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            gap: 20px;
+            transform: translateX(-110%);
+            transition: transform .6s var(--ease-drawer), padding .25s var(--ease-out);
+        }
+        .menu__item:nth-child(even) .menu__link {
+            transform: translateX(110%);
+        }
+
+        /* When nav is open, items slide to position (staggered) */
+        #nav.nav-open .menu__link { transform: translateX(0); }
+        #nav.nav-open .menu__item:nth-child(1) .menu__link { transition-delay: .05s; }
+        #nav.nav-open .menu__item:nth-child(2) .menu__link { transition-delay: .12s; }
+        #nav.nav-open .menu__item:nth-child(3) .menu__link { transition-delay: .19s; }
+        #nav.nav-open .menu__item:nth-child(4) .menu__link { transition-delay: .26s; }
+
+        .menu__link:hover { padding-left: 14px; }
+
+        .menu__number {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .15em;
+            color: rgba(255,255,255,.2);
+            min-width: 34px;
+            flex-shrink: 0;
+        }
+        .menu__caption {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(2.6rem, 6.5vw, 5.8rem);
+            letter-spacing: -.01em;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1;
+            transition: color .2s var(--ease-out), -webkit-text-stroke .2s var(--ease-out), letter-spacing .25s var(--ease-out);
+        }
+        .menu__caption.outline {
+            -webkit-text-stroke: 1.5px rgba(255,255,255,.3);
+            color: transparent;
+        }
+        .menu__link:hover .menu__caption {
+            color: var(--white);
+            -webkit-text-stroke: 0;
+            letter-spacing: .03em;
+        }
+        .menu__link.active-link .menu__caption {
+            color: var(--white);
+            -webkit-text-stroke: 0;
+        }
+
+        /* pill image on hover */
+        .menu__image {
+            width: 110px; height: 64px;
+            border-radius: 100px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            flex-shrink: 0;
+            transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+            filter: grayscale(100%);
+            transform: scale(.92);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .menu__link:hover .menu__image { opacity: 1; transform: scale(1); }
+        }
+        .menu-image-1 { background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80'); }
+        .menu-image-2 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=200&q=80'); }
+        .menu-image-3 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=200&q=80'); }
+        .menu-image-4 { background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80'); }
+
+        .nav__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .4s var(--ease-out) .35s, transform .4s var(--ease-out) .35s;
+        }
+        #nav.nav-open .nav__footer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Socials ─── */
+        .socials-text { display: flex; gap: 20px; }
+        .socials-text a {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            transition: color .2s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .socials-text a:hover { color: var(--white); }
+        }
+        .socials-text li:not(:last-child)::after {
+            content: '+';
+            margin-left: 20px;
+            color: rgba(255,255,255,.12);
+        }
+
+        .copyright {
+            font-family: var(--condensed);
+            font-size: .7rem;
+            letter-spacing: .1em;
+            color: rgba(255,255,255,.2);
+        }
+        .copyright i { color: #cc4444; }
+
+        /* ─── Sections ─── */
+        .section {
+            position: fixed;
+            inset: 0;
+            overflow-y: auto;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .45s var(--ease-out), visibility .45s var(--ease-out);
+        }
+        .section.active { opacity: 1; visibility: visible; pointer-events: auto; }
+
+        /* ─── HERO entrance animations ─── */
+        /* Ken Burns slow drift on hero background */
+        @keyframes heroBgDrift {
+            0%   { transform: scale(1.08) translate(0, 0); }
+            50%  { transform: scale(1.12) translate(-1%, -.8%); }
+            100% { transform: scale(1.08) translate(0, 0); }
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            overflow: hidden;
+        }
+        .hero-bg__sharp {
+            position: absolute;
+            right: 48px;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%),
+                                linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            animation: heroFloat 6s var(--ease-in-out) infinite;
+        }
+        @keyframes heroFloat {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: none;
+        }
+
+        /* Animated aurora glow on sides */
+        .hero-aurora {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-aurora__beam {
+            position: absolute;
+            width: 300px;
+            height: 160%;
+            top: -30%;
+            opacity: 0;
+            filter: blur(60px);
+            will-change: transform, opacity;
+        }
+        .hero-aurora__beam--1 {
+            left: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,153,51,.15) 30%, rgba(204,68,0,.1) 60%, transparent 100%);
+            animation: auroraBeam1 8s var(--ease-in-out) infinite;
+        }
+        .hero-aurora__beam--2 {
+            right: -50px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,120,30,.12) 35%, rgba(255,60,0,.08) 65%, transparent 100%);
+            animation: auroraBeam2 9s var(--ease-in-out) 2.5s infinite;
+        }
+        .hero-aurora__beam--3 {
+            left: 8%;
+            width: 200px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,200,80,.08) 40%, rgba(255,100,0,.05) 70%, transparent 100%);
+            animation: auroraBeam1 10s var(--ease-in-out) 5s infinite;
+        }
+        .hero-aurora__beam--4 {
+            right: 8%;
+            width: 250px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,80,0,.1) 30%, rgba(200,50,0,.06) 65%, transparent 100%);
+            animation: auroraBeam2 7s var(--ease-in-out) 3.5s infinite;
+        }
+        @keyframes auroraBeam1 {
+            0%   { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(-15deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(-15deg) translateY(10%); }
+        }
+        @keyframes auroraBeam2 {
+            0%   { opacity: 0; transform: rotate(12deg) translateY(10%); }
+            25%  { opacity: 1; }
+            50%  { opacity: .7; transform: rotate(12deg) translateY(-10%); }
+            75%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(12deg) translateY(10%); }
+        }
+
+        /* Floating sparkle particles */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 3;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,180,80,.6);
+            box-shadow: 0 0 6px rgba(255,153,51,.4);
+            animation: particleFloat linear infinite;
+            will-change: transform;
+        }
+        @keyframes particleFloat {
+            0%   { transform: translateY(0) scale(0); opacity: 0; }
+            10%  { opacity: 1; transform: translateY(-10vh) scale(1); }
+            50%  { opacity: .6; transform: translateY(-40vh) scale(.8); }
+            90%  { opacity: .2; transform: translateY(-75vh) scale(.3); }
+            100% { opacity: 0; transform: translateY(-85vh) scale(0); }
+        }
+
+        /* Corner frame accents */
+        .hero-frame {
+            position: absolute;
+            inset: 0;
+            bottom: 185px;
+            top: 88px;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .hero-frame__corner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+        }
+        .hero-frame__corner--tl { top: 14px; left: 14px; border-top: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) .8s forwards; }
+        .hero-frame__corner--tr { top: 14px; right: 14px; border-top: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1s forwards; }
+        .hero-frame__corner--bl { bottom: 14px; left: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-left: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.2s forwards; }
+        .hero-frame__corner--br { bottom: 14px; right: 14px; border-bottom: 1px solid rgba(255,153,51,.35); border-right: 1px solid rgba(255,153,51,.35); animation: frameIn 1s var(--ease-out) 1.4s forwards; }
+        @keyframes frameIn {
+            from { opacity: 0; transform: scale(.5); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scanning light line */
+        .hero-scanline {
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0; right: 0;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-scanline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,153,51,.4) 50%, transparent 100%);
+            animation: scanH 6s linear infinite;
+        }
+        @keyframes scanH {
+            0%   { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Hero title lines — each span slides up from below + fades in */
+        .headline__title span {
+            display: block;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity .75s var(--ease-out), transform .75s var(--ease-out);
+        }
+        .hero-ready .headline__title span:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: .05s; }
+        .hero-ready .headline__title span:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: .18s; }
+        .hero-ready .headline__title span:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: .31s; }
+
+        /* Hero caption */
+        .headline__caption {
+            display: block;
+            margin-top: 28px;
+            font-family: var(--condensed);
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .6s var(--ease-out) .48s, transform .6s var(--ease-out) .48s;
+        }
+        .hero-ready .headline__caption { opacity: 1; transform: translateY(0); }
+        .headline__caption em { color: rgba(255,255,255,.8); font-style: normal; }
+
+        /* Hero footer bar — slides up */
+        .intro__footer {
+            position: absolute;
+            bottom: 195px; left: 0; right: 0;
+            padding: 0 48px 12px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s var(--ease-out) .65s, transform .6s var(--ease-out) .65s;
+        }
+        .hero-ready .intro__footer { opacity: 1; transform: translateY(0); }
+
+        /* ─── Ambient floating orb on hero ─── */
+        .hero-orb {
+            position: absolute;
+            inset: 0;
+            top: 88px;
+            bottom: 185px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-orb::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
+            top: 10%; left: 55%;
+            animation: orbDrift 12s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        .hero-orb::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.03) 0%, transparent 70%);
+            bottom: 15%; left: 20%;
+            animation: orbDrift2 16s var(--ease-in-out) infinite alternate;
+            will-change: transform;
+        }
+        @keyframes orbDrift  { from { transform: translate(0, 0) scale(1); }  to { transform: translate(-60px, 40px) scale(1.15); } }
+        @keyframes orbDrift2 { from { transform: translate(0, 0) scale(1); }  to { transform: translate(50px, -30px) scale(1.1); } }
+
+        /* ─── Scroll-reveal for section content ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: .08s; }
+        .reveal-delay-2 { transition-delay: .18s; }
+        .reveal-delay-3 { transition-delay: .28s; }
+
+        /* ─── Event card clip-path reveal ─── */
+        .event-card {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+        }
+        .event-card.in-view { opacity: 1; transform: translateY(0); }
+        .event-card:nth-child(1) { transition-delay: .00s; }
+        .event-card:nth-child(2) { transition-delay: .08s; }
+        .event-card:nth-child(3) { transition-delay: .16s; }
+        .event-card:nth-child(4) { transition-delay: .24s; }
+        .event-card:nth-child(5) { transition-delay: .32s; }
+        .event-card:nth-child(6) { transition-delay: .40s; }
+
+        /* ─── Team cards stagger ─── */
+        .team-card {
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            transition: background .25s var(--ease-out);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: background .25s var(--ease-out), opacity .6s var(--ease-out), transform .6s var(--ease-out);
+        }
+        .team-card.in-view { opacity: 1; transform: translateY(0); }
+        .team-card:nth-child(1) { transition-delay: .0s; }
+        .team-card:nth-child(2) { transition-delay: .1s; }
+        .team-card:nth-child(3) { transition-delay: .2s; }
+        .team-card:nth-child(4) { transition-delay: .3s; }
+
+        /* ─── HERO misc ─── */
+        #home { z-index: 60; }
+        .headline__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(2.4rem, 5vw, 4.5rem);
+            line-height: .88;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            display: flex;
+            flex-direction: column;
+        }
+        .headline__title .outline {
+            -webkit-text-stroke: 2px var(--white);
+            color: transparent;
+        }
+        .headline__title .star {
+            font-size: .18em;
+            vertical-align: super;
+            -webkit-text-stroke: 0;
+            color: var(--white);
+            font-style: normal;
+        }
+        .hero-content {
+            position: absolute;
+            top: 88px;
+            bottom: 185px;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px 48px 40px;
+        }
+        .hero-content .headline-wrap {
+            max-width: 650px;
+        }
+        .footer__line {
+            position: absolute;
+            top: 0; left: 48px; right: 48px;
+            height: 1px;
+            background: rgba(255,255,255,.1);
+        }
+        .footer__line.line-2 { top: 1px; background: rgba(255,255,255,.03); }
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer__launching {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+        }
+        .footer__launching strong { color: var(--white); }
+
+        /* ─── ABOUT ─── */
+        #about { background: #0a0a0a; padding-bottom: 185px; }
+
+        .inner__intro {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: var(--black);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .marquee { width: 100%; overflow: hidden; white-space: nowrap; }
+        .marquee__inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        .marquee__inner span {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(5rem, 10vw, 9rem);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            color: rgba(255,255,255,.04);
+            margin-right: 60px;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .inner__content { padding: 60px 48px 80px; }
+        .content-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 2px;
+        }
+        @media(max-width:768px) { .content-row { grid-template-columns: 1fr; } }
+
+        .text-content-block {
+            padding: 64px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #0d0d0d;
+        }
+        .block__subtitle {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 18px;
+        }
+        .block__title {
+            font-family: var(--condensed);
+            font-weight: 800;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            text-transform: uppercase;
+            letter-spacing: .01em;
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+        .block__title .outline-sm {
+            -webkit-text-stroke: 1px rgba(255,255,255,.5);
+            color: transparent;
+        }
+        .block__text {
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: rgba(255,255,255,.45);
+        }
+
+        .image-block {
+            min-height: 420px;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: filter .4s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .image-block:hover { filter: grayscale(0%); }
+        }
+        .inner-image-1 { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'); }
+        .inner-image-2 { background-image: url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80'); }
+
+        /* ─── EVENTS ─── */
+        #events { background: var(--black); padding-bottom: 185px; }
+
+        .section-header {
+            padding: 140px 48px 40px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .section-header .block__title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            max-width: 700px;
+            margin-bottom: 0;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 40px 48px 80px;
+        }
+        @media(max-width:900px) { .works-grid { grid-template-columns: repeat(2, 1fr); padding: 24px 20px 60px; } }
+        @media(max-width:540px) { .works-grid { grid-template-columns: 1fr; } }
+
+        /* ─── Event Card ─── */
+        .work-item {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.07);
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: border-color .3s var(--ease-out), transform .3s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .work-item:hover {
+                border-color: rgba(255,255,255,.18);
+                transform: translateY(-4px);
+            }
+            .work-item:hover .work-item__img img {
+                transform: scale(1.06);
+                filter: grayscale(0%);
+            }
+            .work-item:hover .work-item__arrow { opacity: 1; transform: translate(0,0); }
+        }
+
+        .work-item__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .work-item__img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%);
+            transition: transform .5s var(--ease-out), filter .4s var(--ease-out);
+        }
+
+        /* Date badge */
+        .work-item__date {
+            position: absolute;
+            top: 14px; left: 14px;
+            background: rgba(255,255,255,1);
+            color: #000;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 52px;
+            z-index: 2;
+        }
+        .work-item__date strong {
+            display: block;
+            font-family: var(--condensed);
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .work-item__date span {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        /* Card body */
+        .work-item__body {
+            padding: 20px 22px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .work-cat {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+        }
+        .work-title {
+            font-family: var(--condensed);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+        .work-item__arrow {
+            margin-top: auto;
+            padding-top: 14px;
+            font-size: .75rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+            opacity: 0;
+            transform: translate(-8px, 4px);
+            transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
+        }
+
+        /* ─── Fixed background logo watermark ─── */
+        .bg-logo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 55;
+            pointer-events: none;
+            width: min(85vw, 900px);
+            opacity: 0;
+            transition: opacity .6s var(--ease-out);
+            mix-blend-mode: screen;
+        }
+        .bg-logo-watermark svg {
+            width: 100%;
+            height: auto;
+        }
+        body.show-watermark .bg-logo-watermark { opacity: 1; }
+
+        /* ─── CONTACT ─── */
+        #contact { background: #0a0a0a; }
+
+        .contact-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 150px 48px 80px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            max-width: 1100px;
+        }
+        @media(max-width:768px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+        .contact__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            line-height: .88;
+            color: var(--white);
+            margin-bottom: 36px;
+        }
+        .contact__title .outline {
+            -webkit-text-stroke: 2px rgba(255,255,255,.35);
+            color: transparent;
+        }
+
+        .contact__info p {
+            font-family: var(--body);
+            font-size: .88rem;
+            font-weight: 300;
+            line-height: 2;
+            color: rgba(255,255,255,.45);
+        }
+        .contact__info strong { color: rgba(255,255,255,.75); font-weight: 600; }
+        .contact__info a { color: var(--white); border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 1px; transition: border-color .2s var(--ease-out); }
+        @media (hover: hover) and (pointer: fine) {
+            .contact__info a:hover { border-color: var(--white); }
+        }
+
+        /* Footer logo inside contact */
+        .contact-footer-logo {
+            margin-top: 48px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+        .contact-footer-logo img { height: 120px; width: 120px; opacity: .6; }
+
+        .contact-form { display: flex; flex-direction: column; gap: 28px; }
+        .form-field { display: flex; flex-direction: column; gap: 8px; }
+        .form-field label {
+            font-family: var(--condensed);
+            font-size: .65rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+        }
+        .form-field input,
+        .form-field textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            color: var(--white);
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            padding: 10px 0;
+            outline: none;
+            transition: border-color .25s;
+        }
+        .form-field input::placeholder,
+        .form-field textarea::placeholder { color: rgba(255,255,255,.15); }
+        .form-field input:focus,
+        .form-field textarea:focus { border-bottom-color: rgba(255,255,255,.5); }
+        .form-field textarea { resize: none; height: 90px; }
+
+        .btn-submit {
+            align-self: flex-start;
+            margin-top: 4px;
+            padding: 14px 40px;
+            background: var(--white);
+            border: 1px solid var(--white);
+            color: var(--black);
+            font-family: var(--condensed);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s var(--ease-out), color .2s var(--ease-out), transform 120ms var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .btn-submit:hover {
+                background: transparent;
+                color: var(--white);
+            }
+        }
+        .btn-submit:active { transform: scale(0.97); }
+
+        /* ─── Event Showcase (Home) ─── */
+        .event-showcase {
+            position: absolute;
+            top: 100px;
+            bottom: 200px;
+            left: auto;
+            right: 0;
+            width: 42%;
+            z-index: 3;
+            overflow: hidden;
+        }
+        .event-showcase__inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        .showcase-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .showcase-slide.active { opacity: 1; pointer-events: auto; }
+
+        .showcase-slide__image {
+            position: relative;
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .showcase-slide__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transform: scale(1.08);
+            transition: transform 6s var(--ease-out), filter 1.2s var(--ease-out);
+        }
+        .showcase-slide.active .showcase-slide__image img {
+            transform: scale(1);
+            filter: grayscale(0%);
+        }
+
+        /* Diagonal blinds overlay */
+        .showcase-blinds {
+            position: absolute;
+            inset: -20px;
+            z-index: 2;
+            display: flex;
+            overflow: hidden;
+            transform: skewX(-12deg);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        .showcase-blind {
+            flex: 1;
+            background: var(--black);
+            transform: scaleY(1);
+            transform-origin: top;
+            transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .showcase-slide.revealing .showcase-blind {
+            transform: scaleY(0);
+        }
+
+        /* Image gradient fade */
+        .showcase-slide__image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.95) 100%);
+        }
+
+        .showcase-slide__info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            padding: 20px 28px;
+            position: relative;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-top: none;
+        }
+        .showcase-slide__number {
+            font-family: var(--condensed);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.2);
+            margin-bottom: 14px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s var(--ease-out) 0.5s, transform 0.6s var(--ease-out) 0.5s;
+        }
+        .showcase-slide.active .showcase-slide__number { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__title {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(1.6rem, 3vw, 2.6rem);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s var(--ease-out) 0.6s, transform 0.6s var(--ease-out) 0.6s;
+        }
+        .showcase-slide.active .showcase-slide__title { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__meta {
+            font-family: var(--condensed);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s var(--ease-out) 0.7s, transform 0.5s var(--ease-out) 0.7s;
+        }
+        .showcase-slide.active .showcase-slide__meta { opacity: 1; transform: translateY(0); }
+
+        .showcase-slide__desc {
+            font-family: var(--body);
+            font-size: 0.82rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.4);
+            max-width: 340px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s var(--ease-out) 0.8s, transform 0.5s var(--ease-out) 0.8s;
+        }
+        .showcase-slide.active .showcase-slide__desc { opacity: 1; transform: translateY(0); }
+
+        /* Progress bar */
+        .showcase-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            z-index: 10;
+            display: flex;
+            gap: 4px;
+            padding: 0 16px;
+        }
+        .showcase-progress__bar {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .showcase-progress__fill {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.5);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        .showcase-progress__bar.active .showcase-progress__fill {
+            animation: progressFill 5s linear forwards;
+        }
+        .showcase-progress__bar.done .showcase-progress__fill {
+            transform: scaleX(1);
+        }
+        @keyframes progressFill {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+
+        /* Slide counter */
+        .showcase-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+            font-family: var(--condensed);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.3);
+        }
+        .showcase-counter__current {
+            font-size: 1.4rem;
+            color: var(--white);
+            font-weight: 900;
+        }
+
+        @media(max-width:768px) {
+            .event-showcase { display: none; }
+            .hero-content { height: calc(100vh - 185px); padding: 90px 20px 0; }
+            .showcase-progress { padding: 0 20px; }
+            .showcase-slide__title { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+        }
+        @media(max-width:480px) {
+            .event-showcase { height: 180px; bottom: 195px; }
+            .showcase-slide__image { width: 40%; }
+            .showcase-slide__info { padding: 16px 18px; }
+            .showcase-slide__meta { display: none; }
+        }
+
+        /* ─── Marquee Band ─── */
+        .marquee-band {
+            position: relative;
+            z-index: 55;
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,.08);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .marquee-row {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            height: 90px;
+        }
+        .marquee-row + .marquee-row {
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+        .marquee-track {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            will-change: transform;
+        }
+
+        /* Row 1 scrolls left */
+        .marquee-row--left .marquee-track {
+            animation: mq-left 28s linear infinite;
+        }
+        /* Row 2 scrolls right */
+        .marquee-row--right .marquee-track {
+            animation: mq-right 32s linear infinite;
+        }
+
+        @keyframes mq-left  { from { transform: translateX(0); }   to { transform: translateX(-50%); } }
+        @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+        .marquee-item {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: var(--white);
+            padding: 0 28px;
+            line-height: 1;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .marquee-sep {
+            font-family: var(--condensed);
+            font-weight: 300;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            color: rgba(255,255,255,.18);
+            padding: 0 8px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        /* Outlined alternate items */
+        .marquee-item.outline {
+            -webkit-text-stroke: 1.5px rgba(255,255,255,.4);
+            color: transparent;
+        }
+
+        /* ─── Team Section ─── */
+        .team-section {
+            padding: 80px 0 20px;
+        }
+        .team-header {
+            padding: 0 48px 48px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            margin-bottom: 0;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,.04);
+        }
+        @media(max-width:900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width:540px) { .team-grid { grid-template-columns: 1fr; } }
+
+        .team-card {
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            transition: background .25s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover { background: #111; }
+        }
+
+        .team-card__photo {
+            width: 100%;
+            aspect-ratio: 1;
+            background-size: cover;
+            background-position: center top;
+            filter: grayscale(100%);
+            transition: filter .4s var(--ease-out);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .team-card:hover .team-card__photo { filter: grayscale(0%); }
+        }
+
+        .team-card__body {
+            padding: 28px 24px 36px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .team-card__index {
+            font-family: var(--condensed);
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            color: rgba(255,255,255,.18);
+            margin-bottom: 10px;
+        }
+        .team-card__name {
+            font-family: var(--condensed);
+            font-weight: 900;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: .02em;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .team-card__role {
+            display: block;
+            font-family: var(--condensed);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.3);
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .team-card__bio {
+            font-family: var(--body);
+            font-size: .82rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255,255,255,.4);
+        }
+
+        /* ─── Event Detail Modal ─── */
+        .event-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity .3s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open {
+            display: flex;
+            opacity: 1;
+        }
+        .event-modal {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform .35s var(--ease-out);
+        }
+        .event-modal-overlay.modal-open .event-modal {
+            transform: translateY(0);
+        }
+        .event-modal__close {
+            position: sticky;
+            top: 0;
+            float: right;
+            z-index: 10;
+            margin: 14px 14px 0 0;
+            background: rgba(0,0,0,.7);
+            border: 1px solid rgba(255,255,255,.2);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+        .event-modal__close:hover { background: rgba(255,255,255,.15); }
+        .event-modal__img {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #000;
+        }
+        .event-modal__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @media(max-width:768px) {
+            .event-modal-overlay { padding: 0; }
+            .event-modal { max-height: 100vh; max-width: 100%; border: none; }
+        }
+
+        /* ─── Scrollbar ─── */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); }
+
+        /* ─── Mobile ─── */
+        @media(max-width:768px) {
+            #header { padding: 16px 20px; }
+            .header__logo { width: 140px; height: 54px; }
+            .header__logo img { width: 200px; height: 200px; left: -32px; top: -72px; }
+            #nav { padding: 90px 20px 56px; overflow-y: auto; }
+            #nav::before { left: 20px; right: 20px; top: 72px; }
+            .menu__caption { font-size: clamp(2.4rem, 11vw, 4rem); }
+            .menu__image { display: none; }
+            .menu__link { padding: 10px 0; }
+            .nav__footer { left: 20px; right: 20px; flex-direction: column; gap: 10px; text-align: center; bottom: 28px; }
+            .hero-content { top: 70px; bottom: 185px; padding: 12px 20px 60px; }
+            .hero-content .headline-wrap { max-width: 100%; }
+            .hero-bg { top: 70px; }
+            .hero-bg__sharp { right: 10px; }
+            .intro__footer { padding: 0 20px 10px; bottom: 185px; }
+            .footer__container { flex-direction: column-reverse; gap: 8px; align-items: flex-start; }
+            .footer__launching { font-size: .6rem; letter-spacing: .12em; white-space: normal; word-break: break-word; }
+            .footer__line { left: 20px; right: 20px; }
+            .inner__content { padding: 28px 20px; }
+            .text-content-block { padding: 32px 20px; }
+            .section-header { padding: 100px 20px 28px; }
+            .contact-wrapper { padding: 100px 20px 60px; }
+            .header__underline { left: 20px; right: 20px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+            .headline__title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+            .works-grid { grid-template-columns: 1fr 1fr; }
+            .marquee-item { font-size: clamp(1.8rem, 6vw, 3rem); }
+            .hero-aurora, .hero-particles, .hero-frame, .hero-scanline { top: 70px; }
+        }
+        @media(max-width:480px) {
+            .works-grid { grid-template-columns: 1fr; }
+            .content-row { grid-template-columns: 1fr; }
+            .image-block { min-height: 260px; }
+            .menu__caption { font-size: clamp(2.2rem, 13vw, 3.5rem); }
+            .contact__title { font-size: clamp(3rem, 14vw, 5rem); }
+        }
+
+        /* ─── Reduced motion: remove positional animations, keep opacity/color ─── */
+        @media (prefers-reduced-motion: reduce) {
+            .loader__logo { animation: none; opacity: 1; }
+            .menu__link { transform: none !important; transition: opacity .2s; }
+            .nav__footer { transform: none !important; }
+            .loader { transition: opacity .3s, visibility .3s; }
+            .section { transition: opacity .3s, visibility .3s; }
+            .work-item img { transition: filter .3s; }
+            .team-card__photo { transition: filter .3s; }
+            .image-block { transition: filter .3s; }
+            /* New animation overrides */
+            .hero-bg { animation: none; }
+            .hero-orb::before, .hero-orb::after { animation: none; }
+            .headline__title span, .headline__caption, .intro__footer {
+                opacity: 1; transform: none; transition: none;
+            }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .work-item { clip-path: none; }
+            .team-card { opacity: 1; transform: none; }
+            .event-card { opacity: 1; transform: none; }
+            .burger__line { transition: opacity .2s; }
+        }
+
+        /* ─────────────────────────────────────────────
+           COOKIE CONSENT / PRIVACY / GDPR
+           ───────────────────────────────────────────── */
+
+        /* ─── Cookie Banner ─── */
+        .cookie-banner {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 140%);
+            width: min(680px, calc(100vw - 32px));
+            background: #0a0a0a;
+            border: 1px solid var(--gray-dim);
+            box-shadow: 0 20px 60px rgba(0,0,0,.6);
+            z-index: 8000;
+            padding: 26px 28px 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform .6s var(--ease-drawer), opacity .5s var(--ease-out), visibility .5s;
+        }
+        .cookie-banner.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .cookie-banner__label {
+            font-family: var(--condensed);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .cookie-banner__label i { font-size: .85rem; }
+        .cookie-banner__text {
+            font-family: var(--body);
+            font-size: .82rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--off-white);
+            margin-bottom: 20px;
+        }
+        .cookie-banner__text a {
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+        .cookie-banner__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .cookie-btn {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 12px 26px;
+            cursor: pointer;
+            border: 1px solid var(--white);
+            background: transparent;
+            color: var(--white);
+            transition: background .2s var(--ease-out), color .2s var(--ease-out), transform 120ms var(--ease-out);
+        }
+        .cookie-btn--solid { background: var(--white); color: var(--black); }
+        .cookie-btn--ghost { border-color: var(--gray-dim); color: var(--gray); }
+        @media (hover: hover) and (pointer: fine) {
+            .cookie-btn--solid:hover { background: transparent; color: var(--white); }
+            .cookie-btn--outline:hover { background: var(--white); color: var(--black); }
+            .cookie-btn--ghost:hover { color: var(--white); border-color: var(--white); }
+        }
+        .cookie-btn:active { transform: scale(.97); }
+        .cookie-btn--ghost { margin-left: auto; }
+
+        @media (max-width: 560px) {
+            .cookie-banner { padding: 22px 20px 20px; bottom: 12px; }
+            .cookie-banner__actions { flex-direction: column; align-items: stretch; }
+            .cookie-btn { width: 100%; text-align: center; }
+            .cookie-btn--ghost { margin-left: 0; }
+        }
+
+        /* ─── Legal Overlay (Privacy / Cookies / Imprint) ─── */
+        .legal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0,0,0,.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s var(--ease-out), visibility .4s;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .legal-overlay.show { opacity: 1; visibility: visible; }
+        .legal-panel {
+            position: relative;
+            width: min(760px, 100%);
+            background: #0a0a0a;
+            border: 1px solid var(--gray-dim);
+            padding: 56px clamp(24px, 5vw, 60px) 60px;
+            transform: translateY(24px);
+            transition: transform .5s var(--ease-drawer);
+        }
+        .legal-overlay.show .legal-panel { transform: translateY(0); }
+        .legal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gray-dim);
+            background: transparent;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-close:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+        }
+        .legal-eyebrow {
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        .legal-panel h2 {
+            font-family: var(--condensed);
+            font-weight: 800;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            line-height: 1.05;
+            letter-spacing: .01em;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .legal-updated {
+            font-family: var(--body);
+            font-size: .75rem;
+            font-weight: 300;
+            color: var(--gray);
+            margin-bottom: 34px;
+        }
+        .legal-body h3 {
+            font-family: var(--condensed);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin: 30px 0 12px;
+        }
+        .legal-body h3:first-child { margin-top: 0; }
+        .legal-body p,
+        .legal-body li {
+            font-family: var(--body);
+            font-size: .9rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--off-white);
+        }
+        .legal-body p { margin-bottom: 14px; }
+        .legal-body ul { list-style: none; margin: 0 0 16px; padding: 0; }
+        .legal-body li { position: relative; padding-left: 20px; margin-bottom: 8px; }
+        .legal-body li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gray);
+            font-size: .7rem;
+            top: .35em;
+        }
+        .legal-body a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+        .legal-body strong { color: var(--white); font-weight: 600; }
+        .legal-note {
+            border: 1px solid var(--gray-dim);
+            padding: 14px 18px;
+            margin: 8px 0 18px;
+            font-size: .82rem !important;
+            color: var(--gray) !important;
+            line-height: 1.6;
+        }
+        .legal-manage {
+            margin-top: 8px;
+            font-family: var(--condensed);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 12px 26px;
+            cursor: pointer;
+            border: 1px solid var(--white);
+            background: var(--white);
+            color: var(--black);
+            transition: background .2s, color .2s, transform 120ms;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-manage:hover { background: transparent; color: var(--white); }
+        }
+        .legal-manage:active { transform: scale(.97); }
+
+        /* ─── Legal footer links (reused in nav footer + contact) ─── */
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            align-items: center;
+        }
+        .legal-links a {
+            font-family: var(--condensed);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color .2s;
+        }
+        .legal-links span { color: var(--gray-dim); font-size: .6rem; }
+        @media (hover: hover) and (pointer: fine) {
+            .legal-links a:hover { color: var(--white); }
+        }
+    
+        /* ─── Associates grid ─── */
+        .associates-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:22px; margin-top:34px; align-items:stretch; }
+        .associate { margin:0; text-align:center; }
+        .associate img { width:100%; max-width:190px; height:150px; object-fit:contain; background:#fff; border-radius:10px; padding:12px; filter:grayscale(1); opacity:.82; transition:filter .4s ease, opacity .4s ease, transform .4s ease; }
+        .associate:hover img { filter:grayscale(0); opacity:1; transform:translateY(-4px); }
+        .associate figcaption { margin-top:10px; font-family:var(--condensed); font-size:.68rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+</style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader__logo">
+            <img src="../img/logo.png" alt="Fusion4 Events">
+        </div>
+    </div>
+
+    <!-- Fixed background logo watermark -->
+    <div class="bg-logo-watermark" id="bgLogoWatermark">
+        <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <text x="50%" y="70%" text-anchor="middle" dominant-baseline="middle"
+                font-family="'Barlow Condensed', sans-serif"
+                font-weight="900"
+                font-size="160"
+                letter-spacing="-4"
+                fill="none"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1.5"
+                text-transform="uppercase"
+            >FUSION4</text>
+        </svg>
+    </div>
+
+    <!-- Noise -->
+    <canvas id="noise"></canvas>
+
+    <!-- ─── Header ─── -->
+    <header id="header">
+        <div class="header__container">
+            <button class="header__logo" id="logo-home" aria-label="Zur Startseite" style="background:none;border:none;cursor:pointer;padding:0;">
+                <img src="../img/logo.png" alt="Fusion4 Events">
+            </button>
+            <div class="header__controls">
+                <a href="../index.html" style="font-family:var(--condensed);font-size:.75rem;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:5px 12px;margin-right:14px;text-decoration:none;">EN</a>
+                <button id="menu-trigger" class="menu-trigger" aria-label="Menü öffnen">
+                    <span class="menu-trigger__label" id="menu-label">Menü</span>
+                    <span class="burger" id="burger">
+                        <span class="burger__line burger__line--1"></span>
+                        <span class="burger__line burger__line--2"></span>
+                        <span class="burger__line burger__line--3"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="header__underline"></div>
+        <div class="header__underline underline-2"></div>
+    </header>
+
+    <!-- ─── Navigation ─── -->
+    <nav id="nav">
+        <ul class="menu">
+            <li class="menu__item">
+                <a href="#" class="menu__link active-link" data-target="home">
+                    <span class="menu__number">01.</span>
+                    <span class="menu__image menu-image-1"></span>
+                    <span class="menu__caption">Start</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="about">
+                    <span class="menu__number">02.</span>
+                    <span class="menu__image menu-image-2"></span>
+                    <span class="menu__caption outline">Über uns</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="events">
+                    <span class="menu__number">03.</span>
+                    <span class="menu__image menu-image-3"></span>
+                    <span class="menu__caption outline">Events</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+            <li class="menu__item">
+                <a href="#" class="menu__link" data-target="contact">
+                    <span class="menu__number">04.</span>
+                    <span class="menu__image menu-image-4"></span>
+                    <span class="menu__caption outline">Kontakt</span>
+                </a>
+                <span class="menu__divider"></span>
+            </li>
+        </ul>
+        <div class="nav__footer">
+            <ul class="socials-text">
+                <li><a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a></li>
+                <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                <li><a href="https://www.tiktok.com/@fusion4events">TikTok</a></li>
+            </ul>
+            <div class="legal-links">
+                <a data-legal="privacy" href="privacy/index.html">Datenschutz</a><span>·</span>
+                <a data-legal="cookies" href="privacy/index.html">Cookie-Richtlinie</a><span>·</span>
+                <a data-legal="imprint" href="impressum/index.html">Impressum</a>
+            </div>
+            <p class="copyright">Mit <i class="fa-solid fa-heart"></i> gemacht von Fusion4 Events</p>
+        </div>
+    </nav>
+
+    <!-- ─── HOME ─── -->
+    <section id="home" class="section active">
+        <div class="hero-bg">
+            <div class="hero-bg__blur"></div>
+            <img class="hero-bg__sharp" src="../img/galary/garba2026/apexa-pandya-live-garba-munich-2.webp" alt="Garba Mahotsav Munich 2026 featuring Apexa Pandya at Zenith Kulturhalle" width="1200" height="1600" fetchpriority="high">
+        </div>
+        <div class="hero-aurora">
+            <div class="hero-aurora__beam hero-aurora__beam--1"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--2"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--3"></div>
+            <div class="hero-aurora__beam hero-aurora__beam--4"></div>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-frame">
+            <div class="hero-frame__corner hero-frame__corner--tl"></div>
+            <div class="hero-frame__corner hero-frame__corner--tr"></div>
+            <div class="hero-frame__corner hero-frame__corner--bl"></div>
+            <div class="hero-frame__corner hero-frame__corner--br"></div>
+        </div>
+        <div class="hero-scanline"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-content">
+            <div class="headline-wrap">
+                <p style="font-family:var(--condensed);font-size:.99rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:16px;">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</p>
+                <h1 class="headline__title">
+                    <span>Garba Mahotsav</span>
+                    <span class="outline">München 2026</span>
+                    <span>Apexa Pandya Live</span>
+                </h1>
+                <span class="headline__caption">Europas größtes Sharad-Purnima-Raas-Garba · Sonntag, 25. Oktober 2026 · <em>🎤Apexa Pandya Live in Concert</em></span>
+                <p style="font-family:var(--condensed);font-size:1.1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,153,51,.8);margin-top:20px;">Eine Nacht | Ein Fest | Millionen Erinnerungen</p>
+                <p style="margin-top:26px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;"><a href="https://brizz.me/booking/31548328-bb1b-4dff-8ca4-2a97c3ae6b72" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.85rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:14px 32px;">🎫 Tickets buchen</a><a href="events/garba-mahotsav-munich-2026/index.html" style="display:inline-block;border:1px solid rgba(255,153,51,.6);color:#ff9933;font-family:var(--condensed);font-size:.85rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:14px 32px;">Zum Event →</a></p>
+            </div>
+        </div>
+        <div class="intro__footer">
+            <div class="footer__line"></div>
+            <div class="footer__line line-2"></div>
+            <div class="footer__container">
+                <ul class="socials-text">
+                    <li><a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/fusion4events/">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@fusion4events">TikTok</a></li>
+                </ul>
+                <div class="footer__launching">
+                    Nächstes Event: <a href="events/garba-mahotsav-munich-2026/index.html"><strong>Garba Mahotsav München 2026 — 25. Okt 2026</strong></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── MARQUEE BAND ─── -->
+    <div class="marquee-band" id="marquee-band" style="position:fixed;bottom:0;left:0;right:0;z-index:200;pointer-events:none;">
+        <!-- Row 1 — scrolls LEFT -->
+        <div class="marquee-row marquee-row--left">
+            <div class="marquee-track">
+                <span class="marquee-item">Live-Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Konferenzen</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Galas &amp; Awards</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Festivals</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Produkt-Launches</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Hochzeiten</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Firmenevents</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Marken-Aktivierungen</span><span class="marquee-sep">/</span>
+                <!-- duplicate for seamless loop -->
+                <span class="marquee-item">Live-Events</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Konferenzen</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Galas &amp; Awards</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Festivals</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Produkt-Launches</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Hochzeiten</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Firmenevents</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Marken-Aktivierungen</span><span class="marquee-sep">/</span>
+            </div>
+        </div>
+        <!-- Row 2 — scrolls RIGHT -->
+        <div class="marquee-row marquee-row--right">
+            <div class="marquee-track">
+                <span class="marquee-item outline">Exklusive Locations</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Ton &amp; Licht</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Bühnenproduktion</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">VIP-Erlebnisse</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Entertainment</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Crowd-Management</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Event-Design</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Internationale Reichweite ✦</span><span class="marquee-sep">/</span>
+                <!-- duplicate -->
+                <span class="marquee-item outline">Exklusive Locations</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Ton &amp; Licht</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Bühnenproduktion</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">VIP-Erlebnisse</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Entertainment</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Crowd-Management</span><span class="marquee-sep">/</span>
+                <span class="marquee-item outline">Event-Design</span><span class="marquee-sep">/</span>
+                <span class="marquee-item">Internationale Reichweite ✦</span><span class="marquee-sep">/</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── ABOUT ─── -->
+    <section id="about" class="section">
+        <div class="inner__intro">
+            <div class="marquee">
+                <div class="marquee__inner" aria-hidden="true">
+                    <span>Über uns</span><span>Über uns</span>
+                    <span>Über uns</span><span>Über uns</span>
+                    <span>Über uns</span><span>Über uns</span>
+                </div>
+            </div>
+        </div>
+        <div class="inner__content">
+            <!-- Company intro rows -->
+            <div class="content-row">
+                <div class="text-content-block reveal">
+                    <span class="block__subtitle reveal reveal-delay-1">Wer wir sind</span>
+                    <h2 class="block__title reveal reveal-delay-2">Wir erschaffen <span class="outline-sm">außergewöhnliche</span> Momente</h2>
+                    <p class="block__text reveal reveal-delay-3">Fusion4 ist eine Premium-Eventagentur, die Visionen Wirklichkeit werden lässt. Von privaten Feiern bis zu Großproduktionen bringen wir Leidenschaft, Präzision und Kreativität in jedes Event. Unser erfahrenes Team sorgt dafür, dass jedes Detail perfekt umgesetzt wird.</p>
+                </div>
+                <div class="image-block inner-image-1 reveal reveal-delay-2"></div>
+            </div>
+            <div class="content-row">
+                <div class="image-block inner-image-2"></div>
+                <div class="text-content-block">
+                    <span class="block__subtitle">Unsere Philosophie</span>
+                    <h2 class="block__title">Jedes Event erzählt eine <span class="outline-sm">Geschichte</span></h2>
+                    <p class="block__text">Wir glauben: Events sind mehr als Anlässe — sie sind Erlebnisse, die in Erinnerung bleiben. Fusion4 verbindet modernste Produktion mit menschlicher Wärme und schafft Events, die berühren, inspirieren und bei jedem Gast einen bleibenden Eindruck hinterlassen.</p>
+                </div>
+            </div>
+
+            <!-- Team section -->
+            <div class="team-section">
+                <div class="team-header">
+                    <span class="block__subtitle">Die Gründer</span>
+                    <h2 class="block__title">Vier <span class="outline-sm">Visionäre</span></h2>
+                </div>
+                <div class="team-grid">
+
+                    <!-- Mr W -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('../img/galary/team/AT.jpeg')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">01</div>
+                            <h3 class="team-card__name">Aditya Tomar</h3>
+                            <span class="team-card__role">Kreativdirektor</span>
+                            <p class="team-card__bio">Der Visionär hinter der unverwechselbaren Ästhetik von Fusion4. Aditya Tomar bringt zwei Jahrzehnte Erfahrung im immersiven Eventdesign mit — er verwandelt leere Hallen in außergewöhnliche Erlebniswelten. Jedes Detail, jede Textur, jeder Lichtakzent trägt seine kreative Handschrift.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr X -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('../img/galary/team/GK.jpeg')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">02</div>
+                            <h3 class="team-card__name">Gaurav Kwatra</h3>
+                            <span class="team-card__role">Direktor für Technik &amp; Betrieb</span>
+                            <p class="team-card__bio">Die technische Kraft hinter der reibungslosen Umsetzung. Gaurav Kwatra vereint operative Präzision, Tontechnik-Expertise und tiefes Wissen über professionelle Audiosysteme, damit jedes Fusion4-Event nahtlos läuft. Von Logistik, Dienstleisterkoordination und Produktionsplänen bis zu Soundaufbau, Bühnenplanung und technischer Umsetzung vor Ort — er liefert jedes Detail mit Klarheit, Verlässlichkeit und Wirkung. Seine ruhige Führung und sein technisches Verständnis machen ihn zum Rückgrat der Fusion4-Events.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr Y -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('../img/galary/team/HM.jpeg')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">03</div>
+                            <h3 class="team-card__name">Himanshu Mahajan</h3>
+                            <span class="team-card__role">Direktor für Kunden- &amp; Markenstrategie</span>
+                            <p class="team-card__bio">Der Beziehungsarchitekt von Fusion4. Himanshu Mahajan knüpft enge Partnerschaften mit Kunden, Sponsoren und Kulturinstitutionen weltweit. Sein Hintergrund im Marken-Storytelling stellt sicher, dass jedes Event die Identität des Kunden stärkt und das Publikum wirklich bewegt.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mr Z -->
+                    <div class="team-card">
+                        <div class="team-card__photo" style="background-image:url('../img/galary/team/km.jpg')"></div>
+                        <div class="team-card__body">
+                            <div class="team-card__index">04</div>
+                            <h3 class="team-card__name">Kiran Musudi</h3>
+                            <span class="team-card__role">Direktor für Marketing &amp; Medien</span>
+                            <p class="team-card__bio">Der Technik-Architekt hinter den Produktionen von Fusion4. Kiran Musudi verantwortet audiovisuelle Innovation, Livestreaming und interaktive Installationen. Von immersiven AR-Erlebnissen bis zum perfekten Sounddesign hält er Fusion4 an der Spitze der Eventtechnologie.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ─── ASSOCIATES ─── -->
+                <div class="section-header reveal" style="margin-top:70px;">
+                    <span class="block__subtitle reveal reveal-delay-1">In Zusammenarbeit mit</span>
+                    <h2 class="block__title reveal reveal-delay-2">Unsere <span class="outline-sm">Partner</span></h2>
+                </div>
+                <div class="associates-grid reveal reveal-delay-2">
+                    <figure class="associate">
+                        <img src="../img/assosiates/indian-nomads.webp" alt="Indian Nomads in Ingolstadt e.V." width="440" height="443" loading="lazy">
+                        <figcaption>Indian Nomads in Ingolstadt e.V.</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="../img/assosiates/dj-garry-crew.webp" alt="DJ Garry &amp; Crew — Event Production &amp; Technical Services" width="440" height="461" loading="lazy">
+                        <figcaption>DJ Garry &amp; Crew</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="../img/assosiates/melodies-n-mixes.webp" alt="Melodies-N-Mixes" width="440" height="504" loading="lazy">
+                        <figcaption>Melodies-N-Mixes</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="../img/assosiates/teentech.webp" alt="TeenTech — the next challenge awaits" width="440" height="422" loading="lazy">
+                        <figcaption>TeenTech</figcaption>
+                    </figure>
+                    <figure class="associate">
+                        <img src="../img/assosiates/fkgpt-dev.webp" alt="FKGPT.dev" width="440" height="367" loading="lazy">
+                        <figcaption>FKGPT.dev</figcaption>
+                    </figure>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── EVENTS ─── -->
+    <section id="events" class="section">
+        <div class="section-header reveal">
+            <span class="block__subtitle reveal reveal-delay-1">Unser Portfolio</span>
+            <h2 class="block__title reveal reveal-delay-2">Ausgewählte <span class="outline-sm">Events</span></h2>
+            <p class="reveal reveal-delay-2" style="margin-top:10px;"><a href="events/index.html" style="font-family:var(--condensed);font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#ff9933;text-decoration:none;">Alle Events →</a></p>
+        </div>
+        <div class="works-grid">
+            <div class="work-item event-card" data-detail="event-detail-retro">
+                <div class="work-item__img">
+                    <div class="work-item__date">06<strong></strong><span>June 2026</span></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="RETRO BOLLYWOOD NIGHT">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Stimmung &amp; Entertainment</span>
+                    <div class="work-title">RETRO BOLLYWOOD NIGHT 2026</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card" data-detail="event-detail-garba">
+                <div class="work-item__img">
+                    <div class="work-item__date">25<strong></strong><span>October 2026</span></div>
+                    <img src="../img/galary/garba2026/garba-mahotsav-munich-2026-apexa-pandya.webp" alt="Garba Mahotsav Munich 2026 featuring Apexa Pandya at Zenith Kulturhalle" width="1154" height="1363" loading="lazy">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Tanz &amp; Musik</span>
+                    <div class="work-title">Garba Mahotsav München 2026</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <!-- <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>14</strong><span>Jun</span></div>
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Conference">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Conference / Expo</span>
+                    <div class="work-title">Tech Summit 2025</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>02</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80" alt="Festival">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Festival / Music</span>
+                    <div class="work-title">Summer Fusion Fest</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>19</strong><span>Jul</span></div>
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" alt="Wedding">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Wedding / Private</span>
+                    <div class="work-title">The Grand Wedding</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>08</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Brand Launch">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Brand / Launch</span>
+                    <div class="work-title">Brand Launch 360°</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div>
+            <div class="work-item event-card">
+                <div class="work-item__img">
+                    <div class="work-item__date"><strong>23</strong><span>Aug</span></div>
+                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Neon Nights">
+                </div>
+                <div class="work-item__body">
+                    <span class="work-cat">Nightlife / Entertainment</span>
+                    <div class="work-title">Neon Nights</div>
+                    <span class="work-item__arrow">Zum Event →</span>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section id="contact" class="section">
+        <div class="contact-wrapper">
+            <div class="contact-grid">
+                <div>
+                    <h2 class="contact__title reveal">
+                        Lasst uns<br>Gemeinsam<br>
+                        <span class="outline">Gestalten</span>
+                    </h2>
+                    <div class="contact__info reveal reveal-delay-2">
+                        <p>
+                            Sie planen ein Event? Wir freuen uns auf Ihre Nachricht.<br><br>
+                            <strong>E-Mail:</strong> info@fusion4events.com<br>
+                            <strong>Telefon:</strong> +49 15560 200235<br>
+                            <strong>Standort:</strong> München, Deutschland<br><br>
+                            <a href="https://www.instagram.com/fusion4events/">Instagram</a>&nbsp; · &nbsp;
+                            <a href="https://www.facebook.com/profile.php?id=61591721092583">Facebook</a>&nbsp; · &nbsp;
+                            <a href="https://www.tiktok.com/@fusion4events">TikTok</a>
+                        </p>
+                    </div>
+                    <div class="contact-footer-logo">
+                        <img src="../img/logo.png" alt="Fusion4 Events">
+                    </div>
+                    <div class="legal-links reveal reveal-delay-3" style="margin-top:22px;">
+                        <a data-legal="privacy" href="privacy/index.html">Datenschutz</a><span>·</span>
+                        <a data-legal="cookies" href="privacy/index.html">Cookie-Richtlinie</a><span>·</span>
+                        <a data-legal="imprint" href="impressum/index.html">Impressum</a>
+                    </div>
+                </div>
+                <div>
+                    <form class="contact-form" onsubmit="return false;">
+                        <div class="form-field">
+                            <label>Ihr Name</label>
+                            <input type="text" placeholder="Max Mustermann">
+                        </div>
+                        <div class="form-field">
+                            <label>E-Mail-Adresse</label>
+                            <input type="email" placeholder="max@beispiel.de">
+                        </div>
+                        <div class="form-field">
+                            <label>Art des Events</label>
+                            <input type="text" placeholder="Hochzeit, Firmenevent, Festival…">
+                        </div>
+                        <div class="form-field">
+                            <label>Nachricht</label>
+                            <textarea placeholder="Erzählen Sie uns von Ihrem Event…"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // ─── Loader ───
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('loaded');
+            // Trigger hero entrance after loader fades
+            setTimeout(() => {
+                document.getElementById('home').classList.add('hero-ready');
+            }, 200);
+        }, 1000);
+    });
+
+    // ─── Noise ───
+    (function() {
+        const canvas = document.getElementById('noise');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+        function draw() {
+            const w = canvas.width, h = canvas.height;
+            const img = ctx.createImageData(w, h);
+            const d = img.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 255 | 0;
+                d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+            }
+            ctx.putImageData(img, 0, 0);
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // ─── Menu ───
+    const menuTrigger = document.getElementById('menu-trigger');
+    const burger      = document.getElementById('burger');
+    const menuLabel   = document.getElementById('menu-label');
+    const nav         = document.getElementById('nav');
+    const header      = document.getElementById('header');
+
+    function openMenu() {
+        nav.classList.add('nav-open');
+        burger.classList.add('is-open');
+        menuLabel.textContent = 'Schließen';
+        menuTrigger.setAttribute('aria-label', 'Close menu');
+        header.classList.add('nav-is-open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        nav.classList.remove('nav-open');
+        burger.classList.remove('is-open');
+        menuLabel.textContent = 'Menü';
+        menuTrigger.setAttribute('aria-label', 'Open menu');
+        header.classList.remove('nav-is-open');
+        document.body.style.overflow = '';
+    }
+
+    menuTrigger.addEventListener('click', () => {
+        nav.classList.contains('nav-open') ? closeMenu() : openMenu();
+    });
+
+    // ─── Section switching ───
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.menu__link[data-target]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const target = link.dataset.target;
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(target).classList.add('active');
+
+            navLinks.forEach(l => {
+                l.classList.remove('active-link');
+                const cap = l.querySelector('.menu__caption');
+                cap.classList.add('outline');
+            });
+            link.classList.add('active-link');
+            link.querySelector('.menu__caption').classList.remove('outline');
+
+            closeMenu();
+        });
+    });
+    // ─── Logo → Home ───
+    document.getElementById('logo-home').addEventListener('click', () => {
+        closeMenu();
+        sections.forEach(s => s.classList.remove('active'));
+        document.getElementById('home').classList.add('active');
+        navLinks.forEach(l => {
+            l.classList.remove('active-link');
+            l.querySelector('.menu__caption').classList.add('outline');
+        });
+        const homeLink = document.querySelector('.menu__link[data-target="home"]');
+        if (homeLink) {
+            homeLink.classList.add('active-link');
+            homeLink.querySelector('.menu__caption').classList.remove('outline');
+        }
+    });
+
+    // ─── Scroll-reveal IntersectionObserver ───
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                revealObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .work-item, .team-card, .event-card').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // ─── Re-run observer when switching sections ───
+    document.querySelectorAll('.menu__link').forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal:not(.in-view), .work-item:not(.in-view), .team-card:not(.in-view), .event-card:not(.in-view)').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }, 100);
+        });
+    });
+
+    // ─── Background logo watermark (shows when non-home section is active) ───
+    function updateWatermark() {
+        const activeSection = document.querySelector('.section.active');
+        const isHome = !activeSection || activeSection.id === 'home';
+        document.body.classList.toggle('show-watermark', !isHome);
+    }
+    // Watch section class changes
+    const sectionObserver = new MutationObserver(updateWatermark);
+    document.querySelectorAll('.section').forEach(s => {
+        sectionObserver.observe(s, { attributes: true, attributeFilter: ['class'] });
+    });
+    updateWatermark(); // run once on load
+
+    // ─── Event Showcase ───
+    (function() {
+        const BLIND_COUNT = 32;
+        const INTERVAL = 7000;
+        const slideData = [
+            { img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80', alt: 'Gala Night', title: 'Gala Night 2024', meta: 'Corporate · Awards · Frankfurt', desc: 'An evening of elegance — 800 guests, live orchestra, and immersive light installations across two grand halls.' },
+            { img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80', alt: 'Tech Summit', title: 'Tech Summit 2025', meta: 'Conference · Expo · Berlin', desc: 'Three days of innovation — keynotes, interactive demos, and networking for 2,000+ tech leaders.' },
+            { img: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80', alt: 'Summer Fusion Fest', title: 'Summer Fusion Fest', meta: 'Festival · Music · Munich', desc: 'A weekend of rhythm and soul — four stages, 40 artists, and 15,000 festival-goers under the summer sky.' },
+            { img: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80', alt: 'The Grand Wedding', title: 'The Grand Wedding', meta: 'Wedding · Private · Lake Como', desc: 'A fairy-tale celebration — lakeside ceremony, 300 guests, bespoke floral design, and fireworks finale.' },
+            { img: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80', alt: 'Neon Nights', title: 'Neon Nights', meta: 'Nightlife · Entertainment · Dubai', desc: 'An after-dark spectacle — LED choreography, world-class DJs, and an unforgettable rooftop experience.' }
+        ];
+        const total = slideData.length;
+        const inner = document.getElementById('showcaseInner');
+        const progWrap = document.getElementById('showcaseProgress');
+        if (!inner || !progWrap) return;
+
+        // Build slides
+        slideData.forEach((d, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'showcase-slide' + (i === 0 ? ' active revealing' : '');
+            slide.dataset.index = i;
+
+            let blindsHTML = '';
+            for (let b = 0; b < BLIND_COUNT; b++) blindsHTML += '<div class="showcase-blind"></div>';
+
+            slide.innerHTML =
+                '<div class="showcase-slide__image">' +
+                    '<div class="showcase-blinds">' + blindsHTML + '</div>' +
+                    '<img src="' + d.img + '" alt="' + d.alt + '">' +
+                '</div>' +
+                '<div class="showcase-slide__info">' +
+                    '<span class="showcase-slide__number">0' + (i+1) + ' / 0' + total + '</span>' +
+                    '<h3 class="showcase-slide__title">' + d.title + '</h3>' +
+                    '<span class="showcase-slide__meta">' + d.meta + '</span>' +
+                    '<p class="showcase-slide__desc">' + d.desc + '</p>' +
+                '</div>';
+            inner.appendChild(slide);
+
+            // Progress bar
+            const bar = document.createElement('div');
+            bar.className = 'showcase-progress__bar' + (i === 0 ? ' active' : '');
+            bar.dataset.slide = i;
+            bar.innerHTML = '<div class="showcase-progress__fill"></div>';
+            progWrap.appendChild(bar);
+        });
+
+        // Apply wavy stagger delays via JS (sine wave)
+        inner.querySelectorAll('.showcase-slide').forEach(slide => {
+            slide.querySelectorAll('.showcase-blind').forEach((blind, i) => {
+                const wave = Math.sin((i / BLIND_COUNT) * Math.PI) * 0.4;
+                const base = (i / BLIND_COUNT) * 1.8;
+                blind.style.transitionDelay = (base + wave).toFixed(3) + 's';
+            });
+        });
+
+        const slides = inner.querySelectorAll('.showcase-slide');
+        const bars = progWrap.querySelectorAll('.showcase-progress__bar');
+        let current = 0;
+        let timer = null;
+
+        function resetBlinds(slide) {
+            slide.classList.remove('revealing');
+            slide.querySelectorAll('.showcase-blind').forEach(b => {
+                b.style.transition = 'none';
+                b.style.transform = 'scaleY(1)';
+            });
+            slide.offsetHeight; // reflow
+            slide.querySelectorAll('.showcase-blind').forEach(b => {
+                b.style.transition = '';
+                b.style.transform = '';
+            });
+        }
+
+        function goTo(index) {
+            const prev = slides[current];
+            prev.classList.remove('active', 'revealing');
+
+            bars[current].classList.remove('active');
+            bars[current].classList.add('done');
+
+            current = index;
+
+            if (current === 0) {
+                bars.forEach(b => {
+                    b.classList.remove('done', 'active');
+                    const fill = b.querySelector('.showcase-progress__fill');
+                    fill.style.animation = 'none';
+                    fill.offsetHeight;
+                    fill.style.animation = '';
+                });
+            }
+
+            // Reset blinds on new slide so they cover the image
+            resetBlinds(slides[current]);
+
+            // Activate + reveal
+            slides[current].classList.add('active');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slides[current].classList.add('revealing');
+                });
+            });
+
+            bars[current].classList.add('active');
+            const fill = bars[current].querySelector('.showcase-progress__fill');
+            fill.style.animation = 'none';
+            fill.offsetHeight;
+            fill.style.animation = '';
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => goTo((current + 1) % total), INTERVAL);
+        }
+
+        // Click progress bars
+        bars.forEach(bar => {
+            bar.addEventListener('click', () => {
+                const idx = parseInt(bar.dataset.slide);
+                if (idx === current) return;
+                bars.forEach((b, i) => {
+                    b.classList.remove('active', 'done');
+                    if (i < idx) b.classList.add('done');
+                });
+                const prev = slides[current];
+                prev.classList.remove('active', 'revealing');
+                current = idx;
+                resetBlinds(slides[current]);
+                slides[current].classList.add('active');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        slides[current].classList.add('revealing');
+                    });
+                });
+                bars[current].classList.add('active');
+                const fill = bars[current].querySelector('.showcase-progress__fill');
+                fill.style.animation = 'none';
+                fill.offsetHeight;
+                fill.style.animation = '';
+                startTimer();
+            });
+        });
+
+        startTimer();
+    })();
+
+    // ─── Garba Gallery Slideshow ───
+    (function() {
+        const slides = document.querySelectorAll('#garbaGallery .garba-slide');
+        const dotsWrap = document.getElementById('garbaDots');
+        if (!slides.length) return;
+        let current = 0;
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:' + (i === 0 ? 'rgba(255,153,51,.9)' : 'rgba(255,255,255,.3)') + ';cursor:pointer;transition:background .3s;';
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+        });
+        const dots = dotsWrap.querySelectorAll('span');
+        function goTo(idx) {
+            slides[current].style.opacity = '0';
+            dots[current].style.background = 'rgba(255,255,255,.3)';
+            current = idx;
+            slides[current].style.opacity = '1';
+            dots[current].style.background = 'rgba(255,153,51,.9)';
+        }
+        setInterval(() => goTo((current + 1) % slides.length), 4000);
+    })();
+
+    // ─── Hero Floating Particles ───
+    (function() {
+        const container = document.getElementById('heroParticles');
+        if (!container) return;
+        const COUNT = 25;
+        for (let i = 0; i < COUNT; i++) {
+            const p = document.createElement('div');
+            p.className = 'hero-particle';
+            const size = 2 + Math.random() * 3;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.bottom = '-10px';
+            p.style.animationDuration = (6 + Math.random() * 8) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(p);
+        }
+    })();
+
+    // ─── Event Detail Modal (deferred until DOM ready) ───
+    window.addEventListener('load', function() {
+        var overlay = document.getElementById('eventModalOverlay');
+        if (!overlay) return;
+        var modals = overlay.querySelectorAll('.event-modal');
+
+        document.querySelector('.works-grid').addEventListener('click', function(e) {
+            var card = e.target.closest('.work-item[data-detail]');
+            if (!card) return;
+            var detailId = card.dataset.detail;
+            modals.forEach(function(m) { m.style.display = 'none'; });
+            var target = document.getElementById(detailId);
+            if (!target) return;
+            target.style.display = '';
+            overlay.classList.add('modal-open');
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay || e.target.closest('.event-modal__close')) {
+                overlay.classList.remove('modal-open');
+            }
+        });
+    });
+
+    </script>
+
+    <!-- ─── Event Detail Modals ─── -->
+    <div class="event-modal-overlay" id="eventModalOverlay">
+
+        <div class="event-modal" id="event-detail-garba">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;z-index:5;"><strong>25</strong><span>Oct</span></div>
+                <div id="garbaGallery" style="position:absolute;inset:0;background:#000;">
+                    <img src="../img/galary/garba2026/garba-mahotsav-munich-2026-apexa-pandya.webp" alt="Garba Mahotsav Munich 2026 event poster with Apexa Pandya" class="garba-slide garba-slide-active" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity 1.2s ease;" loading="lazy">
+                    <img src="../img/galary/garba2026/apexa-pandya-live-garba-munich-1.webp" alt="Apexa Pandya live in concert" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;" loading="lazy">
+                    <img src="../img/galary/garba2026/apexa-pandya-live-garba-munich-2.webp" alt="Apexa Pandya performing Raas Garba live" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;" loading="lazy">
+                    <img src="../img/galary/garba2026/apexa-pandya-live-garba-munich-3.webp" alt="Apexa Pandya Garba night stage performance" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;" loading="lazy">
+                    <img src="../img/galary/garba2026/apexa-pandya-live-garba-munich-4.webp" alt="Apexa Pandya singing live at Garba Mahotsav" class="garba-slide" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s ease;" loading="lazy">
+                </div>
+                <div id="garbaDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;"></div>
+                <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:16px 24px;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%);">
+                    <!-- <span style="display:inline-block;background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;font-family:var(--condensed);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;">🎫 Tickets from July 04</span> 
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">2000+ Attendees</span>
+                    <span style="display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;margin-left:8px;">Sponsor: Squarea</span>-->
+                </div>
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events × Indian Nomads in Ingolstadt e.V.</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">🎭 Garba Mahotsav München 2026 — Europas größtes Sharad-Purnima-Raas-Garba</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Sonntag, 25. Oktober 2026 · Non-Stop Raas Garba die ganze Nacht · 🎤 Apexa Pandya Live in Concert</p>
+                <p style="font-family:var(--condensed);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,153,51,.7);margin-bottom:12px;">Eine Nacht | Ein Fest | Millionen Erinnerungen</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">Die größte Bühne &amp; die größte Nacht — Non-Stop Raas Garba mit Live-Musik, Tanz &amp; Dhol, Essensständen &amp; großartiger Stimmung. Über 2.000 Gäste erwartet. Weitere Überraschungen folgen!</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">✨ Größte Bühne</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🎤 Live-Musik</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">💃 Tanz &amp; Dhol</span>
+                    <span style="display:inline-block;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);color:rgba(255,153,51,.8);font-family:var(--condensed);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;">🍽️ Essensstände</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <span style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,153,51,.5);"><i class="fa-solid fa-location-dot"></i>&ensp;Zenith – Die Kulturhalle, Lilienthalallee 29, 80939 München</span>
+                    <a href="https://brizz.me/booking/31548328-bb1b-4dff-8ca4-2a97c3ae6b72" rel="noopener" style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#ff9933,#e65c00);padding:8px 16px;text-decoration:none;">🎫 Tickets buchen</a>
+                    <a href="events/garba-mahotsav-munich-2026/index.html" style="font-family:var(--condensed);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#ff9933;text-decoration:none;">Alle Details →</a>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:10px;">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-modal" id="event-detail-retro" style="display:none;">
+            <button class="event-modal__close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="event-modal__img">
+                <div class="work-item__date" style="background:linear-gradient(135deg,#ff9933,#e65c00);color:#fff;"><strong>06</strong><span>Jun</span></div>
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80" alt="Retro Bollywood Night 2026">
+            </div>
+            <div style="padding:24px 28px 28px;">
+                <span class="work-cat" style="color:rgba(255,153,51,.6);">Fusion4 Events</span>
+                <div class="work-title" style="font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 4px;">Retro Bollywood Night 2026</div>
+                <p style="font-family:var(--condensed);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;">Samstag, 06. Juni 2026 · Stimmung &amp; Entertainment</p>
+                <p style="font-family:var(--body);font-size:.85rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);">Eine Zeitreise mit Europas größter Retro-Bollywood-Party. Klassische Hits, glanzvolle Outfits und eine Nacht voller Nostalgie. Mehr Details folgen in Kürze!</p>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <a href="https://wa.me/4915560200235" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-brands fa-whatsapp"></i>&ensp;+49 15560 200235</a>
+                    <a href="mailto:info@fusion4events.com" style="font-family:var(--condensed);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;"><i class="fa-solid fa-envelope"></i>&ensp;info@fusion4events.com</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ─── Cookie Consent Banner ─── -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie-Einwilligung">
+        <div class="cookie-banner__label"><i class="fa-solid fa-cookie-bite"></i> Ihre Privatsphäre ist uns wichtig</div>
+        <p class="cookie-banner__text">
+            Wir verwenden nur technisch notwendige Cookies und lokalen Speicher, um diese Website zu betreiben und Ihre Einstellungen zu merken.
+            Mit Ihrer Einwilligung laden wir außerdem Bildmaterial von Drittanbietern.
+            Details finden Sie in unserer <a data-legal="cookies" href="privacy/index.html">Cookie-Richtlinie</a> und <a data-legal="privacy" href="privacy/index.html">Datenschutzerklärung</a>.
+        </p>
+        <div class="cookie-banner__actions">
+            <button class="cookie-btn cookie-btn--solid" id="cookieAccept">Alle akzeptieren</button>
+            <button class="cookie-btn cookie-btn--outline" id="cookieReject">Nur notwendige</button>
+            <button class="cookie-btn cookie-btn--ghost" data-legal="cookies">Cookie-Einstellungen</button>
+        </div>
+    </div>
+
+    <!-- ─── Legal Overlay (Privacy / Cookies / Imprint) ─── -->
+    <div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+        <div class="legal-panel">
+            <button class="legal-close" id="legalClose" aria-label="Schließen">✕</button>
+
+            <!-- PRIVACY POLICY -->
+            <div class="legal-doc" data-doc="privacy" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2 id="legalTitle">Datenschutzerklärung</h2>
+                <p class="legal-updated">Stand: 1. Juli 2026</p>
+                <div class="legal-body">
+                    <p>Fusion4 Events („wir", „uns") nimmt den Schutz Ihrer personenbezogenen Daten ernst. Diese Datenschutzerklärung erläutert, welche Daten wir erheben, warum, und welche Rechte Ihnen nach der EU-Datenschutz-Grundverordnung (DSGVO) und dem Bundesdatenschutzgesetz (BDSG) zustehen.</p>
+
+                    <h3>1. Verantwortlicher</h3>
+                    <p>Verantwortlich für die Verarbeitung Ihrer personenbezogenen Daten ist:</p>
+                    <p class="legal-note">Fusion4 Events<br>By Indian Nomads in Ingolstadt e.V.<br>Unterer Taubentalweg 35, 85055 Ingolstadt<br>E-Mail: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Telefon / WhatsApp: +49 1577 8494287</p>
+
+                    <h3>2. Welche Daten wir erheben</h3>
+                    <ul>
+                        <li><strong>Kontaktformular-Daten</strong> — Name, E-Mail-Adresse, Event-Art und Nachricht, die Sie freiwillig übermitteln.</li>
+                        <li><strong>Technische Daten</strong> — IP-Adresse, Browsertyp und Zugriffszeiten, verarbeitet von unserem Hosting-Anbieter in Server-Logs.</li>
+                        <li><strong>Einwilligungspräferenzen</strong> — Ihre Cookie-Entscheidung, lokal in Ihrem Browser gespeichert.</li>
+                    </ul>
+
+                    <h3>3. Zwecke und Rechtsgrundlagen</h3>
+                    <ul>
+                        <li>Beantwortung Ihrer Anfragen — <strong>Art. 6 Abs. 1 lit. b DSGVO</strong> (vorvertragliche Maßnahmen) bzw. <strong>Art. 6 Abs. 1 lit. f</strong> (berechtigtes Interesse an der Beantwortung).</li>
+                        <li>Betrieb und Sicherheit der Website — <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse).</li>
+                        <li>Laden optionaler Drittinhalte — <strong>Art. 6 Abs. 1 lit. a DSGVO</strong> (Ihre Einwilligung).</li>
+                    </ul>
+
+                    <h3>4. Drittanbieter-Dienste</h3>
+                    <p>Nach Ihrer Einwilligung lädt diese Website Inhalte externer Anbieter, die Ihre IP-Adresse erhalten können:</p>
+                    <ul>
+                        <li><strong>Unsplash</strong> — Bildmaterial.</li>
+                    </ul>
+                    <p>Schriftarten und Icons werden auf fusion4events.com selbst gehostet — es erfolgen keine Font-Anfragen an Google oder Cloudflare. Anfragen können uns über <strong>WhatsApp</strong> (Meta Platforms Ireland Ltd.) oder <strong>Instagram</strong> erreichen; dort gelten die jeweiligen Datenschutzbestimmungen. Wir setzen keine Werbe- oder Analyse-Tracker ein und verkaufen Ihre Daten nicht.</p>
+
+                    <h3>5. Speicherdauer</h3>
+                    <p>Anfragedaten werden nur so lange gespeichert, wie es für die Bearbeitung Ihrer Anfrage und gesetzliche Aufbewahrungspflichten erforderlich ist, und danach gelöscht. Server-Logs werden zu Sicherheitszwecken kurzfristig aufbewahrt.</p>
+
+                    <h3>6. Ihre Rechte</h3>
+                    <p>Nach der DSGVO haben Sie das Recht auf:</p>
+                    <ul>
+                        <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15).</li>
+                        <li>Berichtigung unrichtiger Daten (Art. 16).</li>
+                        <li>Löschung — das „Recht auf Vergessenwerden" (Art. 17).</li>
+                        <li>Einschränkung der Verarbeitung und Widerspruch (Art. 18 &amp; 21).</li>
+                        <li>Datenübertragbarkeit (Art. 20).</li>
+                        <li>Widerruf Ihrer Einwilligung jederzeit mit Wirkung für die Zukunft (Art. 7 Abs. 3).</li>
+                        <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77).</li>
+                    </ul>
+                    <p>Zur Ausübung Ihrer Rechte genügt eine E-Mail an <a href="mailto:info@fusion4events.com">info@fusion4events.com</a>.</p>
+
+                    <h3>7. Cookies verwalten</h3>
+                    <p>Sie können Ihre Cookie-Entscheidung jederzeit einsehen oder ändern.</p>
+                    <button class="legal-manage" data-manage="cookies">Cookie-Einstellungen ändern</button>
+                </div>
+            </div>
+
+            <!-- COOKIE POLICY -->
+            <div class="legal-doc" data-doc="cookies" hidden>
+                <div class="legal-eyebrow">Fusion4 Events</div>
+                <h2>Cookie-Richtlinie</h2>
+                <p class="legal-updated">Stand: 1. Juli 2026</p>
+                <div class="legal-body">
+                    <p>Diese Richtlinie erläutert, wie Fusion4 Events Cookies und ähnliche Local-Storage-Technologien einsetzt und wie Sie diese kontrollieren können.</p>
+
+                    <h3>Was sind Cookies?</h3>
+                    <p>Cookies und Local Storage sind kleine Datenelemente, die in Ihrem Browser gespeichert werden. Sie ermöglichen es einer Website, Ihre Aktionen und Einstellungen über einen Zeitraum zu speichern.</p>
+
+                    <h3>Kategorien, die wir verwenden</h3>
+                    <ul>
+                        <li><strong>Technisch notwendig</strong> — ein einzelner Local-Storage-Eintrag, der Ihre Cookie-Entscheidung speichert, damit wir nicht erneut fragen. Immer aktiv; kann nicht deaktiviert werden.</li>
+                        <li><strong>Präferenz / Drittinhalte</strong> — werden erst nach Klick auf „Alle akzeptieren" geladen. Diese ermöglichen Bildmaterial von Unsplash, das Ihre IP-Adresse protokollieren kann. Schriftarten und Icons werden auf fusion4events.com selbst gehostet — keine Font-Anfragen an Google oder Cloudflare.</li>
+                    </ul>
+                    <p>Wir setzen <strong>keine</strong> Analyse-, Werbe- oder seitenübergreifenden Tracking-Cookies ein.</p>
+
+                    <h3>Ihre Wahl</h3>
+                    <p>„Alle akzeptieren" aktiviert Drittinhalte. „Nur notwendige" belässt ausschließlich den technisch notwendigen Eintrag. Sie können Ihre Entscheidung jederzeit unten ändern.</p>
+                    <button class="legal-manage" data-manage="cookies">Cookie-Einstellungen ändern</button>
+
+                    <h3>Browser-Einstellungen</h3>
+                    <p>Sie können Cookies auch über Ihre Browser-Einstellungen blockieren oder löschen. Dies kann die Darstellung einzelner Bereiche der Website beeinträchtigen.</p>
+                </div>
+            </div>
+
+            <!-- LEGAL NOTICE / IMPRINT -->
+            <div class="legal-doc" data-doc="imprint" hidden>
+                <div class="legal-eyebrow">§ 5 DDG · § 18 MStV</div>
+                <h2>Impressum</h2>
+                <p class="legal-updated">Angaben gemäß § 5 DDG</p>
+                <div class="legal-body">
+                    <p class="legal-note">Fusion4 Events<br>By Indian Nomads in Ingolstadt e.V.<br>Unterer Taubentalweg 35, 85055 Ingolstadt<br><br>Vertreten durch: Himanshu Mahajan<br>E-Mail: <a href="mailto:info@fusion4events.com">info@fusion4events.com</a><br>Telefon / WhatsApp: +49 1577 8494287</p>
+
+                    <h3>Verantwortlich für den Inhalt</h3>
+                    <p>Himanshu Mahajan, unter obiger Anschrift (gemäß § 18 Abs. 2 MStV).</p>
+
+                    <h3>Streitbeilegung</h3>
+                    <p>Die EU-Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Wir sind weder verpflichtet noch bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+                    <h3>Haftung &amp; Urheberrecht</h3>
+                    <p>Trotz sorgfältiger Prüfung übernehmen wir keine Haftung für Inhalte externer Links; hierfür sind die jeweiligen Betreiber verantwortlich. Alle Inhalte und Werke auf dieser Website unterliegen dem Urheberrecht; jede über das gesetzlich Zulässige hinausgehende Nutzung bedarf unserer vorherigen schriftlichen Zustimmung.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ─── Cookie Consent + Legal Overlay ───
+    (function() {
+        const STORAGE_KEY = 'f4-cookie-consent';   // 'accepted' | 'rejected'
+        const banner   = document.getElementById('cookieBanner');
+        const overlay  = document.getElementById('legalOverlay');
+        const docs     = overlay.querySelectorAll('.legal-doc');
+        let lastFocus  = null;
+
+        function getConsent() {
+            try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+        }
+        function setConsent(value) {
+            try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
+            hideBanner();
+        }
+        function showBanner() { banner.classList.add('show'); }
+        function hideBanner() { banner.classList.remove('show'); }
+
+        document.getElementById('cookieAccept').addEventListener('click', () => setConsent('accepted'));
+        document.getElementById('cookieReject').addEventListener('click', () => setConsent('rejected'));
+
+        if (!getConsent()) {
+            setTimeout(showBanner, 1600);
+        }
+
+        function openLegal(doc) {
+            docs.forEach(d => { d.hidden = (d.dataset.doc !== doc); });
+            lastFocus = document.activeElement;
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            overlay.scrollTop = 0;
+            document.getElementById('legalClose').focus({ preventScroll: true });
+        }
+        function closeLegal() {
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+            if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-legal]');
+            if (trigger) {
+                e.preventDefault();
+                openLegal(trigger.dataset.legal);
+                return;
+            }
+            const manage = e.target.closest('[data-manage="cookies"]');
+            if (manage) {
+                e.preventDefault();
+                closeLegal();
+                showBanner();
+            }
+        });
+
+        document.getElementById('legalClose').addEventListener('click', closeLegal);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLegal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) closeLegal();
+        });
+    })();
+    </script>
+</body>
+</html>
